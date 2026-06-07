@@ -72,7 +72,7 @@ function App() {
 
             <div className="feature-item">
               <h2 className="feature-title text-red">MEMORABLE</h2>
-              <p className="feature-subtitle">National <strong className="text-red">hero</strong> figures</p>
+              <p className="feature-subtitle text-red">National <strong className="text-red">hero</strong> figures</p>
             </div>
 
             <div className="feature-item">
