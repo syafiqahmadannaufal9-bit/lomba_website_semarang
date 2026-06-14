@@ -45,7 +45,7 @@
 
 .gooey-nav-container nav ul {
   display: flex;
-  gap: 2em;
+  gap: 3em;
   list-style: none;
   padding: 0 1em;
   margin: 0;

@@ -19,11 +19,11 @@
   --nav-h: 50px;
   --logo: 42px;
   --pill-pad-x: 20px;
-  --pill-gap: 4px;
+  --pill-gap:  26px;
   width: max-content;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 40px;
   box-sizing: border-box;
 }
 
