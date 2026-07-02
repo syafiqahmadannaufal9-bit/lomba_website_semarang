@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PillNav from './PillNav'
 import './App.css'
 
@@ -33,9 +33,65 @@ function App() {
     // '/assets/gambar3.png',
   ]);
 
+  // Budaya Carousel state
+  const budayaItems = [
+    {
+      id: 1,
+      title: 'Dugderan & Warak Ngendog',
+      description: 'Tradisi unik perayaan Ramadan dengan arak-arakan boneka raksasa yang meriah',
+      image: '/assets/dugderan_budaya.png'
+    },
+    {
+      id: 2,
+      title: 'Seni Gambang',
+      description: 'Musik tradisional Jawa dengan instrumen gamelan khas Semarang',
+      image: '/assets/Gambang_budaya.png'
+    },
+    {
+      id: 3,
+      title: 'Terbang Kolong',
+      description: 'Seni musik tradisional dengan alat musik perkusi yang dimainkan secara bersamaan',
+      image: '/assets/Terbang_budaya.png'
+    },
+    {
+      id: 4,
+      title: 'Wayang Kulit',
+      description: 'Seni pertunjukan wayang tradisional yang menceritakan kisah-kisah dari Ramayana dan Mahabharata',
+      image: '/assets/Wayang_budaya.png'
+    }
+  ];
+
+  const [currentBudayaIndex, setCurrentBudayaIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [heroOpacity, setHeroOpacity] = useState(1);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const heroSection = document.querySelector('.hero');
+      
+      if (heroSection) {
+        const heroHeight = heroSection.offsetHeight;
+        const fadeStart = heroHeight * 0.5;
+        const fadeEnd = heroHeight;
+        
+        if (scrollPosition < fadeStart) {
+          setHeroOpacity(1);
+        } else if (scrollPosition > fadeEnd) {
+          setHeroOpacity(0);
+        } else {
+          const opacity = 1 - ((scrollPosition - fadeStart) / (fadeEnd - fadeStart));
+          setHeroOpacity(opacity);
+        }
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handlePrevImage = () => {
     if (isAnimating) return;
@@ -61,6 +117,14 @@ function App() {
     }, 800);
   };
 
+  const handlePrevBudaya = () => {
+    setCurrentBudayaIndex(currentBudayaIndex === 0 ? budayaItems.length - 1 : currentBudayaIndex - 1);
+  };
+
+  const handleNextBudaya = () => {
+    setCurrentBudayaIndex(currentBudayaIndex === budayaItems.length - 1 ? 0 : currentBudayaIndex + 1);
+  };
+
   return (
     <div className="app">
       {/* PillNav Header */}
@@ -77,7 +141,7 @@ function App() {
       />
 
       {/* Hero Section */}
-      <main className="hero">
+      <main className="hero" id="home" style={{ opacity: heroOpacity, pointerEvents: heroOpacity < 0.5 ? 'none' : 'auto' }}>
         <div className={`hero-content ${isAnimating ? 'animating' : ''}`}>
           {/* Left Side Content */}
           <div className="hero-left">
@@ -161,6 +225,106 @@ function App() {
           </div>
         </div>
       </main>
+
+      {/* Wisata Section */}
+      <section className="section" id="wisata" style={{ background: '#fff5e6' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>WISATA</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+            Jelajahi destinasi wisata menarik di Semarang dengan berbagai atraksi budaya, pantai, dan tempat bersejarah yang menakjubkan.
+          </p>
+        </div>
+      </section>
+
+      {/* Budaya Section */}
+      <section className="section" id="budaya" style={{ background: '#ffffff', padding: '3rem 2rem' }}>
+        <div style={{ width: '100%', maxWidth: '1200px' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: '#e74c3c', textAlign: 'center' }}>BUDAYA</h2>
+          <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#666', textAlign: 'center', marginBottom: '3rem', maxWidth: '800px', margin: '0 auto 3rem' }}>
+            Semarang kaya dengan tradisi dan budaya lokal yang telah diwariskan turun-temurun oleh generasi sebelumnya.
+          </p>
+          
+          <div className="budaya-carousel-container">
+            {/* Carousel Items */}
+            <div className="budaya-carousel" style={{ transform: `translateX(-${currentBudayaIndex * 100}%)` }}>
+              {budayaItems.map((item) => (
+                <div key={item.id} className="budaya-card">
+                  <div className="budaya-card-image">
+                    <img src={item.image} alt={item.title} />
+                  </div>
+                  <div className="budaya-card-content">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <button className="budaya-nav-btn budaya-nav-prev" onClick={handlePrevBudaya}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <button className="budaya-nav-btn budaya-nav-next" onClick={handleNextBudaya}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* Indicators */}
+          <div className="budaya-indicators">
+            {budayaItems.map((_, index) => (
+              <button
+                key={index}
+                className={`budaya-indicator ${index === currentBudayaIndex ? 'active' : ''}`}
+                onClick={() => setCurrentBudayaIndex(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Kuliner Section */}
+      <section className="section" id="kuliner" style={{ background: '#fff0f5' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>KULINER</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+            Nikmati cita rasa autentik makanan khas Semarang yang lezat dan menggugah selera dari berbagai warung hingga restoran ternama.
+          </p>
+        </div>
+      </section>
+
+      {/* Sejarah Section */}
+      <section className="section" id="sejarah" style={{ background: '#e6f7ff' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>SEJARAH</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+            Pelajari sejarah panjang Semarang sebagai kota pelabuhan yang menjadi saksi perjalanan bangsa Indonesia.
+          </p>
+        </div>
+      </section>
+
+      {/* Teknologi Section */}
+      <section className="section" id="teknologi" style={{ background: '#f0f5ff' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>TEKNOLOGI</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+            Semarang terus berinovasi dengan teknologi terkini untuk menciptakan kota yang lebih smart dan berkelanjutan.
+          </p>
+        </div>
+      </section>
+
+      {/* Peta Section */}
+      <section className="section" id="peta" style={{ background: '#f5fff0' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>PETA</h2>
+          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+            Temukan lokasi berbagai tempat menarik dan penting di Semarang melalui peta interaktif kami.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

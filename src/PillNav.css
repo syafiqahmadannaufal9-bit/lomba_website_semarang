@@ -1,5 +1,5 @@
 .pill-nav-container {
-  position: absolute;
+  position: fixed;
   top: 1.5em;
   left: 3rem;
   right: 3rem;
@@ -19,7 +19,7 @@
   --nav-h: 50px;
   --logo: 42px;
   --pill-pad-x: 20px;
-  --pill-gap:  26px;
+  --pill-gap: 40px;
   width: max-content;
   display: flex;
   align-items: center;
@@ -41,22 +41,22 @@
   display: flex;
   align-items: center;
   height: var(--nav-h);
-  background: var(--base, #fff);
+  background: transparent;
   border-radius: 9999px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 .pill-logo {
   width: var(--nav-h);
   height: var(--nav-h);
   border-radius: 50%;
-  background: var(--base, #fff);
+  background: transparent;
   padding: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: none;
   transition: transform 0.2s ease;
 }
 
