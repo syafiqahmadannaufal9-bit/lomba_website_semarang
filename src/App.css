@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Montserrat:wght@900&display=swap');
+
 :root {
   --color-red: #e74c3c;
   --color-white: #ffffff;
@@ -14,7 +16,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -29,8 +30,6 @@ body {
 
 .section {
   min-height: 100vh;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -59,11 +58,7 @@ body {
   padding: 1rem;
   padding-top: 2.6rem;
   background: var(--color-white);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   scroll-margin-top: 2.6rem;
-  transition: opacity 0.1s linear;
-  will-change: opacity;
 }
 
 .hero-content {
@@ -558,3 +553,154 @@ body {
     right: 5px;
   }
 }
+
+/* Welcome Section (Page 2) */
+.welcome-section {
+  position: relative;
+  background: var(--color-white);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.welcome-text-1 {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: #000;
+  margin-bottom: -0.5rem;
+  line-height: 1.2;
+}
+
+.welcome-text-2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(2.2rem, 6.5vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #e96a65;
+}
+
+/* Per-letter hover animation */
+.split-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letter,
+.letter-space {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease;
+  will-change: transform, color;
+  cursor: default;
+}
+
+/* Hover on letter inside welcome-text-1 (Caveat, black -> red) */
+.welcome-text-1 .letter:hover {
+  transform: translateY(-10px);
+  color: #e74c3c;
+}
+
+/* Wave float keyframe */
+@keyframes letterFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+/* Apply continuous wave float to each colored letter, staggered */
+.welcome-text-2 .letter-colored {
+  animation: letterFloat 2.4s ease-in-out infinite;
+}
+.welcome-text-2 .letter-n1  { animation-delay: 0.00s; }
+.welcome-text-2 .letter-n2  { animation-delay: 0.10s; }
+.welcome-text-2 .letter-n3  { animation-delay: 0.20s; }
+.welcome-text-2 .letter-n4  { animation-delay: 0.30s; }
+.welcome-text-2 .letter-n5  { animation-delay: 0.40s; }
+.welcome-text-2 .letter-n6  { animation-delay: 0.50s; }
+.welcome-text-2 .letter-n7  { animation-delay: 0.60s; }
+.welcome-text-2 .letter-n8  { animation-delay: 0.70s; }
+.welcome-text-2 .letter-n9  { animation-delay: 0.80s; }
+.welcome-text-2 .letter-n10 { animation-delay: 0.90s; }
+.welcome-text-2 .letter-n11 { animation-delay: 1.00s; }
+.welcome-text-2 .letter-n12 { animation-delay: 1.10s; }
+
+/* Per-letter hover color (each letter gets its own color on hover) */
+.welcome-text-2 .letter-colored:hover { animation-play-state: paused; }
+.welcome-text-2 .letter-n1:hover  { color: #e74c3c; transform: translateY(-14px); }
+.welcome-text-2 .letter-n2:hover  { color: #e67e22; transform: translateY(-14px); }
+.welcome-text-2 .letter-n3:hover  { color: #f1c40f; transform: translateY(-14px); }
+.welcome-text-2 .letter-n4:hover  { color: #2ecc71; transform: translateY(-14px); }
+.welcome-text-2 .letter-n5:hover  { color: #1abc9c; transform: translateY(-14px); }
+.welcome-text-2 .letter-n6:hover  { color: #3498db; transform: translateY(-14px); }
+.welcome-text-2 .letter-n7:hover  { color: #9b59b6; transform: translateY(-14px); }
+.welcome-text-2 .letter-n8:hover  { color: #e91e63; transform: translateY(-14px); }
+.welcome-text-2 .letter-n9:hover  { color: #ff5722; transform: translateY(-14px); }
+.welcome-text-2 .letter-n10:hover { color: #00bcd4; transform: translateY(-14px); }
+.welcome-text-2 .letter-n11:hover { color: #8bc34a; transform: translateY(-14px); }
+.welcome-text-2 .letter-n12:hover { color: #ff9800; transform: translateY(-14px); }
+
+
+.shape {
+  position: absolute;
+  z-index: 1;
+}
+
+.shape-1 {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.02));
+  top: 25%;
+  left: 15%;
+}
+
+.shape-2 {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, rgba(41, 128, 185, 0.15), rgba(41, 128, 185, 0.02));
+  bottom: 30%;
+  right: 15%;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.shape-3 {
+  width: 180px;
+  height: 180px;
+  border: 2px solid rgba(231, 76, 60, 0.1);
+  border-radius: 50%;
+  background: transparent;
+  top: 15%;
+  right: 25%;
+}
+
+.shape-4 {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, rgba(241, 196, 15, 0.2), rgba(241, 196, 15, 0.05));
+  bottom: 20%;
+  left: 20%;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.shape-5 {
+  width: 40px;
+  height: 40px;
+  background: rgba(46, 204, 113, 0.15);
+  top: 40%;
+  right: 10%;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .shape {
+    transform: scale(0.7);
+  }
+}

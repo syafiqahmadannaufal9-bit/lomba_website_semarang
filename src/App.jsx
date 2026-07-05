@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PillNav from './PillNav'
 import './App.css'
+
+gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -22,6 +26,23 @@ const semarangLogo = `data:image/svg+xml,${encodeURIComponent(`
     <text x="50" y="85" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">SMG</text>
   </svg>
 `)}`;
+
+// Per-letter split text component for hover animation
+function SplitText({ text, className, wrapperRef, colored }) {
+  let letterCount = 0;
+  return (
+    <span className={className} ref={wrapperRef}>
+      {text.split('').map((char, i) => {
+        if (char === ' ') {
+          return <span key={i} className="letter-space">&nbsp;</span>;
+        }
+        const idx = ++letterCount;
+        const cls = colored ? `letter letter-colored letter-n${idx}` : 'letter';
+        return <span key={i} className={cls}>{char}</span>;
+      })}
+    </span>
+  );
+}
 
 function App() {
   // Carousel state - isi array dengan gambar Anda sendiri
@@ -65,33 +86,64 @@ function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [heroOpacity, setHeroOpacity] = useState(1);
+
+  // Refs for GSAP Welcome Section (Page 2)
+  const welcomeSectionRef = useRef(null);
+  const welcomeText1Ref = useRef(null);
+  const welcomeText2Ref = useRef(null);
+  const shapesRef = useRef([]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const heroSection = document.querySelector('.hero');
+    const ctx = gsap.context(() => {
+      // ScrollTrigger timeline for smooth reveal from bottom
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: welcomeSectionRef.current,
+          start: "top 75%",
+          end: "bottom center",
+          toggleActions: "play none none reverse",
+        },
+        delay: 1.2
+      });
+
+      tl.from(welcomeText1Ref.current, {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      })
+      .from(welcomeText2Ref.current, {
+        y: 60,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      }, "-=0.6")
+      .from(shapesRef.current, {
+        y: 80,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "power3.out"
+      }, "-=0.8");
       
-      if (heroSection) {
-        const heroHeight = heroSection.offsetHeight;
-        const fadeStart = heroHeight * 0.5;
-        const fadeEnd = heroHeight;
-        
-        if (scrollPosition < fadeStart) {
-          setHeroOpacity(1);
-        } else if (scrollPosition > fadeEnd) {
-          setHeroOpacity(0);
-        } else {
-          const opacity = 1 - ((scrollPosition - fadeStart) / (fadeEnd - fadeStart));
-          setHeroOpacity(opacity);
-        }
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+      // Floating animation loop for shapes
+      shapesRef.current.forEach((shape) => {
+        gsap.to(shape, {
+          y: "random(-20, 20)",
+          x: "random(-20, 20)",
+          rotation: "random(-15, 15)",
+          duration: "random(2.5, 4)",
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      });
+
+    }, welcomeSectionRef);
+
+    return () => ctx.revert();
   }, []);
+
 
   const handlePrevImage = () => {
     if (isAnimating) return;
@@ -141,7 +193,7 @@ function App() {
       />
 
       {/* Hero Section */}
-      <main className="hero" id="home" style={{ opacity: heroOpacity, pointerEvents: heroOpacity < 0.5 ? 'none' : 'auto' }}>
+      <main className="hero" id="home">
         <div className={`hero-content ${isAnimating ? 'animating' : ''}`}>
           {/* Left Side Content */}
           <div className="hero-left">
@@ -225,6 +277,25 @@ function App() {
           </div>
         </div>
       </main>
+
+      {/* Welcome / Page 2 Section */}
+      <section className="section welcome-section" id="welcome" ref={welcomeSectionRef}>
+        <div className="welcome-content">
+          <h2 className="welcome-text-1" ref={welcomeText1Ref}>
+            <SplitText text="Selamat Menjelajah" className="split-line" />
+          </h2>
+          <h1 className="welcome-text-2" ref={welcomeText2Ref}>
+            <SplitText text="Kota Semarang" className="split-line" colored />
+          </h1>
+        </div>
+        
+        {/* Floating Shapes */}
+        <div className="shape shape-1" ref={el => shapesRef.current[0] = el}></div>
+        <div className="shape shape-2" ref={el => shapesRef.current[1] = el}></div>
+        <div className="shape shape-3" ref={el => shapesRef.current[2] = el}></div>
+        <div className="shape shape-4" ref={el => shapesRef.current[3] = el}></div>
+        <div className="shape shape-5" ref={el => shapesRef.current[4] = el}></div>
+      </section>
 
       {/* Wisata Section */}
       <section className="section" id="wisata" style={{ background: '#fff5e6' }}>
