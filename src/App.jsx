@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PillNav from './PillNav'
+import GridMotion from './GridMotion'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,16 +17,8 @@ const navItems = [
   { label: "Peta", href: "#peta" },
 ];
 
-// Create inline SVG logo for Semarang
-const semarangLogo = `data:image/svg+xml,${encodeURIComponent(`
-  <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="45" fill="#e74c3c"/>
-    <circle cx="50" cy="35" r="5" fill="white"/>
-    <circle cx="50" cy="50" r="5" fill="white"/>
-    <circle cx="50" cy="65" r="5" fill="white"/>
-    <text x="50" y="85" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">SMG</text>
-  </svg>
-`)}`;
+// Use the Semarang Semakin Hebat logo
+const semarangLogo = '/assets/semarang-semakin-hebat-seeklogo.png';
 
 // Per-letter split text component for hover animation
 function SplitText({ text, className, wrapperRef, colored }) {
@@ -92,6 +85,29 @@ function App() {
   const welcomeText1Ref = useRef(null);
   const welcomeText2Ref = useRef(null);
   const shapesRef = useRef([]);
+
+  // Refs for GSAP Wisata Section (Page 3)
+  const wisataSectionRef = useRef(null);
+  const wisataContentRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(wisataContentRef.current, {
+        scrollTrigger: {
+          trigger: wisataSectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+        y: -100, // Slide down from top
+        opacity: 0,
+        duration: 1.2,
+        delay: 1, // 1 second delay
+        ease: "power3.out"
+      });
+    }, wisataSectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -298,12 +314,51 @@ function App() {
       </section>
 
       {/* Wisata Section */}
-      <section className="section" id="wisata" style={{ background: '#fff5e6' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>WISATA</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
-            Jelajahi destinasi wisata menarik di Semarang dengan berbagai atraksi budaya, pantai, dan tempat bersejarah yang menakjubkan.
-          </p>
+      <section className="section wisata-section" id="wisata" ref={wisataSectionRef}>
+        <div className="wisata-content-container" ref={wisataContentRef}>
+          <div className="wisata-text-column">
+            <p className="wisata-main-text">
+              <span className="drop-cap">S</span>emarang (bahasa Jawa: <span className="javanese-text">ꦱꦼꦩꦫꦁ</span>, translit. Semarang) merupakan Ibu Kota Provinsi Jawa Tengah yang dinamis. Sebagai kota metropolitan terbesar kelima di Indonesia, Semarang menjadi pusat penting bagi ekonomi, budaya, dan sejarah dengan jumlah penduduk mencapai <strong>1,69 juta</strong> jiwa pada pertengahan 2024.
+            </p>
+            
+            <div className="asal-usul-box">
+              <span className="quote-mark-bg">“</span>
+              <div className="asal-usul-title">
+                <span className="leaf-icon">🍂</span> Asal Usul Nama
+              </div>
+              <p className="asal-usul-quote">
+                “Semarang berasal dari kata <span className="highlight">Asem (Asam)</span> dan <span className="highlight">Arang (Jarang)</span>, yang berarti Pohon Asam yang tumbuh jarang-jarang.”
+              </p>
+            </div>
+            
+            <p className="wisata-footer-text">
+              Penamaan ini bermula saat <strong>Ki Ageng Pandanaran I</strong> tiba di Pulau Tirang dan terkesima melihat fenomena alam unik tersebut. Di era kolonial, nama ini sempat disesuaikan menjadi "Samarang".
+            </p>
+          </div>
+
+          <div className="wisata-grid-panel">
+            <GridMotion
+              gradientColor="#e74c3c"
+              items={[
+                '/assets/Tugumuda.png',
+                '/assets/ChengHo_wisata.png',
+                '/assets/Masjid_wisata.png',
+                '/assets/dugderan_budaya.png',
+                '/assets/Gambang_budaya.png',
+                '/assets/Terbang_budaya.png',
+                '/assets/Wayang_budaya.png',
+                '/assets/lumpia_semarang.png',
+                '/assets/bandeng_presto.png',
+                '/assets/tahu_gimbal.png',
+                '/assets/nasi_ayam_semarang.png',
+                '/assets/ChengHo_wisata.png',
+                '/assets/Tugumuda.png',
+                '/assets/dugderan_budaya.png',
+                '/assets/Masjid_wisata.png',
+                '/assets/Gambang_budaya.png',
+              ]}
+            />
+          </div>
         </div>
       </section>
 

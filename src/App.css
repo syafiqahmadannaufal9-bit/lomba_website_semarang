@@ -123,15 +123,17 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 580px;
-  min-width: 300px;
+  min-height: 380px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .carousel-wrapper {
   max-width: 400px;
-  max-height: 580px;
+  max-height: 380px;
   width: 100%;
-  height: 100%;
+  height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -142,7 +144,7 @@ body {
 
 .hero-image {
   max-width: 400px;
-  max-height: 580px;
+  max-height: 380px;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -150,6 +152,44 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (min-width: 969px) {
+  .hero-content {
+    gap: 8rem;
+  }
+
+  .hero-center {
+    position: static;
+    min-height: 580px;
+    width: 280px;
+    margin: 0;
+  }
+
+  .carousel-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    height: 85vh;
+    max-height: calc(100vh - 120px);
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .hero-image {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: auto;
+    height: 100%;
+    object-position: bottom center;
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .hero-image.fade-out {
@@ -634,18 +674,18 @@ body {
 
 /* Per-letter hover color (each letter gets its own color on hover) */
 .welcome-text-2 .letter-colored:hover { animation-play-state: paused; }
-.welcome-text-2 .letter-n1:hover  { color: #e74c3c; transform: translateY(-14px); }
-.welcome-text-2 .letter-n2:hover  { color: #e67e22; transform: translateY(-14px); }
-.welcome-text-2 .letter-n3:hover  { color: #f1c40f; transform: translateY(-14px); }
-.welcome-text-2 .letter-n4:hover  { color: #2ecc71; transform: translateY(-14px); }
-.welcome-text-2 .letter-n5:hover  { color: #1abc9c; transform: translateY(-14px); }
-.welcome-text-2 .letter-n6:hover  { color: #3498db; transform: translateY(-14px); }
-.welcome-text-2 .letter-n7:hover  { color: #9b59b6; transform: translateY(-14px); }
-.welcome-text-2 .letter-n8:hover  { color: #e91e63; transform: translateY(-14px); }
-.welcome-text-2 .letter-n9:hover  { color: #ff5722; transform: translateY(-14px); }
-.welcome-text-2 .letter-n10:hover { color: #00bcd4; transform: translateY(-14px); }
-.welcome-text-2 .letter-n11:hover { color: #8bc34a; transform: translateY(-14px); }
-.welcome-text-2 .letter-n12:hover { color: #ff9800; transform: translateY(-14px); }
+.welcome-text-2 .letter-n1:hover  { color: #39c666; transform: translateY(-14px); }
+.welcome-text-2 .letter-n2:hover  { color: #57ddff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n3:hover  { color: #7049ff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n4:hover  { color: #44c1ff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n5:hover  { color: hsl(298, 100%, 66%); transform: translateY(-14px); }
+.welcome-text-2 .letter-n6:hover  { color: #4aff4d; transform: translateY(-14px); }
+.welcome-text-2 .letter-n7:hover  { color: #4fe5ff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n8:hover  { color: #ff4acc; transform: translateY(-14px); }
+.welcome-text-2 .letter-n9:hover  { color: #53ff8d; transform: translateY(-14px); }
+.welcome-text-2 .letter-n10:hover { color: #a75bff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n11:hover { color: #57c7ff; transform: translateY(-14px); }
+.welcome-text-2 .letter-n12:hover { color: #49ffaa; transform: translateY(-14px); }
 
 
 .shape {
@@ -703,4 +743,160 @@ body {
   .shape {
     transform: scale(0.7);
   }
-}
+}
+
+/* Wisata Section (Page 3) */
+.wisata-section {
+  background: var(--color-white) !important;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+}
+
+.wisata-content-container {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 0;
+}
+
+.wisata-text-column {
+  flex: 0 0 50%;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+  padding: 7rem 4rem 6rem 5rem;
+  justify-content: center;
+}
+
+.wisata-grid-panel {
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .wisata-section {
+    padding: 0;
+  }
+  .wisata-content-container {
+    flex-direction: column;
+  }
+  .wisata-text-column,
+  .wisata-grid-panel {
+    flex: none;
+    max-width: 100%;
+    width: 100%;
+  }
+  .wisata-text-column {
+    padding: 4rem 2rem 2rem;
+  }
+  .wisata-grid-panel {
+    min-height: 60vw;
+  }
+}
+
+.wisata-main-text {
+  font-size: 1.25rem;
+  line-height: 1.85;
+  color: var(--color-text);
+  font-family: 'Arial', sans-serif;
+}
+
+.wisata-main-text .drop-cap {
+  font-size: 5.5rem;
+  font-weight: 900;
+  float: left;
+  line-height: 0.75;
+  padding-right: 16px;
+  padding-top: 4px;
+  color: var(--color-red);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.wisata-main-text .javanese-text {
+  font-family: 'Noto Sans Javanese', 'Segoe UI', Tahoma, sans-serif;
+  font-weight: 500;
+}
+
+.asal-usul-box {
+  position: relative;
+  background: #fdfbf7;
+  border-left: 5px solid var(--color-red);
+  border-radius: 4px 16px 16px 4px;
+  padding: 2.2rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.015);
+  border-right: 1px solid rgba(0, 0, 0, 0.015);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.015);
+  overflow: hidden;
+}
+
+.quote-mark-bg {
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  font-size: 9rem;
+  font-family: 'Georgia', serif;
+  color: var(--color-red);
+  opacity: 0.07;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.asal-usul-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.asal-usul-title .leaf-icon {
+  font-size: 1.1rem;
+}
+
+.asal-usul-quote {
+  font-family: 'Georgia', Cambria, "Times New Roman", Times, serif;
+  font-size: 1.35rem;
+  line-height: 1.65;
+  color: #2c3e50;
+  margin: 0;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.asal-usul-quote .highlight {
+  font-weight: 700;
+  color: var(--color-red);
+  font-style: normal;
+}
+
+.wisata-footer-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #555;
+  font-style: italic;
+}
+
+.wisata-footer-text strong {
+  color: var(--color-black);
+  font-weight: 700;
+  font-style: normal;
+}
