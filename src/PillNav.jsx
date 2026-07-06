@@ -18,15 +18,53 @@ const PillNav = ({
 }) => {
   const resolvedPillTextColor = pillTextColor ?? baseColor;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  
   const circleRefs = useRef([]);
   const tlRefs = useRef([]);
   const activeTweenRefs = useRef([]);
-  const logoImgRef = useRef(null);
-  const logoTweenRef = useRef(null);
   const hamburgerRef = useRef(null);
   const mobileMenuRef = useRef(null);
   const navItemsRef = useRef(null);
   const logoRef = useRef(null);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isMobileMenuOpen) return;
+
+      const currentScrollY = window.scrollY;
+
+      // Check if scrolled past top
+      if (currentScrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      // Check scroll direction
+      if (currentScrollY < 50) {
+        setVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      const diff = currentScrollY - lastScrollY.current;
+      if (diff > 15) {
+        // Scrolled down - hide
+        setVisible(false);
+        lastScrollY.current = currentScrollY;
+      } else if (diff < -15) {
+        // Scrolled up - show
+        setVisible(true);
+        lastScrollY.current = currentScrollY;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isMobileMenuOpen]);
 
   useEffect(() => {
     const layout = () => {
@@ -136,18 +174,7 @@ const PillNav = ({
     });
   };
 
-  const handleLogoEnter = () => {
-    const img = logoImgRef.current;
-    if (!img) return;
-    logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
-    logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.2,
-      ease,
-      overwrite: 'auto'
-    });
-  };
+
 
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -208,18 +235,17 @@ const PillNav = ({
   };
 
   return (
-    <div className="pill-nav-container">
+    <div className={`pill-nav-container ${visible ? '' : 'nav-hidden'} ${isScrolled ? 'is-scrolled' : ''}`}>
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
         <a
           className="pill-logo"
           href={items?.[0]?.href || '#'}
           aria-label="Home"
-          onMouseEnter={handleLogoEnter}
           ref={el => {
             logoRef.current = el;
           }}
         >
-          <img src={logo} alt={logoAlt} ref={logoImgRef} />
+          <img src={logo} alt={logoAlt} />
         </a>
 
         <div className="pill-nav-items desktop-only" ref={navItemsRef}>
