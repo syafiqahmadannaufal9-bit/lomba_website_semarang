@@ -9,10 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navItems = [
   { label: "Home", href: "#home" },
-  { label: "Wisata", href: "#wisata" },
+  { label: "Sejarah", href: "#sejarah" },
   { label: "Budaya", href: "#budaya" },
   { label: "Kuliner", href: "#kuliner" },
-  { label: "Sejarah", href: "#sejarah" },
   { label: "Teknologi", href: "#teknologi" },
   { label: "Peta", href: "#peta" },
 ];
@@ -36,6 +35,39 @@ function SplitText({ text, className, wrapperRef, colored }) {
     </span>
   );
 }
+
+const sejarahData = [
+  {
+    year: "Abad 8",
+    title: "Awal Mula: Pelabuhan Pragota",
+    desc: "Pada awalnya, daerah pesisir Semarang merupakan pelabuhan bernama Pragota, menjadi bagian dari Kerajaan Mataram Kuno. Daerah ini dulunya merupakan gugusan pulau kecil akibat endapan lumpur.",
+  },
+  {
+    year: "1435",
+    title: "Kedatangan Laksamana Cheng Ho",
+    desc: "Pada tahun 1435 M, armada Laksamana Cheng Ho bersandar di Pelabuhan Simongan. Sebagai bentuk penghormatan dan kenang-kenangan, didirikanlah sebuah kelenteng dan masjid yang kini dikenal sebagai Sam Po Kong (Gedung Batu), simbol harmoni budaya yang masih tegak hingga hari ini.",
+    image: "/assets/cengho.png",
+    largeImage: true,
+  },
+  {
+    year: "1705",
+    title: "Masuknya VOC & Kolonial Belanda",
+    desc: "Semarang diserahkan kepada VOC. Belanda membangun kawasan Kota Lama (Outstadt) dengan benteng dan arsitektur Eropa klasik yang menjadi pusat perdagangan komersial.",
+    image: null,
+  },
+  {
+    year: "1942",
+    title: "Masa Pendudukan Jepang",
+    desc: "Militer Jepang mengambil alih kekuasaan dari Belanda. Masa ini membawa perubahan drastis dalam tatanan sosial, ekonomi, dan pemerintahan di Semarang.",
+    image: null,
+  },
+  {
+    year: "1945",
+    title: "Masa Perjuangan & Kemerdekaan",
+    desc: "Pecah Pertempuran Lima Hari di Semarang antara pemuda pejuang melawan tentara Jepang. Monumen Tugu Muda dibangun untuk mengenang keberanian para pahlawan.",
+    image: "/assets/Tugumuda.png",
+  }
+];
 
 function App() {
   // Carousel state - isi array dengan gambar Anda sendiri
@@ -86,15 +118,59 @@ function App() {
   const welcomeText2Ref = useRef(null);
   const shapesRef = useRef([]);
 
-  // Refs for GSAP Wisata Section (Page 3)
-  const wisataSectionRef = useRef(null);
-  const wisataContentRef = useRef(null);
+  // Refs for GSAP Sejarah Intro Section (Page 3)
+  const sejarahIntroRef = useRef(null);
+  const sejarahIntroContentRef = useRef(null);
+
+  // Refs for GSAP Sejarah Section
+  const sejarahListRef = useRef(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(wisataContentRef.current, {
+      // Add scroll interactive classes to history cards to animate timeline dots
+      const cards = gsap.utils.toArray(".history-card");
+      
+      cards.forEach((card) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 65%",
+          end: "bottom 35%",
+          onEnter: () => card.classList.add("active"),
+          onLeave: () => card.classList.remove("active"),
+          onEnterBack: () => card.classList.add("active"),
+          onLeaveBack: () => card.classList.remove("active")
+        });
+      });
+
+      // Animate entry for cards 3-5 (indices 2, 3, 4) only when scrolled into view
+      cards.forEach((card, index) => {
+        if (index >= 2) {
+          gsap.fromTo(card,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 85%", // Triggers when top of card reaches 85% of viewport
+                once: true // Animate only once
+              }
+            }
+          );
+        }
+      });
+    }, sejarahListRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from(sejarahIntroContentRef.current, {
         scrollTrigger: {
-          trigger: wisataSectionRef.current,
+          trigger: sejarahIntroRef.current,
           start: "top 75%",
           toggleActions: "play none none reverse",
         },
@@ -104,7 +180,7 @@ function App() {
         delay: 1, // 1 second delay
         ease: "power3.out"
       });
-    }, wisataSectionRef);
+    }, sejarahIntroRef);
 
     return () => ctx.revert();
   }, []);
@@ -313,9 +389,9 @@ function App() {
         <div className="shape shape-5" ref={el => shapesRef.current[4] = el}></div>
       </section>
 
-      {/* Wisata Section */}
-      <section className="section wisata-section" id="wisata" ref={wisataSectionRef}>
-        <div className="wisata-content-container" ref={wisataContentRef}>
+      {/* Sejarah Section - Asal Usul (Awal Section Sejarah) */}
+      <section className="section wisata-section" id="sejarah" ref={sejarahIntroRef}>
+        <div className="wisata-content-container" ref={sejarahIntroContentRef}>
           <div className="wisata-text-column">
             <p className="wisata-main-text">
               <span className="drop-cap">S</span>emarang (bahasa Jawa: <span className="javanese-text">ꦱꦼꦩꦫꦁ</span>, translit. Semarang) merupakan Ibu Kota Provinsi Jawa Tengah yang dinamis. Sebagai kota metropolitan terbesar kelima di Indonesia, Semarang menjadi pusat penting bagi ekonomi, budaya, dan sejarah dengan jumlah penduduk mencapai <strong>1,69 juta</strong> jiwa pada pertengahan 2024.
@@ -324,7 +400,6 @@ function App() {
             <div className="asal-usul-box">
               <span className="quote-mark-bg">“</span>
               <div className="asal-usul-title">
-                <span className="leaf-icon">🍂</span> Asal Usul Nama
               </div>
               <p className="asal-usul-quote">
                 “Semarang berasal dari kata <span className="highlight">Asem (Asam)</span> dan <span className="highlight">Arang (Jarang)</span>, yang berarti Pohon Asam yang tumbuh jarang-jarang.”
@@ -340,24 +415,68 @@ function App() {
             <GridMotion
               gradientColor="#e74c3c"
               items={[
-                '/assets/Tugumuda.png',
-                '/assets/ChengHo_wisata.png',
-                '/assets/Masjid_wisata.png',
-                '/assets/dugderan_budaya.png',
-                '/assets/Gambang_budaya.png',
-                '/assets/Terbang_budaya.png',
-                '/assets/Wayang_budaya.png',
-                '/assets/lumpia_semarang.png',
-                '/assets/bandeng_presto.png',
-                '/assets/tahu_gimbal.png',
-                '/assets/nasi_ayam_semarang.png',
-                '/assets/ChengHo_wisata.png',
-                '/assets/Tugumuda.png',
-                '/assets/dugderan_budaya.png',
-                '/assets/Masjid_wisata.png',
-                '/assets/Gambang_budaya.png',
+                '/assets/kuda.jpe',
+                '/assets/laksamana.jpg',
+                '/assets/patungpenari.jpe',
+                '/assets/undip.jpg',
+                '/assets/Warak ngendog.jpe',
+                '/assets/kuda.jpe',
+                '/assets/laksamana.jpg',
+                '/assets/patungpenari.jpe',
+                '/assets/Warak ngendog.jpe',
+                '/assets/laksamana.jpg',
+                '/assets/undip.jpg',
+                '/assets/Warak ngendog.jpe',
+                '/assets/patungpenari.jpe',
+                '/assets/undip.jpg',
+                '/assets/laksamana.jpg',
+                '/assets/kuda.jpe',
               ]}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Sejarah Timeline Cards Section */}
+      <section className="section sejarah-section" id="sejarah-timeline">
+        <div className="sejarah-layout">
+          {/* Left Side (Sticky) */}
+          <div className="sejarah-sticky">
+            <h3 className="sejarah-subtitle">Sejarah Kota Semarang</h3>
+            <h2 className="sejarah-title">
+              Jejak Langkah &<br /><span className="text-red">Peristiwa Bersejarah</span>
+            </h2>
+            <p className="sejarah-desc">
+              Temukan berbagai peristiwa penting yang membentuk identitas dan budaya Kota Semarang dari masa ke masa. Mari telusuri jejak sejarahnya!
+            </p>
+            
+            {/* Arrow image */}
+            <img src="/assets/panah.png" className="sejarah-arrow" alt="arrow" />
+          </div>
+
+          {/* Right Side (Scrollable Cards) */}
+          <div className="sejarah-list" ref={sejarahListRef}>
+            {sejarahData.map((item, index) => (
+              <div key={index} className="history-card">
+                <div className="hc-timeline-node">
+                  <div className="hc-timeline-line"></div>
+                  <div className="hc-timeline-dot"></div>
+                  <div className="hc-timeline-date">{item.year}</div>
+                </div>
+                
+                {item.image && (
+                  <div className={`hc-image${item.largeImage ? ' hc-image--large' : ''}`}>
+                    <img src={item.image} alt={item.title} />
+                  </div>
+                )}
+                
+                <div className="hc-info">
+                  <h3 className="hc-title">{item.title}</h3>
+                  <div className="hc-divider"></div>
+                  <p className="hc-desc">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -370,44 +489,35 @@ function App() {
             Semarang kaya dengan tradisi dan budaya lokal yang telah diwariskan turun-temurun oleh generasi sebelumnya.
           </p>
           
-          <div className="budaya-carousel-container">
-            {/* Carousel Items */}
-            <div className="budaya-carousel" style={{ transform: `translateX(-${currentBudayaIndex * 100}%)` }}>
-              {budayaItems.map((item) => (
-                <div key={item.id} className="budaya-card">
-                  <div className="budaya-card-image">
-                    <img src={item.image} alt={item.title} />
-                  </div>
-                  <div className="budaya-card-content">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
+          <div className="budaya-marquee-container">
+            <div className="budaya-marquee-track">
+              {/* Duplicate the sets 4 times to ensure no empty space on ultra-wide screens */}
+              {[0, 1, 2, 3].map((setIdx) => (
+                <div key={setIdx} className="budaya-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
+                  {budayaItems.map((item) => (
+                    <div key={item.id} className="budaya-card">
+                      <div className="budaya-card-image">
+                        <img src={item.image} alt={item.title} />
+                        <div className="budaya-card-overlay"></div>
+                      </div>
+                      <div className="budaya-card-content">
+                        <h3>{item.title}</h3>
+                        <div className="budaya-card-details">
+                          <hr className="budaya-card-divider" />
+                          <p>{item.description}</p>
+                          <div className="budaya-card-action">
+                            <span>Lihat Detail</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
-
-            {/* Navigation Buttons */}
-            <button className="budaya-nav-btn budaya-nav-prev" onClick={handlePrevBudaya}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <button className="budaya-nav-btn budaya-nav-next" onClick={handleNextBudaya}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
-          {/* Indicators */}
-          <div className="budaya-indicators">
-            {budayaItems.map((_, index) => (
-              <button
-                key={index}
-                className={`budaya-indicator ${index === currentBudayaIndex ? 'active' : ''}`}
-                onClick={() => setCurrentBudayaIndex(index)}
-              />
-            ))}
           </div>
         </div>
       </section>
@@ -422,15 +532,7 @@ function App() {
         </div>
       </section>
 
-      {/* Sejarah Section */}
-      <section className="section" id="sejarah" style={{ background: '#e6f7ff' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>SEJARAH</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
-            Pelajari sejarah panjang Semarang sebagai kota pelabuhan yang menjadi saksi perjalanan bangsa Indonesia.
-          </p>
-        </div>
-      </section>
+
 
       {/* Teknologi Section */}
       <section className="section" id="teknologi" style={{ background: '#f0f5ff' }}>

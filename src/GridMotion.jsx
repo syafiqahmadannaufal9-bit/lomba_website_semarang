@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import './GridMotion.css';
 
@@ -72,7 +72,7 @@ const GridMotion = ({
             >
               {rowItems.map((item, colIdx) => (
                 <div key={colIdx} className="gm-cell">
-                  {item && typeof item === 'string' && item.match(/\.(png|jpe?g|webp|gif|svg)$/i) ? (
+                  {item && typeof item === 'string' && item.match(/\.(png|jpe?g|jpe|webp|gif|svg)$/i) ? (
                     <img src={item} alt="" className="gm-img" />
                   ) : typeof item === 'string' ? (
                     <span className="gm-label">{item}</span>
