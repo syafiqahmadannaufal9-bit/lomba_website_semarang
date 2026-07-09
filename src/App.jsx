@@ -523,12 +523,24 @@ function App() {
       </section>
 
       {/* Kuliner Section */}
-      <section className="section" id="kuliner" style={{ background: '#fff0f5' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>KULINER</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
-            Nikmati cita rasa autentik makanan khas Semarang yang lezat dan menggugah selera dari berbagai warung hingga restoran ternama.
-          </p>
+      <section className="section kuliner-section" id="kuliner">
+        <div className="kuliner-content">
+          <div className="kuliner-image" aria-hidden="true">
+            <img src="/assets/bandeng_presto.png" alt="Bandeng Presto" />
+          </div>
+
+          <div className="kuliner-info">
+            <h2 className="kuliner-title">Bandeng Presto</h2>
+            <p className="kuliner-subtitle">Masakan khas Semarang — olahan ikan bandeng yang dimasak dengan teknik presto sehingga tulangnya lunak dan dapat dimakan.</p>
+
+            <p className="kuliner-desc">
+              Bandeng presto adalah salah satu hidangan ikonis dari Semarang. Ikan bandeng dimasak dengan tekanan uap tinggi (presto) bersama bumbu sederhana sehingga dagingnya empuk dan tulangnya lunak. Hidangan ini populer karena teksturnya yang mudah dimakan dan rasanya gurih — sering disajikan untuk acara keluarga dan oleh-oleh.
+            </p>
+
+            <p className="kuliner-history">
+              Sejarah singkat: teknik presto diadopsi untuk mempermudah konsumsi ikan berduri seperti bandeng. Di Semarang, metode ini berkembang menjadi kuliner rumahan yang kemudian populer di pasar dan restoran lokal.
+            </p>
+          </div>
         </div>
       </section>
 
