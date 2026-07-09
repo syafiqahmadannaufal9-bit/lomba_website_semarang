@@ -46,8 +46,6 @@ const sejarahData = [
     year: "1435",
     title: "Kedatangan Laksamana Cheng Ho",
     desc: "Pada tahun 1435 M, armada Laksamana Cheng Ho bersandar di Pelabuhan Simongan. Sebagai bentuk penghormatan dan kenang-kenangan, didirikanlah sebuah kelenteng dan masjid yang kini dikenal sebagai Sam Po Kong (Gedung Batu), simbol harmoni budaya yang masih tegak hingga hari ini.",
-    image: "/assets/cengho.png",
-    largeImage: true,
   },
   {
     year: "1705",
@@ -65,7 +63,6 @@ const sejarahData = [
     year: "1945",
     title: "Masa Perjuangan & Kemerdekaan",
     desc: "Pecah Pertempuran Lima Hari di Semarang antara pemuda pejuang melawan tentara Jepang. Monumen Tugu Muda dibangun untuk mengenang keberanian para pahlawan.",
-    image: "/assets/Tugumuda.png",
   }
 ];
 
@@ -393,6 +390,7 @@ function App() {
       <section className="section wisata-section" id="sejarah" ref={sejarahIntroRef}>
         <div className="wisata-content-container" ref={sejarahIntroContentRef}>
           <div className="wisata-text-column">
+            <h2 style={{ fontSize: '3.5rem', marginBottom: '0.5rem', color: '#e74c3c', fontWeight: 'bold' }}>Sejarah Kota Semarang</h2>
             <p className="wisata-main-text">
               <span className="drop-cap">S</span>emarang (bahasa Jawa: <span className="javanese-text">ꦱꦼꦩꦫꦁ</span>, translit. Semarang) merupakan Ibu Kota Provinsi Jawa Tengah yang dinamis. Sebagai kota metropolitan terbesar kelima di Indonesia, Semarang menjadi pusat penting bagi ekonomi, budaya, dan sejarah dengan jumlah penduduk mencapai <strong>1,69 juta</strong> jiwa pada pertengahan 2024.
             </p>
