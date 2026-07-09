@@ -40,6 +40,7 @@ body {
 
 /* Make welcome section a bit taller so its background covers more space */
 .welcome-section {
+  background: var(--color-white);
   min-height: 92vh;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
@@ -494,6 +495,69 @@ body {
   }
 }
 
+/* Budaya Section */
+.budaya-section {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #fffbfb 45%, #ffffff 100%);
+  min-height: 92vh;
+  padding: 3.5rem 2rem 4.5rem;
+  overflow: hidden;
+  align-items: flex-start;
+}
+
+.budaya-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('/assets/corak.png') center / cover no-repeat;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.budaya-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.92) 10%,
+      rgba(255, 255, 255, 0.45) 20%,
+      rgba(255, 255, 255, 0) 32%
+    ),
+    linear-gradient(
+      to top,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.9) 12%,
+      rgba(255, 255, 255, 0.4) 22%,
+      rgba(255, 255, 255, 0) 34%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.budaya-section-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.budaya-header {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.budaya-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--color-red);
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
 /* Budaya Marquee */
 .budaya-marquee-container {
   position: relative;
@@ -525,13 +589,12 @@ body {
 }
 
 .budaya-card {
-  flex: 0 0 260px;
-  width: 260px;
-  height: 380px;
+  flex: 0 0 clamp(320px, 22.2vw, 568px);
+  width: clamp(320px, 22.2vw, 568px);
+  height: clamp(460px, 31.9vw, 816px);
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.35s ease;
   cursor: pointer;
   position: relative;
@@ -539,8 +602,7 @@ body {
 }
 
 .budaya-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  /* no lift, no shadow */
 }
 
 .budaya-card-image {
@@ -666,9 +728,9 @@ body {
 /* Responsive */
 @media (max-width: 1024px) {
   .budaya-card {
-    flex: 0 0 200px;
-    width: 200px;
-    height: 320px;
+    flex: 0 0 280px;
+    width: 280px;
+    height: 400px;
   }
 }
 
@@ -679,9 +741,9 @@ body {
   }
 
   .budaya-card {
-    flex: 0 0 200px;
-    width: 200px;
-    height: 320px;
+    flex: 0 0 250px;
+    width: 250px;
+    height: 360px;
   }
 
   .budaya-card-content {
@@ -704,9 +766,9 @@ body {
   }
 
   .budaya-card {
-    flex: 0 0 180px;
-    width: 180px;
-    height: 280px;
+    flex: 0 0 210px;
+    width: 210px;
+    height: 310px;
   }
 }
 

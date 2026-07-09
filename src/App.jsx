@@ -480,13 +480,12 @@ function App() {
       </section>
 
       {/* Budaya Section */}
-      <section className="section" id="budaya" style={{ background: '#ffffff', padding: '3rem 2rem' }}>
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: '#e74c3c', textAlign: 'center' }}>BUDAYA</h2>
-          <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#666', textAlign: 'center', marginBottom: '3rem', maxWidth: '800px', margin: '0 auto 3rem' }}>
-            Semarang kaya dengan tradisi dan budaya lokal yang telah diwariskan turun-temurun oleh generasi sebelumnya.
-          </p>
-          
+      <section className="section budaya-section" id="budaya">
+        <div className="budaya-section-inner">
+          <header className="budaya-header">
+            <h2 className="budaya-title">BUDAYA</h2>
+          </header>
+
           <div className="budaya-marquee-container">
             <div className="budaya-marquee-track">
               {/* Duplicate the sets 4 times to ensure no empty space on ultra-wide screens */}
