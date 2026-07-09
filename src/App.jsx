@@ -489,44 +489,35 @@ function App() {
             Semarang kaya dengan tradisi dan budaya lokal yang telah diwariskan turun-temurun oleh generasi sebelumnya.
           </p>
           
-          <div className="budaya-carousel-container">
-            {/* Carousel Items */}
-            <div className="budaya-carousel" style={{ transform: `translateX(-${currentBudayaIndex * 100}%)` }}>
-              {budayaItems.map((item) => (
-                <div key={item.id} className="budaya-card">
-                  <div className="budaya-card-image">
-                    <img src={item.image} alt={item.title} />
-                  </div>
-                  <div className="budaya-card-content">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
+          <div className="budaya-marquee-container">
+            <div className="budaya-marquee-track">
+              {/* Duplicate the sets 4 times to ensure no empty space on ultra-wide screens */}
+              {[0, 1, 2, 3].map((setIdx) => (
+                <div key={setIdx} className="budaya-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
+                  {budayaItems.map((item) => (
+                    <div key={item.id} className="budaya-card">
+                      <div className="budaya-card-image">
+                        <img src={item.image} alt={item.title} />
+                        <div className="budaya-card-overlay"></div>
+                      </div>
+                      <div className="budaya-card-content">
+                        <h3>{item.title}</h3>
+                        <div className="budaya-card-details">
+                          <hr className="budaya-card-divider" />
+                          <p>{item.description}</p>
+                          <div className="budaya-card-action">
+                            <span>Lihat Detail</span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
-
-            {/* Navigation Buttons */}
-            <button className="budaya-nav-btn budaya-nav-prev" onClick={handlePrevBudaya}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-            <button className="budaya-nav-btn budaya-nav-next" onClick={handleNextBudaya}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
-          {/* Indicators */}
-          <div className="budaya-indicators">
-            {budayaItems.map((_, index) => (
-              <button
-                key={index}
-                className={`budaya-indicator ${index === currentBudayaIndex ? 'active' : ''}`}
-                onClick={() => setCurrentBudayaIndex(index)}
-              />
-            ))}
           </div>
         </div>
       </section>
