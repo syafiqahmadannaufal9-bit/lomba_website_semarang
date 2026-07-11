@@ -168,13 +168,13 @@ function App() {
       gsap.from(sejarahIntroContentRef.current, {
         scrollTrigger: {
           trigger: sejarahIntroRef.current,
-          start: "top 75%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: -100, // Slide down from top
         opacity: 0,
         duration: 1.2,
-        delay: 1, // 1 second delay
+        delay: 0, // removed delay
         ease: "power3.out"
       });
     }, sejarahIntroRef);
@@ -188,11 +188,11 @@ function App() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: welcomeSectionRef.current,
-          start: "top 75%",
+          start: "top 85%",
           end: "bottom center",
           toggleActions: "play none none reverse",
         },
-        delay: 1.2
+        delay: 0.2
       });
 
       tl.from(welcomeText1Ref.current, {
