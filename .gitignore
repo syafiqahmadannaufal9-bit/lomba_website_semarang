@@ -35,3 +35,4 @@ coverage/
 # Temporary files
 *.tmp
 .cache/
+node_modules/.vite/deps/_metadata.json
