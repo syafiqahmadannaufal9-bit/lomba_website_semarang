@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import PillNav from './PillNav'
-import GridMotion from './GridMotion'
+import PillNav from './components/PillNav'
+import GridMotion from './components/GridMotion'
+import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +12,7 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "Sejarah", href: "#sejarah" },
   { label: "Budaya", href: "#budaya" },
+  { label: "Wisata", href: "#wisata" },
   { label: "Kuliner", href: "#kuliner" },
   { label: "Teknologi", href: "#teknologi" },
   { label: "Peta", href: "#peta" },
@@ -46,8 +48,6 @@ const sejarahData = [
     year: "1435",
     title: "Kedatangan Laksamana Cheng Ho",
     desc: "Pada tahun 1435 M, armada Laksamana Cheng Ho bersandar di Pelabuhan Simongan. Sebagai bentuk penghormatan dan kenang-kenangan, didirikanlah sebuah kelenteng dan masjid yang kini dikenal sebagai Sam Po Kong (Gedung Batu), simbol harmoni budaya yang masih tegak hingga hari ini.",
-    image: "/assets/cengho.png",
-    largeImage: true,
   },
   {
     year: "1705",
@@ -65,9 +65,10 @@ const sejarahData = [
     year: "1945",
     title: "Masa Perjuangan & Kemerdekaan",
     desc: "Pecah Pertempuran Lima Hari di Semarang antara pemuda pejuang melawan tentara Jepang. Monumen Tugu Muda dibangun untuk mengenang keberanian para pahlawan.",
-    image: "/assets/Tugumuda.png",
   }
 ];
+
+
 
 function App() {
   // Carousel state - isi array dengan gambar Anda sendiri
@@ -125,6 +126,11 @@ function App() {
   // Refs for GSAP Sejarah Section
   const sejarahListRef = useRef(null);
 
+  // Refs for GSAP Teknologi Section
+  const teknologiSectionRef = useRef(null);
+  const teknologiContentRef = useRef(null);
+  const teknologiLineRef = useRef(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Add scroll interactive classes to history cards to animate timeline dots
@@ -171,13 +177,13 @@ function App() {
       gsap.from(sejarahIntroContentRef.current, {
         scrollTrigger: {
           trigger: sejarahIntroRef.current,
-          start: "top 75%",
+          start: "top 85%",
           toggleActions: "play none none reverse",
         },
         y: -100, // Slide down from top
         opacity: 0,
         duration: 1.2,
-        delay: 1, // 1 second delay
+        delay: 0, // removed delay
         ease: "power3.out"
       });
     }, sejarahIntroRef);
@@ -191,11 +197,11 @@ function App() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: welcomeSectionRef.current,
-          start: "top 75%",
+          start: "top 85%",
           end: "bottom center",
           toggleActions: "play none none reverse",
         },
-        delay: 1.2
+        delay: 0.2
       });
 
       tl.from(welcomeText1Ref.current, {
@@ -232,6 +238,33 @@ function App() {
       });
 
     }, welcomeSectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: teknologiSectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        }
+      });
+      
+      tl.from(teknologiLineRef.current, {
+        scaleX: 0,
+        transformOrigin: "left center",
+        duration: 0.8,
+        ease: "power3.inOut"
+      })
+      .from(teknologiContentRef.current, {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      }, "-=0.4");
+    }, teknologiSectionRef);
 
     return () => ctx.revert();
   }, []);
@@ -393,6 +426,7 @@ function App() {
       <section className="section wisata-section" id="sejarah" ref={sejarahIntroRef}>
         <div className="wisata-content-container" ref={sejarahIntroContentRef}>
           <div className="wisata-text-column">
+            <h2 style={{ fontSize: '3.5rem', marginBottom: '0.5rem', color: '#e74c3c', fontWeight: 'bold' }}>Sejarah Kota Semarang</h2>
             <p className="wisata-main-text">
               <span className="drop-cap">S</span>emarang (bahasa Jawa: <span className="javanese-text">ꦱꦼꦩꦫꦁ</span>, translit. Semarang) merupakan Ibu Kota Provinsi Jawa Tengah yang dinamis. Sebagai kota metropolitan terbesar kelima di Indonesia, Semarang menjadi pusat penting bagi ekonomi, budaya, dan sejarah dengan jumlah penduduk mencapai <strong>1,69 juta</strong> jiwa pada pertengahan 2024.
             </p>
@@ -482,13 +516,12 @@ function App() {
       </section>
 
       {/* Budaya Section */}
-      <section className="section" id="budaya" style={{ background: '#ffffff', padding: '3rem 2rem' }}>
-        <div style={{ width: '100%', maxWidth: '1200px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '2rem', color: '#e74c3c', textAlign: 'center' }}>BUDAYA</h2>
-          <p style={{ fontSize: '1rem', lineHeight: '1.6', color: '#666', textAlign: 'center', marginBottom: '3rem', maxWidth: '800px', margin: '0 auto 3rem' }}>
-            Semarang kaya dengan tradisi dan budaya lokal yang telah diwariskan turun-temurun oleh generasi sebelumnya.
-          </p>
-          
+      <section className="section budaya-section" id="budaya">
+        <div className="budaya-section-inner">
+          <header className="budaya-header">
+            <h2 className="budaya-title">BUDAYA</h2>
+          </header>
+
           <div className="budaya-marquee-container">
             <div className="budaya-marquee-track">
               {/* Duplicate the sets 4 times to ensure no empty space on ultra-wide screens */}
@@ -505,12 +538,6 @@ function App() {
                         <div className="budaya-card-details">
                           <hr className="budaya-card-divider" />
                           <p>{item.description}</p>
-                          <div className="budaya-card-action">
-                            <span>Lihat Detail</span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -521,6 +548,7 @@ function App() {
           </div>
         </div>
       </section>
+
 
       {/* Kuliner Section */}
       <section className="section kuliner-section" id="kuliner">
@@ -547,12 +575,73 @@ function App() {
 
 
       {/* Teknologi Section */}
-      <section className="section" id="teknologi" style={{ background: '#f0f5ff' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>TEKNOLOGI</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
-            Semarang terus berinovasi dengan teknologi terkini untuk menciptakan kota yang lebih smart dan berkelanjutan.
-          </p>
+      <section className="section teknologi-section" id="teknologi" ref={teknologiSectionRef}>
+        
+        {/* Top Part: Image and Content */}
+        <div className="teknologi-hero-part">
+          <img src="/assets/herotek.jpeg" alt="Semarang Kota Teknologi" className="teknologi-bg-image" />
+          <div className="teknologi-gradient-top"></div>
+          <div className="teknologi-gradient-bottom"></div>
+          
+          <div className="teknologi-content-wrapper">
+            <div className="teknologi-content-inner">
+              <div className="teknologi-line" ref={teknologiLineRef}></div>
+              <div className="teknologi-content-bottom" ref={teknologiContentRef}>
+                <div className="teknologi-title-col">
+                  <h2>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
+                </div>
+                <div className="teknologi-desc-col">
+                  <p>
+                    Sebagai kota yang dinamis, Semarang terus berinovasi dan mengintegrasikan teknologi terkini untuk menciptakan kota cerdas yang berkelanjutan. Menjadi percontohan transformasi digital, Semarang memfasilitasi berbagai ruang kolaborasi yang siap mencetak generasi inovator masa depan bagi nusantara.
+                  </p>
+                  <p>
+                    Melalui inisiatif Semarang Smart City, berbagai layanan publik kini dapat diakses secara terpadu. Infrastruktur cerdas dan pemanfaatan data besar memberikan kemudahan bagi masyarakat, mengukuhkan Semarang sebagai pelopor inovasi berkelas global.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Part: Empty Tech Space with Logo Marquee */}
+        <div className="teknologi-tech-part">
+          <div className="tech-ornaments">
+            <div className="tech-grid"></div>
+            <div className="tech-glow"></div>
+            <div className="tech-dots"></div>
+          </div>
+
+          <div className="sticky-cards-wrapper z-10 relative">
+            <StickyScrollCards />
+          </div>
+        </div>
+
+        {/* University Logos Marquee - Separate from scroll area */}
+        <div className="univ-marquee-section">
+          <div className="univ-marquee-container">
+            <div className="univ-marquee-track">
+              {/* Duplicate sets for infinite scroll effect */}
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="univ-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
+                  {[
+                    '/assets/polines.png',
+                    '/assets/scu.png',
+                    '/assets/udinus.png',
+                    '/assets/uin.png',
+                    '/assets/unimus.png',
+                    '/assets/unisbank.png',
+                    '/assets/unisula.jpeg',
+                    '/assets/unnes.png',
+                    '/assets/unwahas.png'
+                  ].map((logo, idx) => (
+                    <div key={idx} className="univ-logo-card">
+                      <img src={logo} alt={`University Logo ${idx}`} />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

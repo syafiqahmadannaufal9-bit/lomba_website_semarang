@@ -40,6 +40,7 @@ body {
 
 /* Make welcome section a bit taller so its background covers more space */
 .welcome-section {
+  background: var(--color-white);
   min-height: 92vh;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
@@ -73,6 +74,7 @@ body {
   padding: 0;
   align-items: stretch;
   overflow: hidden;
+  margin-bottom: 20 !important;
 }
 
 .kuliner-content {
@@ -494,6 +496,35 @@ body {
   }
 }
 
+/* Budaya Section */
+.budaya-section {
+  position: relative;
+  background: #ffffff;
+  min-height: 92vh;
+  padding: 3.5rem 2rem 4.5rem;
+  overflow: hidden;
+  align-items: flex-start;
+}
+
+.budaya-section-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.budaya-header {
+  text-align: center;
+  margin-bottom: 2.75rem;
+}
+
+.budaya-title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  color: var(--color-red);
+  letter-spacing: 0.06em;
+  font-weight: 700;
+}
+
 /* Budaya Marquee */
 .budaya-marquee-container {
   position: relative;
@@ -525,13 +556,12 @@ body {
 }
 
 .budaya-card {
-  flex: 0 0 260px;
-  width: 260px;
-  height: 380px;
+  flex: 0 0 clamp(320px, 22.2vw, 568px);
+  width: clamp(320px, 22.2vw, 568px);
+  height: clamp(460px, 31.9vw, 816px);
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.35s ease;
   cursor: pointer;
   position: relative;
@@ -539,8 +569,7 @@ body {
 }
 
 .budaya-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  /* no lift, no shadow */
 }
 
 .budaya-card-image {
@@ -666,9 +695,9 @@ body {
 /* Responsive */
 @media (max-width: 1024px) {
   .budaya-card {
-    flex: 0 0 200px;
-    width: 200px;
-    height: 320px;
+    flex: 0 0 280px;
+    width: 280px;
+    height: 400px;
   }
 }
 
@@ -679,9 +708,9 @@ body {
   }
 
   .budaya-card {
-    flex: 0 0 200px;
-    width: 200px;
-    height: 320px;
+    flex: 0 0 250px;
+    width: 250px;
+    height: 360px;
   }
 
   .budaya-card-content {
@@ -704,9 +733,9 @@ body {
   }
 
   .budaya-card {
-    flex: 0 0 180px;
-    width: 180px;
-    height: 280px;
+    flex: 0 0 210px;
+    width: 210px;
+    height: 310px;
   }
 }
 
@@ -1491,3 +1520,243 @@ body {
     margin-top: 0;
   }
 }
+
+/* Teknologi Section */
+.teknologi-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  background-color: #050507;
+  display: flex;
+  flex-direction: column;
+}
+
+.teknologi-hero-part {
+  position: relative;
+  width: 100%;
+  height: 90vh;
+  min-height: 500px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.teknologi-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+}
+
+.teknologi-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 15%, rgba(255, 255, 255, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.teknologi-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.teknologi-content-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 0 2rem 2rem 2rem;
+  z-index: 3;
+}
+
+.teknologi-tech-part {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin-top: 0;
+}
+
+.teknologi-tech-part::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(to bottom, #050507 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.tech-ornaments,
+.tech-grid,
+.tech-glow,
+.tech-dots {
+  display: none;
+}
+
+.teknologi-content-inner {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.teknologi-line {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2rem;
+}
+
+.teknologi-content-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 4rem;
+  color: white;
+}
+
+.teknologi-title-col h2 {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: left;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.teknologi-desc-col {
+  max-width: 700px;
+  text-align: left;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.teknologi-desc-col p {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  color: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 300;
+}
+
+@media (max-width: 968px) {
+  .teknologi-section {
+    min-height: 600px;
+  }
+  
+  .teknologi-content-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2rem 3rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .teknologi-desc-col {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* University Logo Marquee */
+.univ-marquee-section {
+  position: relative;
+  width: 100%;
+  background: #050507;
+  padding: 80px 0 40px 0;
+}
+
+.univ-marquee-container {
+  position: relative;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10;
+  padding: 20px 0;
+}
+
+.univ-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: univMarquee 30s linear infinite;
+}
+
+.univ-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.univ-marquee-set {
+  display: flex;
+  gap: 1.5rem;
+  padding-right: 1.5rem;
+  align-items: center;
+}
+
+@keyframes univMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.univ-logo-card {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.univ-logo-card img {
+  max-width: 160px; 
+  max-height: 100%;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.5); 
+  transition: all 0.4s ease;
+}
+
+.univ-logo-card:hover img {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .univ-logo-card {
+    height: 50px;
+  }
+  .univ-logo-card img {
+    max-width: 100px;
+  }
+  .univ-marquee-set {
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .univ-marquee-container {
+    bottom: 2%;
+  }
+}
+
