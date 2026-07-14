@@ -68,7 +68,51 @@ const sejarahData = [
   }
 ];
 
+const kulinerTop = [
+  {
+    name: "Lumpia Semarang",
+    image: "/assets/lumpia-semarang.jpeg",
+    desc: "Perpaduan budaya Tionghoa dan Jawa berisi rebung manis, telur, dan udang/ayam dibungkus kulit renyah."
+  },
+  {
+    name: "Bandeng Presto",
+    image: "/assets/bandeng-juwana-semarang-google-image.jpg",
+    desc: "Olahan ikan bandeng segar berbumbu rempah dimasak dengan uap tinggi hingga seluruh durinya sangat lunak."
+  },
+  {
+    name: "Wingko Babat",
+    image: "/assets/wingko_babat.jpg",
+    desc: "Kue tradisional berbahan ketan dan kelapa parut dengan cita rasa manis gurih dipanggang kecokelatan."
+  },
+  {
+    name: "Mie Kopyok",
+    image: "/assets/Mie Kopyok Semarang.jpg",
+    desc: "Mie khas Semarang disajikan dengan tahu pong, lontong, tauge, kerupuk gendar, seledri dan kuah kaldu segar."
+  }
+];
 
+const kulinerBottom = [
+  {
+    name: "Soto Semarang",
+    image: "/assets/Soto Semarang.jpg",
+    desc: "Soto ayam berkuah bening segar dengan bumbu kemiri khas, disajikan bersama suwiran ayam dan sate kerang."
+  },
+  {
+    name: "Kue Mochi",
+    image: "/assets/kue-mochi-semarang-google-image.jpg",
+    desc: "Kue kenyal tradisional dari tepung ketan berisi kacang tanah manis gurih berbalut wijen harum."
+  },
+  {
+    name: "Nasi Ayam",
+    image: "/assets/nasi-ayam-semarang.jpg",
+    desc: "Nasi gurih hangat dengan siraman opor ayam suwir, telur pindang, tahu manis, dan siraman kuah santan sedap."
+  },
+  {
+    name: "Tahu Gimbal",
+    image: "/assets/tahu-gimbal.jpg",
+    desc: "Sajian irisan ketupat, tahu goreng, tauge, kubis, dan gimbal udang garing dengan siraman saus bumbu petis manis."
+  }
+];
 
 function App() {
   // Carousel state - isi array dengan gambar Anda sendiri
@@ -112,6 +156,9 @@ function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  // State independen untuk pause marquee kuliner per baris
+  const [isTopPaused, setIsTopPaused] = useState(false);
+  const [isBottomPaused, setIsBottomPaused] = useState(false);
 
   // Refs for GSAP Welcome Section (Page 2)
   const welcomeSectionRef = useRef(null);
@@ -426,7 +473,7 @@ function App() {
       <section className="section wisata-section" id="sejarah" ref={sejarahIntroRef}>
         <div className="wisata-content-container" ref={sejarahIntroContentRef}>
           <div className="wisata-text-column">
-            <h2 style={{ fontSize: '3.5rem', marginBottom: '0.5rem', color: '#e74c3c', fontWeight: 'bold' }}>Sejarah Kota Semarang</h2>
+            <h2 style={{ fontSize: '2.8rem', marginBottom: '0.5rem', color: '#e74c3c', fontWeight: 'bold' }}>Sejarah Kota Semarang</h2>
             <p className="wisata-main-text">
               <span className="drop-cap">S</span>emarang (bahasa Jawa: <span className="javanese-text">ꦱꦼꦩꦫꦁ</span>, translit. Semarang) merupakan Ibu Kota Provinsi Jawa Tengah yang dinamis. Sebagai kota metropolitan terbesar kelima di Indonesia, Semarang menjadi pusat penting bagi ekonomi, budaya, dan sejarah dengan jumlah penduduk mencapai <strong>1,69 juta</strong> jiwa pada pertengahan 2024.
             </p>
@@ -552,22 +599,63 @@ function App() {
 
       {/* Kuliner Section */}
       <section className="section kuliner-section" id="kuliner">
-        <div className="kuliner-content">
-          <div className="kuliner-image" aria-hidden="true">
-            <img src="/assets/bandeng_presto.png" alt="Bandeng Presto" />
+        <div className="kuliner-container">
+          <header className="kuliner-header">
+            <h2 className="kuliner-title-main">KULINER</h2>
+            <div className="kuliner-header-line"></div>
+            <p className="kuliner-subtitle-main">Menjelajahi Cita Rasa Legendaris Kota Semarang</p>
+          </header>
+
+          {/* Top Marquee Row (Scrolling Right) — pause hanya baris ini saat card di-hover */}
+          <div className="kuliner-marquee-container">
+            <div className={`kuliner-marquee-track kuliner-marquee-track-right${isTopPaused ? ' paused' : ''}`}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="kuliner-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
+                  {kulinerTop.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="kuliner-card"
+                      onMouseEnter={() => setIsTopPaused(true)}
+                      onMouseLeave={() => setIsTopPaused(false)}
+                    >
+                      <div className="kuliner-card-img-wrapper">
+                        <img src={item.image} alt={item.name} className="kuliner-card-img" />
+                      </div>
+                      <div className="kuliner-card-info">
+                        <h3 className="kuliner-card-title">{item.name}</h3>
+                        <p className="kuliner-card-desc">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="kuliner-info">
-            <h2 className="kuliner-title">Bandeng Presto</h2>
-            <p className="kuliner-subtitle">Masakan khas Semarang — olahan ikan bandeng yang dimasak dengan teknik presto sehingga tulangnya lunak dan dapat dimakan.</p>
-
-            <p className="kuliner-desc">
-              Bandeng presto adalah salah satu hidangan ikonis dari Semarang. Ikan bandeng dimasak dengan tekanan uap tinggi (presto) bersama bumbu sederhana sehingga dagingnya empuk dan tulangnya lunak. Hidangan ini populer karena teksturnya yang mudah dimakan dan rasanya gurih — sering disajikan untuk acara keluarga dan oleh-oleh.
-            </p>
-
-            <p className="kuliner-history">
-              Sejarah singkat: teknik presto diadopsi untuk mempermudah konsumsi ikan berduri seperti bandeng. Di Semarang, metode ini berkembang menjadi kuliner rumahan yang kemudian populer di pasar dan restoran lokal.
-            </p>
+          {/* Bottom Marquee Row (Scrolling Left) — pause hanya baris ini saat card di-hover */}
+          <div className="kuliner-marquee-container">
+            <div className={`kuliner-marquee-track kuliner-marquee-track-left${isBottomPaused ? ' paused' : ''}`}>
+              {[0, 1].map((setIdx) => (
+                <div key={setIdx} className="kuliner-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
+                  {kulinerBottom.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="kuliner-card"
+                      onMouseEnter={() => setIsBottomPaused(true)}
+                      onMouseLeave={() => setIsBottomPaused(false)}
+                    >
+                      <div className="kuliner-card-img-wrapper">
+                        <img src={item.image} alt={item.name} className="kuliner-card-img" />
+                      </div>
+                      <div className="kuliner-card-info">
+                        <h3 className="kuliner-card-title">{item.name}</h3>
+                        <p className="kuliner-card-desc">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

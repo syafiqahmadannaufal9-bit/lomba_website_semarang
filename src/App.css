@@ -70,102 +70,214 @@ body {
 }
 /* Kuliner specific styles */
 .kuliner-section {
-  background: #fff0f5;
-  padding: 0;
-  align-items: stretch;
-  overflow: hidden;
-  margin-bottom: 20 !important;
-}
-
-.kuliner-content {
+  background: linear-gradient(135deg, #ffffff 0%, #fdf5f5 100%);
+  padding: 3rem 0;
   display: flex;
-  align-items: stretch;
-  width: 100%;
-  min-height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 4rem; /* Jarak untuk section di bawahnya */
 }
 
-.kuliner-image {
-  flex: 0 0 50%;
-  max-width: 50%;
+.kuliner-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.kuliner-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.kuliner-title-main {
+  font-size: 2.3rem; /* Slightly increased scale of header */
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #e74c3c;
+  margin: 0 0 0.1rem 0;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.kuliner-header-line {
+  width: 60px; /* Slightly increased scale of header divider */
+  height: 3.5px;
+  background-color: #e74c3c;
+  border-radius: 2px;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.kuliner-subtitle-main {
+  font-size: 1.05rem; /* Slightly increased scale of header subtitle */
+  color: #666;
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Marquee Layout */
+.kuliner-marquee-container {
+  width: 100%;
+  overflow: hidden;
   position: relative;
+  padding: 10px 0;
+}
+
+.kuliner-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.kuliner-marquee-track-right {
+  animation: scrollRight 35s linear infinite;
+}
+
+.kuliner-marquee-track-left {
+  animation: scrollLeft 35s linear infinite;
+}
+
+/* Pause class — applied directly on the track element to stop its own animation */
+.kuliner-marquee-track.paused {
+  animation-play-state: paused;
+}
+
+.kuliner-marquee-set {
+  display: flex;
+  gap: 2.5rem; /* Perpanjang jarak antar card */
+  padding-right: 2.5rem;
+  align-items: stretch;
+}
+
+.kuliner-card {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  /* Sedikit diperkecil scale dari setiap card di section kuliner */
+  width: calc((100vw - 120px - 2 * 2.5rem) / 3.4);
+  min-width: 290px;
+  max-width: 380px;
+  flex-shrink: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Shadow */
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(231, 76, 60, 0.04);
+  position: relative;
+}
+
+.kuliner-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(231, 76, 60, 0.15); /* Shadow hover */
+  border-color: rgba(231, 76, 60, 0.15);
+}
+
+.kuliner-card-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 185px; /* Sedikit diperkecil */
   overflow: hidden;
 }
 
-.kuliner-image img {
+.kuliner-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transform-origin: center;
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* blend kanan gambar ke background */
-.kuliner-image::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 14rem;
-  background: linear-gradient(to right, rgba(255,240,245,0) 0%, #fff0f5 85%);
-  pointer-events: none;
-  z-index: 2;
+.kuliner-card:hover .kuliner-card-img {
+  transform: scale(1.06);
 }
 
-.kuliner-info {
-  flex: 1 1 50%;
-  color: #333;
-  padding: 4rem 4rem 4rem 3rem;
+.kuliner-card-info {
+  padding: 1rem; /* Sedikit diperkecil */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 0.4rem;
+  flex-grow: 1;
 }
 
-.kuliner-title {
-  font-size: 2rem;
+.kuliner-card-title {
+  font-size: 1.08rem; /* Sedikit diperkecil */
+  font-weight: 750;
+  color: #2c3e50;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.kuliner-card:hover .kuliner-card-title {
   color: #e74c3c;
-  margin-bottom: 0.5rem;
-  font-weight: 800;
 }
 
-.kuliner-subtitle {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 1rem;
-  font-weight: 600;
-}
-
-.kuliner-desc, .kuliner-history {
-  font-size: 0.98rem;
-  line-height: 1.6;
+.kuliner-card-desc {
+  font-size: 0.8rem; /* Sedikit diperkecil */
+  line-height: 1.5;
   color: #555;
-  margin-bottom: 1rem;
+  margin: 0;
+}
+
+/* Infinite Marquee Animations */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 968px) {
-  .kuliner-content {
-    flex-direction: column;
-    min-height: auto;
+  .kuliner-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 3rem 0;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .kuliner-container {
+    height: auto;
+    gap: 1.5rem;
   }
 
-  .kuliner-image {
-    flex: none;
-    max-width: 100%;
-    width: 100%;
-    height: 50vh;
+  .kuliner-marquee-set {
+    gap: 1.5rem;
+    padding-right: 1.5rem;
   }
 
-  .kuliner-image::after {
-    width: 100%;
-    height: 6rem;
-    top: auto;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(to bottom, rgba(255,240,245,0) 0%, #fff0f5 90%);
+  .kuliner-card {
+    width: 300px;
+    min-width: 280px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
   }
 
-  .kuliner-info {
-    padding: 2.5rem 2rem;
+  .kuliner-card-img-wrapper {
+    height: 160px;
+  }
+
+  .kuliner-title-main {
+    font-size: 1.6rem;
   }
 }
 
@@ -910,7 +1022,7 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   text-align: left;
-  padding: 4.5rem 3rem 3.5rem 3.5rem;
+  padding: 3.5rem 2.5rem 2.5rem 3rem; /* Sedikit diperkecil scale */
   justify-content: center;
 }
 
@@ -944,17 +1056,17 @@ body {
 }
 
 .wisata-main-text {
-  font-size: 1.25rem;
-  line-height: 1.85;
+  font-size: 1.1rem; /* Sedikit diperkecil scale */
+  line-height: 1.7;
   color: var(--color-text);
   font-family: 'Arial', sans-serif;
 }
 
 .wisata-main-text .drop-cap {
-  font-size: 5.5rem;
+  font-size: 4.5rem; /* Sedikit diperkecil scale */
   font-weight: 900;
   float: left;
-  line-height: 0.75;
+  line-height: 0.8;
   padding-right: 16px;
   padding-top: 4px;
   color: var(--color-red);
@@ -971,7 +1083,7 @@ body {
   background: #fdfbf7;
   border-left: 5px solid var(--color-red);
   border-radius: 4px 16px 16px 4px;
-  padding: 2.2rem 2.8rem;
+  padding: 1.6rem 2.2rem; /* Sedikit diperkecil scale */
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -986,7 +1098,7 @@ body {
   position: absolute;
   top: -20px;
   right: 15px;
-  font-size: 9rem;
+  font-size: 7.5rem; /* Sedikit diperkecil scale */
   font-family: 'Georgia', serif;
   color: var(--color-red);
   opacity: 0.07;
@@ -1001,20 +1113,20 @@ body {
   gap: 0.5rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.8rem; /* Sedikit diperkecil scale */
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #888;
 }
 
 .asal-usul-title .leaf-icon {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .asal-usul-quote {
   font-family: 'Georgia', Cambria, "Times New Roman", Times, serif;
-  font-size: 1.35rem;
-  line-height: 1.65;
+  font-size: 1.15rem; /* Sedikit diperkecil scale */
+  line-height: 1.55;
   color: #2c3e50;
   margin: 0;
   font-style: italic;
@@ -1028,8 +1140,8 @@ body {
 }
 
 .wisata-footer-text {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 0.92rem; /* Sedikit diperkecil scale */
+  line-height: 1.6;
   color: #555;
   font-style: italic;
 }
@@ -1245,12 +1357,12 @@ body {
 
 .sejarah-layout {
   display: flex;
-  gap: 4rem;
-  max-width: 1200px;
+  gap: 3rem; /* Sedikit diperkecil scale */
+  max-width: 1050px; /* Sedikit diperkecil scale */
   width: 100%;
   margin: 0 auto;
   align-items: flex-start;
-  padding: 6rem 2rem;
+  padding: 4.5rem 2rem; /* Sedikit diperkecil scale */
 }
 
 .sejarah-sticky {
@@ -1263,33 +1375,33 @@ body {
 .sejarah-subtitle {
   font-family: 'Caveat', cursive;
   color: #e74c3c;
-  font-size: 2.2rem;
+  font-size: 1.8rem; /* Sedikit diperkecil scale */
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
 .sejarah-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.8rem;
+  font-size: 2.4rem; /* Sedikit diperkecil scale */
   font-weight: 900;
   color: #1a1a1a;
   line-height: 1.15;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem; /* Sedikit diperkecil scale */
   letter-spacing: -0.02em;
 }
 
 .sejarah-desc {
-  font-size: 1.1rem;
+  font-size: 0.98rem; /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #555;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.8rem; /* Sedikit diperkecil scale */
 }
 
 .btn-sejarah {
   display: inline-block;
   background: #e74c3c;
   color: white;
-  padding: 0.8rem 2rem;
+  padding: 0.7rem 1.6rem; /* Sedikit diperkecil scale */
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
@@ -1304,9 +1416,9 @@ body {
 
 .sejarah-arrow {
   display: block;
-  width: 160px;
+  width: 130px; /* Sedikit diperkecil scale */
   height: auto;
-  margin-top: 2.5rem;
+  margin-top: 1.8rem; /* Sedikit diperkecil scale */
   opacity: 0.9;
   animation: floatArrow 3s ease-in-out infinite;
   object-fit: contain;
@@ -1330,9 +1442,9 @@ body {
   background: white;
   border: 1px solid #f0f0f0;
   border-radius: 12px;
-  padding: 1.2rem;
+  padding: 1rem; /* Sedikit diperkecil scale */
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem; /* Sedikit diperkecil scale */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
   position: relative;
@@ -1350,7 +1462,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 90px;
+  min-width: 75px; /* Sedikit diperkecil scale */
 }
 
 .hc-timeline-line {
@@ -1385,7 +1497,7 @@ body {
   font-family: 'Caveat', cursive;
   font-weight: 700;
   color: #a0a0a0;
-  font-size: 1.05rem;
+  font-size: 0.95rem; /* Sedikit diperkecil scale */
   z-index: 2;
   transition: color 0.4s ease;
   background: white;
@@ -1411,8 +1523,8 @@ body {
 }
 
 .hc-image {
-  flex: 0 0 160px;
-  height: 160px;
+  flex: 0 0 140px; /* Sedikit diperkecil scale */
+  height: 140px; /* Sedikit diperkecil scale */
   border-radius: 10px;
   overflow: hidden;
   align-self: center;
@@ -1421,8 +1533,8 @@ body {
 
 /* Larger image variant for Cheng Ho card */
 .hc-image--large {
-  flex: 0 0 260px;
-  height: 260px;
+  flex: 0 0 220px; /* Sedikit diperkecil scale */
+  height: 220px; /* Sedikit diperkecil scale */
 }
 
 .hc-image img {
@@ -1444,24 +1556,24 @@ body {
 }
 
 .hc-title {
-  font-size: 1.15rem;
+  font-size: 1.05rem; /* Sedikit diperkecil scale */
   font-weight: 700;
   color: #2c3e50;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   line-height: 1.25;
 }
 
 .hc-divider {
-  width: 40px;
-  height: 3px;
+  width: 35px; /* Sedikit diperkecil scale */
+  height: 2.5px;
   background: #e74c3c;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem; /* Sedikit diperkecil scale */
   opacity: 0.7;
   border-radius: 2px;
 }
 
 .hc-desc {
-  font-size: 0.95rem;
+  font-size: 0.88rem; /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #666;
   margin: 0;
@@ -1527,7 +1639,7 @@ body {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  margin-top: 0 !important;
+  margin-top: 4rem !important;
   margin-bottom: 0 !important;
   padding: 0 !important;
   background-color: #050507;
