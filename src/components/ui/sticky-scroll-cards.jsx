@@ -3,53 +3,53 @@ import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import ReactLenis from "lenis/react";
 import { useEffect, useRef, useState } from "react";
-import { SinergiUniversitas } from "@/components/SinergiUniversitas";
+
 
 const DEFAULT_CARDS = [
   {
-    title: "Integrated Smart System Platform (I-SSP) untuk Smart City Kota Semarang",
-    username: "semarang.id ",
-    caption: "Integrated Smart System Platform (I-SSP) untuk Smart City Kota Semarang",
-    hashtags: "#smartcitysmg #semaranghebat",
-    likes: "12.847",
-    description: "\n Kota Semarang saat ini telah memiliki command room smart city yang diberi nama Situation Room Pemerintah Kota Semarang. Kota Semarang saat ini sudah memiliki sistem pelaporan masyarakat berbasis aplikasi sehingga masyarakat dapat turut aktif berpartisipasi mengawasi kinerja pemerintah. Kota Semarang sudah memiliki pusat data Kota Semarang serta sudah menerapkan berbagai macam aplikasi dalam upaya pengelolaan kota.\n\n1. Sistem Integrated Smart System Platform (I-SSP) Kota Semarang yang dilengkapi dengan fitur city analytics Kota Semarang yang terpasang di Situation Room Kota Semarang.\n2. Pengembangan Integrasi layanan-layanan Smart City Kota Semarang (Single Sign On).\n3. Implementasi sistem integrasi data dalam bentuk micro service API, database connector, dan data integrator.",
-    src: "https://www.devjelita.semarangkota.go.id/uploads/galeri/20230329093555-2023-03-29galeri093535.jpg",
+    title: "Kota Lama Semarang",
+    username: "semarang.tourism",
+    caption: "Menikmati nuansa Eropa klasik di Little Netherlands van Java",
+    hashtags: "#KotaLamaSemarang #SemarangHeritage #DolanSemarang",
+    likes: "18.421",
+    description: "\nKota Lama Semarang adalah cagar budaya dengan gedung-gedung bersejarah peninggalan kolonial Belanda bergaya Eropa klasik abad ke-19 hingga ke-20.\n\nDahulu dikenal sebagai pusat perdagangan komersial dan militer Belanda, kini kawasan ini menjadi pusat kreativitas, kuliner, dan destinasi wisata sejarah paling populer di Semarang yang menawarkan atmosfer ala Eropa masa lampau.",
+    src: "https://semarangkita.id/wp-content/uploads/2025/07/63c4bbaed1729.jpeg",
   },
   {
-    title: "AI pengelolaan sampah AISSA",
-    username: "lia.diary ",
-    caption: "Kota tercintaku jadi juara inovasi dunia",
-    hashtags: "#KotaTerbaik #InovasiMasaDepan",
-    likes: "8.392",
-    description: "\n Kota Semarang kembali mengukir prestasi di tingkat internasional. Inovasi Artificial Intelligence Solusi Sampah (AISSA) berhasil masuk dalam 30 Exemplary Initiatives pada ajang bergengsi 7th Guangzhou International Award for Urban Innovation 2026, mengukuhkan Semarang sebagai salah satu kota paling inovatif di dunia. \n Penghargaan tersebut diumumkan dalam rangkaian 2026 United Cities and Local Governments (UCLG) World Congress di Tangier, Maroko, pada 25 Juni 2026. Capaian ini menjadi pengakuan internasional atas keberhasilan Pemerintah Kota Semarang menghadirkan solusi berbasis teknologi untuk menjawab persoalan perkotaan.\n\n Aissa bekerja dengan memanfaatkan kamera pengawas (CCTV) yang dipasang di 23 titik TPS (Tempat Pembuangan Sementara) di seluruh Kota Semarang. Sistem ini memiliki kemampuan deteksi otomatis selama 24 jam penuh untuk memantau berbagai kondisi di sekitar tempat sampah. Dengan teknologi AI-nya, Aissa dapat mengidentifikasi tumpukan sampah yang berserakan, mendeteksi kontainer yang sudah overload, dan memastikan tidak ada sampah yang tercecer di luar area yang ditentukan.",
-    src: "https://www.rmoljawatengah.id/uploads/images/2026/07/image_750x_6a4d08584ce98.jpg",
+    title: "Lawang Sewu",
+    username: "history.semarang",
+    caption: "Menelusuri sejarah megah gedung berpintu seribu",
+    hashtags: "#LawangSewu #ExploreSemarang #PesonaIndonesia",
+    likes: "22.589",
+    description: "\nLawang Sewu merupakan bangunan bersejarah milik PT Kereta Api Indonesia (Persero) yang dahulu digunakan sebagai Kantor Pusat Perusahaan Kereta Api Swasta Belanda (NIS).\n\nDikenal dengan arsitektur art deco berkarakter pintu dan jendela besar yang sangat banyak menyerupai seribu pintu. Destinasi ikonik ini menyajikan galeri sejarah perkeretaapian Indonesia serta keindahan arsitektur kolonial yang megah.",
+    src: "https://asset.kompas.com/crops/vUsswiGtM597_q9p6sKBVkOyPVY=/0x0:780x520/1200x800/data/photo/2019/06/17/2838871495.jpg",
   },
   {
-    title: "Semarang Mantapkan Langkah Menuju Transportasi Hijau, Bus Listrik Hyundai Jalani Uji Operasional",
-    username: "semarang.id ",
-    caption: "Transformasi sistem transportasi publik berbasis energi bersih",
-    hashtags: "#TransportasiHijau #SemarangHebat",
-    likes: "23.105",
-    description: "\n Kota Semarang semakin serius mempersiapkan transformasi sistem transportasi publik berbasis energi bersih. Upaya tersebut ditandai dengan dimulainya uji operasional bus listrik Hyundai yang menjadi bagian dari pengembangan ekosistem angkutan umum ramah lingkungan di ibu kota Provinsi Jawa Tengah.\n\n Peluncuran uji coba bus listrik dilakukan usai pelaksanaan Focus Group Discussion (FGD) bertajuk “Membangun Ekosistem Transportasi Publik Ramah Lingkungan: Integrasi Aspek Keselamatan, Infrastruktur Pengisian Daya, dan Pembiayaan Angkutan Umum Berbasis Listrik di Kota Semarang” yang digelar di Hotel Metro Park View Semarang.",
-    src: "https://www.jatengnews.id/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-29-at-20.02.55.jpeg",
+    title: "Kelenteng Sam Poo Kong",
+    username: "visit.sampookong",
+    caption: "Simbol keharmonisan dan akulturasi budaya yang lestari",
+    hashtags: "#SamPooKong #AkulturasiBudaya #SemarangSmartCity",
+    likes: "15.932",
+    description: "\nKelenteng Sam Poo Kong adalah situs bersejarah bekas pendaratan dan tempat persinggahan pertama Laksamana Cheng Ho, laksamana Tiongkok beragama Islam.\n\nSitus ini menjadi tempat ibadah sekaligus tempat wisata ikonik dengan bangunan kelenteng megah berarsitektur Tionghoa bernuansa merah, melambangkan harmoni akulturasi budaya Tionghoa dan Jawa di Kota Semarang.",
+    src: "https://akcdn.detik.net.id/community/media/visual/2021/02/11/kelenteng-sam-poo-kong_43.jpeg?w=700&q=90",
   },
   {
-    title: "ANJASWARA (Anjungan Kesehatan Mandiri Warga Kota Semarang)",
-    username: "ahmad aimar ",
-    caption: "Anjungan Kesehatan Mandiri Warga Kota Semarang",
-    hashtags: "#ANJASWARA #KesehatanDigital #SemarangHebat",
-    likes: "15.620",
-    description: "\n merupakan alat skrining kesehatan berbasis IOT yang terdiri dari tiga komponen yaitu, tinggi badan, berat badan dan pemeriksaan gula, dan selanjutnya akan dikembangkan oleh berbagai skrining Kesehatan. Deteksi Penyakit sedini mungkin adalah salah satu tujuan dilakukannya skrining Kesehatan. \n\n Sistem Anjungan ini menggunakan :\n 1. Aplikasi antarmuka pengguna untuk desktop yang memungkinkan interaksi dengan perangkat keras dan memproses data pengguna\n 2. Sistem analisis berbasis kecerdasan buatan untuk pengolahan data glukosa yang mampu memberikan hasil analisis yang akurat dan cepat secara non Invasif atau tanpa proses pengambilan darah.\n 3. Pengembangan back end server dan aplikasi web untuk mengelola data, menyediakan layanan API, dan antarmuka web yang memungkinkan akses jarak jauh ke sistem.",
-    src: "/assets/anjaswara.png",
+    title: "Masjid Agung Jawa Tengah (MAJT)",
+    username: "majt.semarang",
+    caption: "Kemegahan payung raksasa laksana Masjid Nabawi di Semarang",
+    hashtags: "#MasjidAgungJateng #WisataReligi #SemarangHebat",
+    likes: "14.280",
+    description: "\nMasjid Agung Jawa Tengah (MAJT) adalah landmark wisata religi di Semarang dengan arsitektur perpaduan gaya Jawa, Roma, dan Arab.\n\nSalah satu daya tarik utamanya adalah enam buah payung hidrolik raksasa di pelataran masjid yang menyerupai payung di Masjid Nabawi Madinah, serta Menara Asmaul Husna setinggi 99 meter yang menyuguhkan pemandangan indah Kota Semarang dari ketinggian.",
+    src: "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlMY4JcP47Sn3Q2RFqvmi5pjWTSkcK2oOWlNHgMEEIW8upNhBVYxY_LMdjD73jaDyhujYn4IF_zap75lQyendS_eAF0eOHCmsyJ8OchXBYyUghTnUOdw_20HzXSDAd05F6d_cDU=s1360-w1360-h1020-rw",
   },
   {
-    title: "KATULISTIWA (Katalis Otomasi dan Integrasi Sistem Teknologi Informasi Untuk Pengumpulan Data Cuaca Berbasis IoT di wilayah Kota Semarang).",
-    username: "maulana.peak ",
-    caption: "KATULISTIWA (Katalis Otomasi Untuk Pengumpulan Data Cuaca Berbasis IoT di wilayah Kota Semarang).",
-    hashtags: "#katulistiwa",
-    likes: "10.831",
-    description: "\nInovasi ini berfokus pada manajemen data dan analisis data cuaca dengan menggunakan teknologi Internet of Things (IoT). Dirancang dengan berbagai komponen untuk mengumpulkan data cuaca. Sensor yang terpasang meliputi sensor suhu udara dengan rentang pengukuran dari -40°C hingga 125°C dan kelembapan udara dari 0% hingga 100%. Peran inovasi ini sebagai pemercepat dalam penerapan teknologi informasi dan otomasi di bidang meteorology. Penggunaan teknologi untuk mengotomatiskan proses manajemen data cuaca, mengurangi intervensi manusia, dan meningkatkan efisiensi. Penggabungan berbagai sistem teknologi informasi untuk memastikan data yang terkumpul dapat dianalisis dan digunakan secara efektif. Pemanfaatan perangkat IoT yang terhubung untuk mengumpulkan data secara real-time dari berbagai lokasi di wilayah kota Semarang.",
-    src: "https://www.niubol.com/static/upload/image/20231218/1702904385211216.png",
+    title: "Kampung Pelangi Semarang",
+    username: "kampungpelangi",
+    caption: "Eksotisme warna-warni pemukiman kreatif di perbukitan kota",
+    hashtags: "#KampungPelangi #SemarangCreative #WarnaWarni",
+    likes: "11.642",
+    description: "\nKampung Pelangi Semarang merupakan wujud kreativitas tata kota yang mengubah kawasan pemukiman padat di lereng bukit menjadi destinasi wisata kreatif yang penuh warna.\n\nSetiap dinding rumah, atap, hingga tangga dihiasi dengan lukisan mural menarik, menjadikannya spot foto yang sangat instagramable dan terkenal di kancah internasional sebagai pelopor kampung kreatif.",
+    src: "https://cdn0-production-images-kly.akamaized.net/QJbnYcOLeDdPGvjC-HPTfIK2WAI=/1280x720/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2383625/original/034346700_1539590317-8.JPG",
   },
 ];
 
@@ -208,10 +208,10 @@ export function StickyScrollCards({
             {/* Hint label */}
             <div
               className="absolute left-1/2 top-[2%] flex -translate-x-1/2 flex-col items-center gap-3 z-20">
-              <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-30 text-white">
+              <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-30 text-neutral-800">
                 {hint}
               </p>
-              <span className="h-12 w-px bg-gradient-to-b from-white/30 to-transparent" />
+              <span className="h-12 w-px bg-gradient-to-b from-neutral-400/30 to-transparent" />
             </div>
 
             {cards.map((card, i) => {
@@ -238,10 +238,10 @@ export function StickyScrollCards({
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <h3 className="text-3xl md:text-4xl font-extrabold text-[#c5c3c3] mb-8 tracking-tight">
+                <h3 className="text-3xl md:text-4xl font-extrabold text-[#e74c3c] mb-8 tracking-tight">
                   {cards[activeIndex]?.title}
                 </h3>
-                <p className="text-base md:text-lg text-neutral-300 leading-relaxed whitespace-pre-line">
+                <p className="text-base md:text-lg text-neutral-600 leading-relaxed whitespace-pre-line">
                   {cards[activeIndex]?.description}
                 </p>
               </motion.div>
@@ -249,7 +249,6 @@ export function StickyScrollCards({
           </div>
 
         </div>
-        <SinergiUniversitas />
 
       </main>
     </ReactLenis>
