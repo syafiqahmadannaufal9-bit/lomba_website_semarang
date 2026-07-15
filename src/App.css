@@ -35,7 +35,7 @@ body {
   justify-content: center;
   padding: 2rem 1rem;
   scroll-margin-top: 2.6rem;
-  animation: slideUp 0.8s ease-out;
+  /* Removed unconditional slideUp — was firing on all sections including off-screen */
 }
 
 /* Make welcome section a bit taller so its background covers more space */
@@ -73,7 +73,7 @@ body {
 
 /* Kuliner specific styles */
 .kuliner-section {
-  background: linear-gradient(135deg, #ffffff 0%, #fdf5f5 100%);
+  background: #ffffff;
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
@@ -82,7 +82,7 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 4rem; /* Jarak untuk section di bawahnya */
+  margin-bottom: 0;
 }
 
 .kuliner-container {
@@ -104,7 +104,8 @@ body {
 }
 
 .kuliner-title-main {
-  font-size: 2.3rem; /* Slightly increased scale of header */
+  font-size: 2.3rem;
+  /* Slightly increased scale of header */
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #e74c3c;
@@ -114,7 +115,8 @@ body {
 }
 
 .kuliner-header-line {
-  width: 60px; /* Slightly increased scale of header divider */
+  width: 60px;
+  /* Slightly increased scale of header divider */
   height: 3.5px;
   background-color: #e74c3c;
   border-radius: 2px;
@@ -122,7 +124,8 @@ body {
 }
 
 .kuliner-subtitle-main {
-  font-size: 1.05rem; /* Slightly increased scale of header subtitle */
+  font-size: 1.05rem;
+  /* Slightly increased scale of header subtitle */
   color: #666;
   font-weight: 400;
   margin: 0;
@@ -140,6 +143,7 @@ body {
   display: flex;
   width: max-content;
   will-change: transform;
+  contain: layout style;
 }
 
 .kuliner-marquee-track-right {
@@ -157,7 +161,8 @@ body {
 
 .kuliner-marquee-set {
   display: flex;
-  gap: 2.5rem; /* Perpanjang jarak antar card */
+  gap: 2.5rem;
+  /* Perpanjang jarak antar card */
   padding-right: 2.5rem;
   align-items: stretch;
 }
@@ -171,7 +176,6 @@ body {
   min-width: 290px;
   max-width: 380px;
   flex-shrink: 0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Shadow */
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   display: flex;
   flex-direction: column;
@@ -181,14 +185,14 @@ body {
 
 .kuliner-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(231, 76, 60, 0.15); /* Shadow hover */
-  border-color: rgba(231, 76, 60, 0.15);
+  border: 2px solid #e74c3c;
 }
 
 .kuliner-card-img-wrapper {
   position: relative;
   width: 100%;
-  height: 185px; /* Sedikit diperkecil */
+  height: 185px;
+  /* Sedikit diperkecil */
   overflow: hidden;
 }
 
@@ -205,7 +209,8 @@ body {
 }
 
 .kuliner-card-info {
-  padding: 1rem; /* Sedikit diperkecil */
+  padding: 1rem;
+  /* Sedikit diperkecil */
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -213,7 +218,8 @@ body {
 }
 
 .kuliner-card-title {
-  font-size: 1.08rem; /* Sedikit diperkecil */
+  font-size: 1.08rem;
+  /* Sedikit diperkecil */
   font-weight: 750;
   color: #2c3e50;
   margin: 0;
@@ -225,7 +231,8 @@ body {
 }
 
 .kuliner-card-desc {
-  font-size: 0.8rem; /* Sedikit diperkecil */
+  font-size: 0.8rem;
+  /* Sedikit diperkecil */
   line-height: 1.5;
   color: #555;
   margin: 0;
@@ -236,6 +243,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -245,6 +253,7 @@ body {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -256,9 +265,9 @@ body {
     min-height: 100vh;
     padding: 3rem 0;
     overflow: hidden;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
-  
+
   .kuliner-container {
     height: auto;
     gap: 1.5rem;
@@ -272,7 +281,6 @@ body {
   .kuliner-card {
     width: 300px;
     min-width: 280px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
   }
 
   .kuliner-card-img-wrapper {
@@ -658,6 +666,7 @@ body {
   display: flex;
   width: max-content;
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
 .budaya-marquee-track:hover {
@@ -693,7 +702,7 @@ body {
   transition: all 0.35s ease;
   cursor: pointer;
   position: relative;
-  animation: slideUp 0.8s ease-out;
+  /* Removed unconditional slideUp — 16 cards animating simultaneously caused jank */
 }
 
 .budaya-card:hover {
@@ -724,8 +733,8 @@ body {
   width: 100%;
   height: 100%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
-  transition: all 0.6s ease;
-  backdrop-filter: blur(0px);
+  transition: background 0.6s ease;
+  /* Removed backdrop-filter: blur(0px) — no visual effect but created extra GPU layer */
 }
 
 .budaya-card:hover .budaya-card-image img {
@@ -1132,7 +1141,8 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   text-align: left;
-  padding: 3.5rem 2.5rem 2.5rem 3rem; /* Sedikit diperkecil scale */
+  padding: 3.5rem 2.5rem 2.5rem 3rem;
+  /* Sedikit diperkecil scale */
   justify-content: center;
 }
 
@@ -1170,14 +1180,16 @@ body {
 }
 
 .wisata-main-text {
-  font-size: 1.1rem; /* Sedikit diperkecil scale */
+  font-size: 1.1rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.7;
   color: var(--color-text);
   font-family: 'Arial', sans-serif;
 }
 
 .wisata-main-text .drop-cap {
-  font-size: 4.5rem; /* Sedikit diperkecil scale */
+  font-size: 4.5rem;
+  /* Sedikit diperkecil scale */
   font-weight: 900;
   float: left;
   line-height: 0.8;
@@ -1197,7 +1209,8 @@ body {
   background: #fdfbf7;
   border-left: 5px solid var(--color-red);
   border-radius: 4px 16px 16px 4px;
-  padding: 1.6rem 2.2rem; /* Sedikit diperkecil scale */
+  padding: 1.6rem 2.2rem;
+  /* Sedikit diperkecil scale */
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1212,7 +1225,8 @@ body {
   position: absolute;
   top: -20px;
   right: 15px;
-  font-size: 7.5rem; /* Sedikit diperkecil scale */
+  font-size: 7.5rem;
+  /* Sedikit diperkecil scale */
   font-family: 'Georgia', serif;
   color: var(--color-red);
   opacity: 0.07;
@@ -1227,7 +1241,8 @@ body {
   gap: 0.5rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.8rem; /* Sedikit diperkecil scale */
+  font-size: 0.8rem;
+  /* Sedikit diperkecil scale */
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #888;
@@ -1239,7 +1254,8 @@ body {
 
 .asal-usul-quote {
   font-family: 'Georgia', Cambria, "Times New Roman", Times, serif;
-  font-size: 1.15rem; /* Sedikit diperkecil scale */
+  font-size: 1.15rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.55;
   color: #2c3e50;
   margin: 0;
@@ -1254,7 +1270,8 @@ body {
 }
 
 .wisata-footer-text {
-  font-size: 0.92rem; /* Sedikit diperkecil scale */
+  font-size: 0.92rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #555;
   font-style: italic;
@@ -1476,12 +1493,15 @@ body {
 
 .sejarah-layout {
   display: flex;
-  gap: 3rem; /* Sedikit diperkecil scale */
-  max-width: 1050px; /* Sedikit diperkecil scale */
+  gap: 3rem;
+  /* Sedikit diperkecil scale */
+  max-width: 1050px;
+  /* Sedikit diperkecil scale */
   width: 100%;
   margin: 0 auto;
   align-items: flex-start;
-  padding: 4.5rem 2rem; /* Sedikit diperkecil scale */
+  padding: 4.5rem 2rem;
+  /* Sedikit diperkecil scale */
 }
 
 .sejarah-sticky {
@@ -1494,33 +1514,39 @@ body {
 .sejarah-subtitle {
   font-family: 'Caveat', cursive;
   color: #e74c3c;
-  font-size: 1.8rem; /* Sedikit diperkecil scale */
+  font-size: 1.8rem;
+  /* Sedikit diperkecil scale */
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
 .sejarah-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.4rem; /* Sedikit diperkecil scale */
+  font-size: 2.4rem;
+  /* Sedikit diperkecil scale */
   font-weight: 900;
   color: #1a1a1a;
   line-height: 1.15;
-  margin-bottom: 1.2rem; /* Sedikit diperkecil scale */
+  margin-bottom: 1.2rem;
+  /* Sedikit diperkecil scale */
   letter-spacing: -0.02em;
 }
 
 .sejarah-desc {
-  font-size: 0.98rem; /* Sedikit diperkecil scale */
+  font-size: 0.98rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #555;
-  margin-bottom: 1.8rem; /* Sedikit diperkecil scale */
+  margin-bottom: 1.8rem;
+  /* Sedikit diperkecil scale */
 }
 
 .btn-sejarah {
   display: inline-block;
   background: #e74c3c;
   color: white;
-  padding: 0.7rem 1.6rem; /* Sedikit diperkecil scale */
+  padding: 0.7rem 1.6rem;
+  /* Sedikit diperkecil scale */
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
@@ -1536,9 +1562,11 @@ body {
 
 .sejarah-arrow {
   display: block;
-  width: 130px; /* Sedikit diperkecil scale */
+  width: 130px;
+  /* Sedikit diperkecil scale */
   height: auto;
-  margin-top: 1.8rem; /* Sedikit diperkecil scale */
+  margin-top: 1.8rem;
+  /* Sedikit diperkecil scale */
   opacity: 0.9;
   animation: floatArrow 3s ease-in-out infinite;
   object-fit: contain;
@@ -1569,9 +1597,11 @@ body {
   background: white;
   border: 1px solid #f0f0f0;
   border-radius: 12px;
-  padding: 1rem; /* Sedikit diperkecil scale */
+  padding: 1rem;
+  /* Sedikit diperkecil scale */
   display: flex;
-  gap: 0.8rem; /* Sedikit diperkecil scale */
+  gap: 0.8rem;
+  /* Sedikit diperkecil scale */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
   position: relative;
@@ -1589,7 +1619,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 75px; /* Sedikit diperkecil scale */
+  min-width: 75px;
+  /* Sedikit diperkecil scale */
 }
 
 .hc-timeline-line {
@@ -1625,7 +1656,8 @@ body {
   font-family: 'Caveat', cursive;
   font-weight: 700;
   color: #a0a0a0;
-  font-size: 0.95rem; /* Sedikit diperkecil scale */
+  font-size: 0.95rem;
+  /* Sedikit diperkecil scale */
   z-index: 2;
   transition: color 0.4s ease;
   background: white;
@@ -1651,8 +1683,10 @@ body {
 }
 
 .hc-image {
-  flex: 0 0 140px; /* Sedikit diperkecil scale */
-  height: 140px; /* Sedikit diperkecil scale */
+  flex: 0 0 140px;
+  /* Sedikit diperkecil scale */
+  height: 140px;
+  /* Sedikit diperkecil scale */
   border-radius: 10px;
   overflow: hidden;
   align-self: center;
@@ -1662,8 +1696,10 @@ body {
 
 /* Larger image variant for Cheng Ho card */
 .hc-image--large {
-  flex: 0 0 220px; /* Sedikit diperkecil scale */
-  height: 220px; /* Sedikit diperkecil scale */
+  flex: 0 0 220px;
+  /* Sedikit diperkecil scale */
+  height: 220px;
+  /* Sedikit diperkecil scale */
 }
 
 .hc-image img {
@@ -1686,7 +1722,8 @@ body {
 }
 
 .hc-title {
-  font-size: 1.05rem; /* Sedikit diperkecil scale */
+  font-size: 1.05rem;
+  /* Sedikit diperkecil scale */
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 0.5rem;
@@ -1694,16 +1731,19 @@ body {
 }
 
 .hc-divider {
-  width: 35px; /* Sedikit diperkecil scale */
+  width: 35px;
+  /* Sedikit diperkecil scale */
   height: 2.5px;
   background: #e74c3c;
-  margin-bottom: 0.8rem; /* Sedikit diperkecil scale */
+  margin-bottom: 0.8rem;
+  /* Sedikit diperkecil scale */
   opacity: 0.7;
   border-radius: 2px;
 }
 
 .hc-desc {
-  font-size: 0.88rem; /* Sedikit diperkecil scale */
+  font-size: 0.88rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #666;
   margin: 0;
@@ -1769,7 +1809,7 @@ body {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  margin-top: 4rem !important;
+  margin-top: 0 !important;
   margin-bottom: 0 !important;
   padding: 0 !important;
   background-color: #050507;
@@ -1832,6 +1872,8 @@ body {
   width: 100%;
   min-height: 100vh;
   margin-top: 0;
+  overflow: hidden;
+  background-color: #050507;
 }
 
 .teknologi-tech-part::before {
@@ -2054,11 +2096,11 @@ body {
 
 .wisata-inovasi-subtitle {
   font-size: 1.1rem;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.75);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 /* ============================================ */
@@ -2086,8 +2128,8 @@ body {
 
 .wisata-inovasi-footer {
   text-align: center;
-  max-width: 896px;
-  /* max-w-4xl */
+  max-width: 1100px;
+  /* Diperlebar agar muat lebih panjang ke samping */
   margin: 0 auto;
   position: relative;
   z-index: 20;
@@ -2101,7 +2143,26 @@ body {
   box-sizing: border-box;
 }
 
+.wisata-inovasi-footer .wisata-inovasi-subtitle {
+  max-width: 1000px; /* Diperlebar dari 600px agar muat lebih panjang ke samping */
+}
+
 .wisata-inovasi-footer p {
   text-align: center;
   margin: 0 auto;
+}
+
+/* ============================================ */
+/* SinergiUniversitas Reveal Animation          */
+/* ============================================ */
+
+@keyframes sinergiReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

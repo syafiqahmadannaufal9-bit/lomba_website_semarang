@@ -6,6 +6,7 @@ import GridMotion from './components/GridMotion'
 import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
 import { SinergiUniversitas } from '@/components/SinergiUniversitas'
 import { motion } from 'framer-motion'
+import InteractiveHoneycomb from './components/ui/InteractiveHoneycomb'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -390,6 +391,7 @@ function App() {
                   src={images[currentImageIndex]} 
                   alt="Carousel Image" 
                   className="hero-image"
+                  fetchpriority="high"
                 />
               ) : (
                 <>
@@ -579,7 +581,7 @@ function App() {
                   {budayaItems.map((item) => (
                     <div key={item.id} className="budaya-card">
                       <div className="budaya-card-image">
-                        <img src={item.image} alt={item.title} />
+                        <img src={item.image} alt={item.title} loading="lazy" />
                         <div className="budaya-card-overlay"></div>
                       </div>
                       <div className="budaya-card-content">
@@ -601,8 +603,7 @@ function App() {
       {/* Wisata Section */}
       <section className="section wisata-inovasi-section" id="wisata">
         <div className="wisata-inovasi-header">
-          <h2 className="wisata-inovasi-title">WISATA <span className="text-red">&</span> INOVASI</h2>
-          <p className="wisata-inovasi-subtitle">Temukan keindahan dan keragaman destinasi wisata unggulan di Kota Semarang</p>
+          <h2 className="wisata-inovasi-title">WISATA <span className="text-red">IKONIK</span> SEMARANG</h2>
         </div>
         <div className="sticky-cards-wrapper z-10 relative">
           <StickyScrollCards />
@@ -620,7 +621,7 @@ function App() {
                 },
               },
             }}
-            className="text-neutral-500 text-lg md:text-xl font-light leading-relaxed text-center"
+            className="wisata-inovasi-subtitle"
           >
             {"Perpaduan nilai warisan sejarah yang agung dan pesona kebudayaan lokal yang berakulturasi dengan harmonis menjadikan sektor pariwisata Kota Semarang terus berkembang pesat sebagai salah satu destinasi unggulan Nusantara.".split(" ").map((word, i) => (
               <motion.span
@@ -716,7 +717,7 @@ function App() {
         
         {/* Top Part: Image and Content */}
         <div className="teknologi-hero-part">
-          <img src="/assets/herotek.jpeg" alt="Semarang Kota Teknologi" className="teknologi-bg-image" />
+          <img src="/assets/teknologihero.png" alt="Semarang Kota Teknologi" className="teknologi-bg-image" loading="lazy" />
           <div className="teknologi-gradient-top"></div>
           <div className="teknologi-gradient-bottom"></div>
           
@@ -742,11 +743,7 @@ function App() {
 
         {/* Bottom Part: Sinergi Universitas */}
         <div className="teknologi-tech-part">
-          <div className="tech-ornaments">
-            <div className="tech-grid"></div>
-            <div className="tech-glow"></div>
-            <div className="tech-dots"></div>
-          </div>
+          <InteractiveHoneycomb />
 
           <div className="sinergi-wrapper z-10 relative">
             <SinergiUniversitas />

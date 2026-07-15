@@ -1,54 +1,54 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import ReactLenis from "lenis/react";
+// ReactLenis removed — was causing scroll-engine conflict with GSAP ScrollTrigger
 import { useEffect, useRef, useState } from "react";
 
 
 const DEFAULT_CARDS = [
   {
-    title: "Kota Lama Semarang",
-    username: "semarang.tourism",
-    caption: "Menikmati nuansa Eropa klasik di Little Netherlands van Java",
-    hashtags: "#KotaLamaSemarang #SemarangHeritage #DolanSemarang",
+    title: "Saloka Theme Park",
+    username: "burhan.daily ",
+    caption: "Liburan akhir tahun telah tiba, yuk explore wahana seru di Saloka Theme Park",
+    hashtags: "#SalokaThemePark #SemarangHeritage #DolanSemarang",
     likes: "18.421",
-    description: "\nKota Lama Semarang adalah cagar budaya dengan gedung-gedung bersejarah peninggalan kolonial Belanda bergaya Eropa klasik abad ke-19 hingga ke-20.\n\nDahulu dikenal sebagai pusat perdagangan komersial dan militer Belanda, kini kawasan ini menjadi pusat kreativitas, kuliner, dan destinasi wisata sejarah paling populer di Semarang yang menawarkan atmosfer ala Eropa masa lampau.",
+    description: "\ntaman rekreasi tematik terbesar di Jawa Tengah yang berlokasi di Jl. Fatmawati No.154, Tuntang, Kabupaten Semarang. Berdiri di lahan seluas 12 hektare, tempat ini menawarkan lebih dari 25 wahana modern yang terbagi dalam 5 zona: Pesisir, Balalantar, Kamayayi, Segara Prada, dan Ararya\n\nSelain wahana permainan, restoran, cafe dan foodtruck, Saloka juga mempunyai pertunjukan spektakuler yaitu Baru Klinthing Show, Pertunjukan film yang menggabungkan teknologi laser, air mancur menari dan animasi 3D.\n\n Saloka Theme Park berlokasi di Jalan Fatmawati Nomor 154, Gumuk Sari, Lopait, Kecamatan Tuntang, Kabupaten Semarang, Jawa Tengah. Letaknya sangat strategis di persimpangan kota Semarang, Salatiga, Surakarta, dan Yogyakarta, tepat di kawasan wisata Rawa Pening.",
     src: "https://semarangkita.id/wp-content/uploads/2025/07/63c4bbaed1729.jpeg",
   },
   {
     title: "Lawang Sewu",
-    username: "history.semarang",
+    username: "history.semarang ",
     caption: "Menelusuri sejarah megah gedung berpintu seribu",
     hashtags: "#LawangSewu #ExploreSemarang #PesonaIndonesia",
     likes: "22.589",
-    description: "\nLawang Sewu merupakan bangunan bersejarah milik PT Kereta Api Indonesia (Persero) yang dahulu digunakan sebagai Kantor Pusat Perusahaan Kereta Api Swasta Belanda (NIS).\n\nDikenal dengan arsitektur art deco berkarakter pintu dan jendela besar yang sangat banyak menyerupai seribu pintu. Destinasi ikonik ini menyajikan galeri sejarah perkeretaapian Indonesia serta keindahan arsitektur kolonial yang megah.",
-    src: "https://asset.kompas.com/crops/vUsswiGtM597_q9p6sKBVkOyPVY=/0x0:780x520/1200x800/data/photo/2019/06/17/2838871495.jpg",
+    description: "\nhampir selalu menjadi jawaban pertama saat orang menyebut ikon kota Semarang. Dibangun pada awal abad ke-20, bangunan megah bergaya arsitektur Belanda ini dulunya merupakan kantor perusahaan kereta api NIS (Nederlandsch-Indische Spoorweg Maatschappij).\n\nDikenal dengan arsitektur art deco berkarakter pintu dan jendela besar yang sangat banyak menyerupai seribu pintu. Destinasi ikonik ini menyajikan galeri sejarah perkeretaapian Indonesia serta keindahan arsitektur kolonial yang megah.\n\n Lokasinya yang strategis di pusat kota membuat ikon Kota Semarang ini mudah diakses. Jika kamu tertarik mendalami sisi sejarah Indonesia sambil menikmati keindahan arsitektur klasik, Lawang Sewu adalah destinasi wajib.",
+    src: "https://ik.imagekit.io/tvlk/blog/2025/04/Lawang-Sewu.jpg?tr=q-70,c-at_max,w-1000,h-600",
   },
   {
     title: "Kelenteng Sam Poo Kong",
-    username: "visit.sampookong",
+    username: "lukman_hdr ",
     caption: "Simbol keharmonisan dan akulturasi budaya yang lestari",
     hashtags: "#SamPooKong #AkulturasiBudaya #SemarangSmartCity",
     likes: "15.932",
-    description: "\nKelenteng Sam Poo Kong adalah situs bersejarah bekas pendaratan dan tempat persinggahan pertama Laksamana Cheng Ho, laksamana Tiongkok beragama Islam.\n\nSitus ini menjadi tempat ibadah sekaligus tempat wisata ikonik dengan bangunan kelenteng megah berarsitektur Tionghoa bernuansa merah, melambangkan harmoni akulturasi budaya Tionghoa dan Jawa di Kota Semarang.",
+    description: "\nKelenteng Sam Poo Kong adalah situs bersejarah bekas pendaratan dan tempat persinggahan pertama Laksamana Cheng Ho, laksamana Tiongkok beragama Islam.\n\nSitus ini menjadi tempat ibadah sekaligus tempat wisata ikonik dengan bangunan kelenteng megah berarsitektur Tionghoa bernuansa merah, melambangkan harmoni akulturasi budaya Tionghoa dan Jawa di Kota Semarang.\n\n Kelenteng Sam Poo Kong berlokasi di Jalan Simongan Raya nomor 129, Semarang. Tempat wisata ini buka untuk umum mulai pukul 09.00 (hari biasa) dan pukul 08.00 (akhir pekan)  serta tutup pukul 20.00 WIB.",
     src: "https://akcdn.detik.net.id/community/media/visual/2021/02/11/kelenteng-sam-poo-kong_43.jpeg?w=700&q=90",
   },
   {
-    title: "Masjid Agung Jawa Tengah (MAJT)",
-    username: "majt.semarang",
-    caption: "Kemegahan payung raksasa laksana Masjid Nabawi di Semarang",
+    title: "Kota Lama Semarang ",
+    username: "arif_rizal_nugroho ",
+    caption: "Kemegahan bangunnan tempo dulu yang menawan",
     hashtags: "#MasjidAgungJateng #WisataReligi #SemarangHebat",
     likes: "14.280",
-    description: "\nMasjid Agung Jawa Tengah (MAJT) adalah landmark wisata religi di Semarang dengan arsitektur perpaduan gaya Jawa, Roma, dan Arab.\n\nSalah satu daya tarik utamanya adalah enam buah payung hidrolik raksasa di pelataran masjid yang menyerupai payung di Masjid Nabawi Madinah, serta Menara Asmaul Husna setinggi 99 meter yang menyuguhkan pemandangan indah Kota Semarang dari ketinggian.",
-    src: "https://lh3.googleusercontent.com/gps-cs-s/AHRPTWlMY4JcP47Sn3Q2RFqvmi5pjWTSkcK2oOWlNHgMEEIW8upNhBVYxY_LMdjD73jaDyhujYn4IF_zap75lQyendS_eAF0eOHCmsyJ8OchXBYyUghTnUOdw_20HzXSDAd05F6d_cDU=s1360-w1360-h1020-rw",
+    description: "\nkawasan bersejarah yang membawa kita kembali ke masa kolonial, ketika Semarang menjadi pusat perdagangan penting di Nusantara. Dijuluki “Little Netherland,” area ini menampilkan deretan bangunan bergaya Eropa klasik dengan fasad megah, jendela-jendela besar, dan kanal yang menciptakan suasana khas kota tua di Belanda. Di sinilah benteng VOC dulu berdiri, dan kini berganti fungsi menjadi museum, galeri seni, hingga kafe kekinian tanpa kehilangan nuansa masa lalu.\n\n Daya tarik utama Kota Lama tak hanya terletak pada keindahan arsitekturnya, tetapi juga pada cerita di balik setiap bangunannya. Mulai dari gereja tua yang masih aktif, bekas gedung perkantoran kolonial, hingga gudang rempah yang pernah menjadi pusat kegiatan ekspor-impor. Setiap sudut kawasan ini menyimpan jejak peran penting Semarang dalam jalur perdagangan global pada abad ke-17 hingga ke-19.\n\n Kawasan Kota Lama Semarang berpusat di Jalan Letjen Suprapto, Kelurahan Tanjung Mas, Kecamatan Semarang Utara, Kota Semarang, Jawa Tengah.",
+    src: "https://asset.kompas.com/crops/JZNK8UKlaRwuZOgD1TqMn7gBxPA=/0x0:1800x1200/1200x800/data/photo/2024/03/02/65e32e5b5743c.jpg",
   },
   {
-    title: "Kampung Pelangi Semarang",
-    username: "kampungpelangi",
-    caption: "Eksotisme warna-warni pemukiman kreatif di perbukitan kota",
-    hashtags: "#KampungPelangi #SemarangCreative #WarnaWarni",
+    title: "Pantai Marina",
+    username: "bima.ariyama ",
+    caption: "Keindahan senja di pesisir Utara Semarang",
+    hashtags: "#PantaiMarina #SemarangCreative #WarnaWarni",
     likes: "11.642",
-    description: "\nKampung Pelangi Semarang merupakan wujud kreativitas tata kota yang mengubah kawasan pemukiman padat di lereng bukit menjadi destinasi wisata kreatif yang penuh warna.\n\nSetiap dinding rumah, atap, hingga tangga dihiasi dengan lukisan mural menarik, menjadikannya spot foto yang sangat instagramable dan terkenal di kancah internasional sebagai pelopor kampung kreatif.",
+    description: "\nPantai Marina Semarang terletak di pesisir utara Jawa Tengah, dekat dengan pelabuhan Tanjung Emas dan bandara Ahmad Yani. Dulunya merupakan kawasan rawa dan tambak, kini telah disulap menjadi destinasi wisata pesisir modern.\n\nKeunikan utama Pantai Marina adalah panorama sunset yang spektakuler, serta berbagai fasilitas rekreasi seperti waterboom,banana boat, perahu nelayan, area kuliner seafood, dan dermaga panjang yang menjorok ke laut.\n\n Pantai Marina Semarang terletak di Jalan Taman Marina, Tawangsari, Kota Semarang, Jawa Tengah, dengan lokasi yang strategis dan mudah dijangkau. Dari Simpang Lima Semarang, jaraknya sekitar 9 km atau dapat ditempuh dalam waktu sekitar 20 menit. Pantai ini juga hanya berjarak sekitar 3,8 km dari Bandara Ahmad Yani dan sekitar 15 km dari pusat kota Semarang.",
     src: "https://cdn0-production-images-kly.akamaized.net/QJbnYcOLeDdPGvjC-HPTfIK2WAI=/1280x720/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/2383625/original/034346700_1539590317-8.JPG",
   },
 ];
@@ -192,7 +192,7 @@ export function StickyScrollCards({
   }, []);
 
   return (
-    <ReactLenis root>
+    <>
       <main
         ref={container}
         className={cn(
@@ -251,6 +251,6 @@ export function StickyScrollCards({
         </div>
 
       </main>
-    </ReactLenis>
+    </>
   );
 }
