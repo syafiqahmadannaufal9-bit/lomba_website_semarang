@@ -4,6 +4,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PillNav from './components/PillNav'
 import GridMotion from './components/GridMotion'
 import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
+import { SinergiUniversitas } from '@/components/SinergiUniversitas'
+import { motion } from 'framer-motion'
+import InteractiveHoneycomb from './components/ui/InteractiveHoneycomb'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -388,6 +391,7 @@ function App() {
                   src={images[currentImageIndex]} 
                   alt="Carousel Image" 
                   className="hero-image"
+                  fetchpriority="high"
                 />
               ) : (
                 <>
@@ -577,7 +581,7 @@ function App() {
                   {budayaItems.map((item) => (
                     <div key={item.id} className="budaya-card">
                       <div className="budaya-card-image">
-                        <img src={item.image} alt={item.title} />
+                        <img src={item.image} alt={item.title} loading="lazy" />
                         <div className="budaya-card-overlay"></div>
                       </div>
                       <div className="budaya-card-content">
@@ -596,6 +600,52 @@ function App() {
         </div>
       </section>
 
+      {/* Wisata Section */}
+      <section className="section wisata-inovasi-section" id="wisata">
+        <div className="wisata-inovasi-header">
+          <h2 className="wisata-inovasi-title">WISATA <span className="text-red">IKONIK</span> SEMARANG</h2>
+        </div>
+        <div className="sticky-cards-wrapper z-10 relative">
+          <StickyScrollCards />
+        </div>
+        <div className="wisata-inovasi-footer">
+          <motion.p
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.015,
+                },
+              },
+            }}
+            className="wisata-inovasi-subtitle"
+          >
+            {"Perpaduan nilai warisan sejarah yang agung dan pesona kebudayaan lokal yang berakulturasi dengan harmonis menjadikan sektor pariwisata Kota Semarang terus berkembang pesat sebagai salah satu destinasi unggulan Nusantara.".split(" ").map((word, i) => (
+              <motion.span
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 25 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      damping: 15,
+                      stiffness: 120,
+                    },
+                  },
+                }}
+                style={{ display: "inline-block", marginRight: "0.35em" }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.p>
+        </div>
+      </section>
 
       {/* Kuliner Section */}
       <section className="section kuliner-section" id="kuliner">
@@ -667,14 +717,14 @@ function App() {
         
         {/* Top Part: Image and Content */}
         <div className="teknologi-hero-part">
-          <img src="/assets/herotek.jpeg" alt="Semarang Kota Teknologi" className="teknologi-bg-image" />
+          <img src="/assets/teknologihero.png" alt="Semarang Kota Teknologi" className="teknologi-bg-image" loading="lazy" />
           <div className="teknologi-gradient-top"></div>
           <div className="teknologi-gradient-bottom"></div>
           
           <div className="teknologi-content-wrapper">
             <div className="teknologi-content-inner">
               <div className="teknologi-line" ref={teknologiLineRef}></div>
-              <div className="teknologi-content-bottom" ref={teknologiContentRef}>
+              <div className="teknologi-content-bottom teknologi-content-left" ref={teknologiContentRef}>
                 <div className="teknologi-title-col">
                   <h2>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
                 </div>
@@ -691,16 +741,12 @@ function App() {
           </div>
         </div>
 
-        {/* Bottom Part: Empty Tech Space with Logo Marquee */}
+        {/* Bottom Part: Sinergi Universitas */}
         <div className="teknologi-tech-part">
-          <div className="tech-ornaments">
-            <div className="tech-grid"></div>
-            <div className="tech-glow"></div>
-            <div className="tech-dots"></div>
-          </div>
+          <InteractiveHoneycomb />
 
-          <div className="sticky-cards-wrapper z-10 relative">
-            <StickyScrollCards />
+          <div className="sinergi-wrapper z-10 relative">
+            <SinergiUniversitas />
           </div>
         </div>
 

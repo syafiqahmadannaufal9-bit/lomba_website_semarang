@@ -35,7 +35,7 @@ body {
   justify-content: center;
   padding: 2rem 1rem;
   scroll-margin-top: 2.6rem;
-  animation: slideUp 0.8s ease-out;
+  /* Removed unconditional slideUp — was firing on all sections including off-screen */
 }
 
 /* Make welcome section a bit taller so its background covers more space */
@@ -51,6 +51,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -60,7 +61,8 @@ body {
 /* Hero Section */
 .hero {
   position: relative;
-  height: 100vh; /* make hero fill the first viewport */
+  height: 100vh;
+  /* make hero fill the first viewport */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,9 +70,10 @@ body {
   padding-top: 2rem;
   background: var(--color-white);
 }
+
 /* Kuliner specific styles */
 .kuliner-section {
-  background: linear-gradient(135deg, #ffffff 0%, #fdf5f5 100%);
+  background: #ffffff;
   padding: 3rem 0;
   display: flex;
   flex-direction: column;
@@ -79,7 +82,7 @@ body {
   min-height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  margin-bottom: 4rem; /* Jarak untuk section di bawahnya */
+  margin-bottom: 0;
 }
 
 .kuliner-container {
@@ -101,7 +104,8 @@ body {
 }
 
 .kuliner-title-main {
-  font-size: 2.3rem; /* Slightly increased scale of header */
+  font-size: 2.3rem;
+  /* Slightly increased scale of header */
   font-weight: 800;
   letter-spacing: 0.08em;
   color: #e74c3c;
@@ -111,7 +115,8 @@ body {
 }
 
 .kuliner-header-line {
-  width: 60px; /* Slightly increased scale of header divider */
+  width: 60px;
+  /* Slightly increased scale of header divider */
   height: 3.5px;
   background-color: #e74c3c;
   border-radius: 2px;
@@ -119,7 +124,8 @@ body {
 }
 
 .kuliner-subtitle-main {
-  font-size: 1.05rem; /* Slightly increased scale of header subtitle */
+  font-size: 1.05rem;
+  /* Slightly increased scale of header subtitle */
   color: #666;
   font-weight: 400;
   margin: 0;
@@ -137,6 +143,7 @@ body {
   display: flex;
   width: max-content;
   will-change: transform;
+  contain: layout style;
 }
 
 .kuliner-marquee-track-right {
@@ -154,7 +161,8 @@ body {
 
 .kuliner-marquee-set {
   display: flex;
-  gap: 2.5rem; /* Perpanjang jarak antar card */
+  gap: 2.5rem;
+  /* Perpanjang jarak antar card */
   padding-right: 2.5rem;
   align-items: stretch;
 }
@@ -168,7 +176,6 @@ body {
   min-width: 290px;
   max-width: 380px;
   flex-shrink: 0;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Shadow */
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   display: flex;
   flex-direction: column;
@@ -178,14 +185,14 @@ body {
 
 .kuliner-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(231, 76, 60, 0.15); /* Shadow hover */
-  border-color: rgba(231, 76, 60, 0.15);
+  border: 2px solid #e74c3c;
 }
 
 .kuliner-card-img-wrapper {
   position: relative;
   width: 100%;
-  height: 185px; /* Sedikit diperkecil */
+  height: 185px;
+  /* Sedikit diperkecil */
   overflow: hidden;
 }
 
@@ -202,7 +209,8 @@ body {
 }
 
 .kuliner-card-info {
-  padding: 1rem; /* Sedikit diperkecil */
+  padding: 1rem;
+  /* Sedikit diperkecil */
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -210,7 +218,8 @@ body {
 }
 
 .kuliner-card-title {
-  font-size: 1.08rem; /* Sedikit diperkecil */
+  font-size: 1.08rem;
+  /* Sedikit diperkecil */
   font-weight: 750;
   color: #2c3e50;
   margin: 0;
@@ -222,7 +231,8 @@ body {
 }
 
 .kuliner-card-desc {
-  font-size: 0.8rem; /* Sedikit diperkecil */
+  font-size: 0.8rem;
+  /* Sedikit diperkecil */
   line-height: 1.5;
   color: #555;
   margin: 0;
@@ -233,6 +243,7 @@ body {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -242,6 +253,7 @@ body {
   0% {
     transform: translateX(-50%);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -253,9 +265,9 @@ body {
     min-height: 100vh;
     padding: 3rem 0;
     overflow: hidden;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
-  
+
   .kuliner-container {
     height: auto;
     gap: 1.5rem;
@@ -269,7 +281,6 @@ body {
   .kuliner-card {
     width: 300px;
     min-width: 280px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.06);
   }
 
   .kuliner-card-img-wrapper {
@@ -350,7 +361,8 @@ body {
 
 .carousel-wrapper {
   max-width: 360px;
-  max-height: 60vh; /* scale relative to viewport so image fits inside hero */
+  max-height: 60vh;
+  /* scale relative to viewport so image fits inside hero */
   width: 100%;
   height: min(60vh, 420px);
   display: flex;
@@ -423,6 +435,7 @@ body {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -432,6 +445,7 @@ body {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -439,7 +453,7 @@ body {
 
 /* Right Side */
 .hero-right {
-  margin: 5rem 50px 0 ;
+  margin: 5rem 50px 0;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -477,9 +491,11 @@ body {
   font-weight: bold;
   color: var(--color-black);
 }
+
 .text-red {
   color: var(--color-red);
 }
+
 .text-red strong {
   font-weight: bold;
   color: var(--color-red);
@@ -650,6 +666,7 @@ body {
   display: flex;
   width: max-content;
   animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
 .budaya-marquee-track:hover {
@@ -659,12 +676,20 @@ body {
 .budaya-marquee-set {
   display: flex;
   gap: 1rem;
-  padding-right: 1rem; /* Reduced spacing so more cards fit horizontally */
+  padding-right: 1rem;
+  /* Reduced spacing so more cards fit horizontally */
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-25%); } /* Shift exactly 1 out of 4 duplicated sets */
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-25%);
+  }
+
+  /* Shift exactly 1 out of 4 duplicated sets */
 }
 
 .budaya-card {
@@ -677,7 +702,7 @@ body {
   transition: all 0.35s ease;
   cursor: pointer;
   position: relative;
-  animation: slideUp 0.8s ease-out;
+  /* Removed unconditional slideUp — 16 cards animating simultaneously caused jank */
 }
 
 .budaya-card:hover {
@@ -707,9 +732,9 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-  transition: all 0.6s ease;
-  backdrop-filter: blur(0px);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+  transition: background 0.6s ease;
+  /* Removed backdrop-filter: blur(0px) — no visual effect but created extra GPU layer */
 }
 
 .budaya-card:hover .budaya-card-image img {
@@ -718,7 +743,7 @@ body {
 }
 
 .budaya-card:hover .budaya-card-overlay {
-  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.4) 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .budaya-card-content {
@@ -743,7 +768,7 @@ body {
   line-height: 1.25;
   transform: translateY(120px);
   transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
 .budaya-card:hover .budaya-card-content h3 {
@@ -767,7 +792,7 @@ body {
 .budaya-card-divider {
   border: 0;
   height: 1px;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.4);
   margin: 1.2rem 0;
 }
 
@@ -776,7 +801,7 @@ body {
   color: #e0e0e0;
   line-height: 1.6;
   margin-bottom: 1.5rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .budaya-card-action {
@@ -860,6 +885,7 @@ body {
   margin-bottom: -0.4rem;
   line-height: 1.2;
 }
+
 .welcome-text-2 {
   font-family: 'Montserrat', sans-serif;
   font-size: clamp(1.8rem, 5vw, 3.6rem);
@@ -902,41 +928,134 @@ body {
 
 /* Wave float keyframe */
 @keyframes letterFloat {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-14px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-14px);
+  }
 }
 
 /* Apply continuous wave float to each colored letter, staggered */
 .welcome-text-2 .letter-colored {
   animation: letterFloat 2.4s ease-in-out infinite;
 }
-.welcome-text-2 .letter-n1  { animation-delay: 0.00s; }
-.welcome-text-2 .letter-n2  { animation-delay: 0.10s; }
-.welcome-text-2 .letter-n3  { animation-delay: 0.20s; }
-.welcome-text-2 .letter-n4  { animation-delay: 0.30s; }
-.welcome-text-2 .letter-n5  { animation-delay: 0.40s; }
-.welcome-text-2 .letter-n6  { animation-delay: 0.50s; }
-.welcome-text-2 .letter-n7  { animation-delay: 0.60s; }
-.welcome-text-2 .letter-n8  { animation-delay: 0.70s; }
-.welcome-text-2 .letter-n9  { animation-delay: 0.80s; }
-.welcome-text-2 .letter-n10 { animation-delay: 0.90s; }
-.welcome-text-2 .letter-n11 { animation-delay: 1.00s; }
-.welcome-text-2 .letter-n12 { animation-delay: 1.10s; }
+
+.welcome-text-2 .letter-n1 {
+  animation-delay: 0.00s;
+}
+
+.welcome-text-2 .letter-n2 {
+  animation-delay: 0.10s;
+}
+
+.welcome-text-2 .letter-n3 {
+  animation-delay: 0.20s;
+}
+
+.welcome-text-2 .letter-n4 {
+  animation-delay: 0.30s;
+}
+
+.welcome-text-2 .letter-n5 {
+  animation-delay: 0.40s;
+}
+
+.welcome-text-2 .letter-n6 {
+  animation-delay: 0.50s;
+}
+
+.welcome-text-2 .letter-n7 {
+  animation-delay: 0.60s;
+}
+
+.welcome-text-2 .letter-n8 {
+  animation-delay: 0.70s;
+}
+
+.welcome-text-2 .letter-n9 {
+  animation-delay: 0.80s;
+}
+
+.welcome-text-2 .letter-n10 {
+  animation-delay: 0.90s;
+}
+
+.welcome-text-2 .letter-n11 {
+  animation-delay: 1.00s;
+}
+
+.welcome-text-2 .letter-n12 {
+  animation-delay: 1.10s;
+}
 
 /* Per-letter hover color (each letter gets its own color on hover) */
-.welcome-text-2 .letter-colored:hover { animation-play-state: paused; }
-.welcome-text-2 .letter-n1:hover  { color: #39c666; transform: translateY(-14px); }
-.welcome-text-2 .letter-n2:hover  { color: #57ddff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n3:hover  { color: #7049ff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n4:hover  { color: #44c1ff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n5:hover  { color: hsl(298, 100%, 66%); transform: translateY(-14px); }
-.welcome-text-2 .letter-n6:hover  { color: #4aff4d; transform: translateY(-14px); }
-.welcome-text-2 .letter-n7:hover  { color: #4fe5ff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n8:hover  { color: #ff4acc; transform: translateY(-14px); }
-.welcome-text-2 .letter-n9:hover  { color: #53ff8d; transform: translateY(-14px); }
-.welcome-text-2 .letter-n10:hover { color: #a75bff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n11:hover { color: #57c7ff; transform: translateY(-14px); }
-.welcome-text-2 .letter-n12:hover { color: #49ffaa; transform: translateY(-14px); }
+.welcome-text-2 .letter-colored:hover {
+  animation-play-state: paused;
+}
+
+.welcome-text-2 .letter-n1:hover {
+  color: #39c666;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n2:hover {
+  color: #57ddff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n3:hover {
+  color: #7049ff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n4:hover {
+  color: #44c1ff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n5:hover {
+  color: hsl(298, 100%, 66%);
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n6:hover {
+  color: #4aff4d;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n7:hover {
+  color: #4fe5ff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n8:hover {
+  color: #ff4acc;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n9:hover {
+  color: #53ff8d;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n10:hover {
+  color: #a75bff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n11:hover {
+  color: #57c7ff;
+  transform: translateY(-14px);
+}
+
+.welcome-text-2 .letter-n12:hover {
+  color: #49ffaa;
+  transform: translateY(-14px);
+}
 
 
 .shape {
@@ -1022,7 +1141,8 @@ body {
   flex-direction: column;
   gap: 1.25rem;
   text-align: left;
-  padding: 3.5rem 2.5rem 2.5rem 3rem; /* Sedikit diperkecil scale */
+  padding: 3.5rem 2.5rem 2.5rem 3rem;
+  /* Sedikit diperkecil scale */
   justify-content: center;
 }
 
@@ -1038,32 +1158,38 @@ body {
   .wisata-section {
     padding: 0;
   }
+
   .wisata-content-container {
     flex-direction: column;
   }
+
   .wisata-text-column,
   .wisata-grid-panel {
     flex: none;
     max-width: 100%;
     width: 100%;
   }
+
   .wisata-text-column {
     padding: 4rem 2rem 2rem;
   }
+
   .wisata-grid-panel {
     min-height: 60vw;
   }
 }
 
 .wisata-main-text {
-  font-size: 1.1rem; /* Sedikit diperkecil scale */
+  font-size: 1.1rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.7;
   color: var(--color-text);
   font-family: 'Arial', sans-serif;
 }
 
 .wisata-main-text .drop-cap {
-  font-size: 4.5rem; /* Sedikit diperkecil scale */
+  font-size: 4.5rem;
+  /* Sedikit diperkecil scale */
   font-weight: 900;
   float: left;
   line-height: 0.8;
@@ -1083,7 +1209,8 @@ body {
   background: #fdfbf7;
   border-left: 5px solid var(--color-red);
   border-radius: 4px 16px 16px 4px;
-  padding: 1.6rem 2.2rem; /* Sedikit diperkecil scale */
+  padding: 1.6rem 2.2rem;
+  /* Sedikit diperkecil scale */
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -1098,7 +1225,8 @@ body {
   position: absolute;
   top: -20px;
   right: 15px;
-  font-size: 7.5rem; /* Sedikit diperkecil scale */
+  font-size: 7.5rem;
+  /* Sedikit diperkecil scale */
   font-family: 'Georgia', serif;
   color: var(--color-red);
   opacity: 0.07;
@@ -1113,7 +1241,8 @@ body {
   gap: 0.5rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 0.8rem; /* Sedikit diperkecil scale */
+  font-size: 0.8rem;
+  /* Sedikit diperkecil scale */
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #888;
@@ -1125,7 +1254,8 @@ body {
 
 .asal-usul-quote {
   font-family: 'Georgia', Cambria, "Times New Roman", Times, serif;
-  font-size: 1.15rem; /* Sedikit diperkecil scale */
+  font-size: 1.15rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.55;
   color: #2c3e50;
   margin: 0;
@@ -1140,7 +1270,8 @@ body {
 }
 
 .wisata-footer-text {
-  font-size: 0.92rem; /* Sedikit diperkecil scale */
+  font-size: 0.92rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #555;
   font-style: italic;
@@ -1213,6 +1344,7 @@ body {
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
 }
+
 .btn-sejarah:hover {
   flex-direction: column;
   gap: 2rem;
@@ -1233,18 +1365,22 @@ body {
   .wisata-section {
     padding: 0;
   }
+
   .wisata-content-container {
     flex-direction: column;
   }
+
   .wisata-text-column,
   .wisata-grid-panel {
     flex: none;
     max-width: 100%;
     width: 100%;
   }
+
   .wisata-text-column {
     padding: 4rem 2rem 2rem;
   }
+
   .wisata-grid-panel {
     min-height: 60vw;
   }
@@ -1357,12 +1493,15 @@ body {
 
 .sejarah-layout {
   display: flex;
-  gap: 3rem; /* Sedikit diperkecil scale */
-  max-width: 1050px; /* Sedikit diperkecil scale */
+  gap: 3rem;
+  /* Sedikit diperkecil scale */
+  max-width: 1050px;
+  /* Sedikit diperkecil scale */
   width: 100%;
   margin: 0 auto;
   align-items: flex-start;
-  padding: 4.5rem 2rem; /* Sedikit diperkecil scale */
+  padding: 4.5rem 2rem;
+  /* Sedikit diperkecil scale */
 }
 
 .sejarah-sticky {
@@ -1375,39 +1514,46 @@ body {
 .sejarah-subtitle {
   font-family: 'Caveat', cursive;
   color: #e74c3c;
-  font-size: 1.8rem; /* Sedikit diperkecil scale */
+  font-size: 1.8rem;
+  /* Sedikit diperkecil scale */
   margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
 .sejarah-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2.4rem; /* Sedikit diperkecil scale */
+  font-size: 2.4rem;
+  /* Sedikit diperkecil scale */
   font-weight: 900;
   color: #1a1a1a;
   line-height: 1.15;
-  margin-bottom: 1.2rem; /* Sedikit diperkecil scale */
+  margin-bottom: 1.2rem;
+  /* Sedikit diperkecil scale */
   letter-spacing: -0.02em;
 }
 
 .sejarah-desc {
-  font-size: 0.98rem; /* Sedikit diperkecil scale */
+  font-size: 0.98rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #555;
-  margin-bottom: 1.8rem; /* Sedikit diperkecil scale */
+  margin-bottom: 1.8rem;
+  /* Sedikit diperkecil scale */
 }
 
 .btn-sejarah {
   display: inline-block;
   background: #e74c3c;
   color: white;
-  padding: 0.7rem 1.6rem; /* Sedikit diperkecil scale */
+  padding: 0.7rem 1.6rem;
+  /* Sedikit diperkecil scale */
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
   transition: all 0.3s ease;
   box-shadow: 0 4px 10px rgba(231, 76, 60, 0.2);
 }
+
 .btn-sejarah:hover {
   background: #c0392b;
   transform: translateY(-2px);
@@ -1416,17 +1562,26 @@ body {
 
 .sejarah-arrow {
   display: block;
-  width: 130px; /* Sedikit diperkecil scale */
+  width: 130px;
+  /* Sedikit diperkecil scale */
   height: auto;
-  margin-top: 1.8rem; /* Sedikit diperkecil scale */
+  margin-top: 1.8rem;
+  /* Sedikit diperkecil scale */
   opacity: 0.9;
   animation: floatArrow 3s ease-in-out infinite;
   object-fit: contain;
 }
 
 @keyframes floatArrow {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(10px) rotate(-5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(10px) rotate(-5deg);
+  }
 }
 
 .sejarah-list {
@@ -1442,9 +1597,11 @@ body {
   background: white;
   border: 1px solid #f0f0f0;
   border-radius: 12px;
-  padding: 1rem; /* Sedikit diperkecil scale */
+  padding: 1rem;
+  /* Sedikit diperkecil scale */
   display: flex;
-  gap: 0.8rem; /* Sedikit diperkecil scale */
+  gap: 0.8rem;
+  /* Sedikit diperkecil scale */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
   position: relative;
@@ -1462,13 +1619,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 75px; /* Sedikit diperkecil scale */
+  min-width: 75px;
+  /* Sedikit diperkecil scale */
 }
 
 .hc-timeline-line {
   position: absolute;
   top: 0;
-  bottom: -2.8rem; /* Cross the gap between cards */
+  bottom: -2.8rem;
+  /* Cross the gap between cards */
   width: 3px;
   background: #f0f0f0;
   z-index: 1;
@@ -1497,7 +1656,8 @@ body {
   font-family: 'Caveat', cursive;
   font-weight: 700;
   color: #a0a0a0;
-  font-size: 0.95rem; /* Sedikit diperkecil scale */
+  font-size: 0.95rem;
+  /* Sedikit diperkecil scale */
   z-index: 2;
   transition: color 0.4s ease;
   background: white;
@@ -1523,24 +1683,30 @@ body {
 }
 
 .hc-image {
-  flex: 0 0 140px; /* Sedikit diperkecil scale */
-  height: 140px; /* Sedikit diperkecil scale */
+  flex: 0 0 140px;
+  /* Sedikit diperkecil scale */
+  height: 140px;
+  /* Sedikit diperkecil scale */
   border-radius: 10px;
   overflow: hidden;
   align-self: center;
-  background: transparent; /* seamless transparent look */
+  background: transparent;
+  /* seamless transparent look */
 }
 
 /* Larger image variant for Cheng Ho card */
 .hc-image--large {
-  flex: 0 0 220px; /* Sedikit diperkecil scale */
-  height: 220px; /* Sedikit diperkecil scale */
+  flex: 0 0 220px;
+  /* Sedikit diperkecil scale */
+  height: 220px;
+  /* Sedikit diperkecil scale */
 }
 
 .hc-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* display entire statue cleanly */
+  object-fit: contain;
+  /* display entire statue cleanly */
   transition: transform 0.5s ease;
 }
 
@@ -1556,7 +1722,8 @@ body {
 }
 
 .hc-title {
-  font-size: 1.05rem; /* Sedikit diperkecil scale */
+  font-size: 1.05rem;
+  /* Sedikit diperkecil scale */
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 0.5rem;
@@ -1564,16 +1731,19 @@ body {
 }
 
 .hc-divider {
-  width: 35px; /* Sedikit diperkecil scale */
+  width: 35px;
+  /* Sedikit diperkecil scale */
   height: 2.5px;
   background: #e74c3c;
-  margin-bottom: 0.8rem; /* Sedikit diperkecil scale */
+  margin-bottom: 0.8rem;
+  /* Sedikit diperkecil scale */
   opacity: 0.7;
   border-radius: 2px;
 }
 
 .hc-desc {
-  font-size: 0.88rem; /* Sedikit diperkecil scale */
+  font-size: 0.88rem;
+  /* Sedikit diperkecil scale */
   line-height: 1.6;
   color: #666;
   margin: 0;
@@ -1639,7 +1809,7 @@ body {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
-  margin-top: 4rem !important;
+  margin-top: 0 !important;
   margin-bottom: 0 !important;
   padding: 0 !important;
   background-color: #050507;
@@ -1702,6 +1872,8 @@ body {
   width: 100%;
   min-height: 100vh;
   margin-top: 0;
+  overflow: hidden;
+  background-color: #050507;
 }
 
 .teknologi-tech-part::before {
@@ -1746,12 +1918,16 @@ body {
   color: white;
 }
 
+.teknologi-content-bottom.teknologi-content-left {
+  justify-content: flex-start;
+}
+
 .teknologi-title-col h2 {
   font-size: clamp(2rem, 3.5vw, 3.2rem);
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 0px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: #fff;
   text-align: left;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -1770,7 +1946,7 @@ body {
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   color: #f8f8f8;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 300;
@@ -1780,7 +1956,7 @@ body {
   .teknologi-section {
     min-height: 600px;
   }
-  
+
   .teknologi-content-bottom {
     flex-direction: column;
     align-items: flex-start;
@@ -1829,8 +2005,13 @@ body {
 }
 
 @keyframes univMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .univ-logo-card {
@@ -1844,10 +2025,10 @@ body {
 }
 
 .univ-logo-card img {
-  max-width: 160px; 
+  max-width: 160px;
   max-height: 100%;
   object-fit: contain;
-  filter: grayscale(100%) opacity(0.5); 
+  filter: grayscale(100%) opacity(0.5);
   transition: all 0.4s ease;
 }
 
@@ -1860,15 +2041,128 @@ body {
   .univ-logo-card {
     height: 50px;
   }
+
   .univ-logo-card img {
     max-width: 100px;
   }
+
   .univ-marquee-set {
     gap: 0.5rem;
     padding-right: 0.5rem;
   }
+
   .univ-marquee-container {
     bottom: 2%;
   }
 }
 
+
+/* ============================================ */
+/* Wisata & Inovasi Section (Sticky Cards)      */
+/* ============================================ */
+
+.wisata-inovasi-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  background-color: #ffffff;
+  display: block;
+  min-height: auto;
+}
+
+.wisata-inovasi-header {
+  text-align: center;
+  padding: 5rem 2rem 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.wisata-inovasi-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.wisata-inovasi-title .text-red {
+  color: #e74c3c;
+}
+
+.wisata-inovasi-subtitle {
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, 0.75);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* ============================================ */
+/* Sinergi Universitas Layout Configuration     */
+/* ============================================ */
+
+.sinergi-section-container {
+  /* Ubah persentase atau gunakan variabel CSS ini untuk custom jarak dari kiri */
+  padding-top: 8%;
+  padding-left: var(--sinergi-padding-left, 9%);
+  padding-right: 8%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .sinergi-section-container {
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+}
+
+/* ============================================ */
+/* Wisata Footer Spacing Configuration          */
+/* ============================================ */
+
+.wisata-inovasi-footer {
+  text-align: center;
+  max-width: 1100px;
+  /* Diperlebar agar muat lebih panjang ke samping */
+  margin: 0 auto;
+  position: relative;
+  z-index: 20;
+
+  /* Atur padding (jarak space) di sini sesuai keinginan */
+  padding-top: var(--wisata-footer-padding-top, 6rem);
+  padding-bottom: var(--wisata-footer-padding-bottom, 6rem);
+  padding-left: var(--wisata-footer-padding-left, 1.5rem);
+  padding-right: var(--wisata-footer-padding-right, 1.5rem);
+
+  box-sizing: border-box;
+}
+
+.wisata-inovasi-footer .wisata-inovasi-subtitle {
+  max-width: 1000px; /* Diperlebar dari 600px agar muat lebih panjang ke samping */
+}
+
+.wisata-inovasi-footer p {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* ============================================ */
+/* SinergiUniversitas Reveal Animation          */
+/* ============================================ */
+
+@keyframes sinergiReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
