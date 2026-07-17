@@ -44,6 +44,8 @@ body {
   min-height: 92vh;
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
+  position: relative;
+  overflow: hidden;
 }
 
 @keyframes slideUp {
@@ -746,18 +748,19 @@ body {
   background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.4) 100%);
 }
 
+/* Details panel */
 .budaya-card-content {
   position: absolute;
-  bottom: 0;
+  top: 100%;
   left: 0;
   width: 100%;
   padding: 1.5rem;
   color: white;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   z-index: 2;
   text-align: left;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .budaya-card-content h3 {
@@ -766,26 +769,30 @@ body {
   color: #ffffff;
   margin-bottom: 0;
   line-height: 1.25;
-  transform: translateY(120px);
-  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
-}
-
-.budaya-card:hover .budaya-card-content h3 {
-  transform: translateY(0);
+  /* Translate up by its own height (100%) + padding top & bottom (3rem) */
+  transform: translateY(calc(-100% - 3rem));
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .budaya-card-details {
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(40px);
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: opacity 0.5s ease;
+}
+
+/* Hover effects */
+.budaya-card:hover .budaya-card-content {
+  /* Slide entire content block up from the bottom edge */
+  transform: translateY(-100%);
+}
+
+.budaya-card:hover .budaya-card-content h3 {
+  /* Reset title's relative position so it sits normally inside the content block */
+  transform: translateY(0);
 }
 
 .budaya-card:hover .budaya-card-details {
   opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
   transition-delay: 0.1s;
 }
 
@@ -2165,4 +2172,57 @@ body {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+/* Smart City Innovations */
+.smart-city-innovations {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.innovations-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.glow-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .glow-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.glow-card-content {
+  padding: 2.5rem 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.glow-card-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.glow-card-desc {
+  color: #a0a0a0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
 }

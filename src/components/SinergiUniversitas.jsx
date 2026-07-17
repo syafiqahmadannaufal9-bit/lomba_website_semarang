@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Folder from "./Folder";
 
 // Lightweight reveal hook using Intersection Observer (no Framer Motion overhead)
 function useReveal(threshold = 0.2) {
@@ -28,13 +29,19 @@ export function SinergiUniversitas() {
 
   const [containerRef, isVisible] = useReveal(0.15);
 
+  const folderItems = [
+    <img key="1" src="https://unkartur.ac.id/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-30-at-08.55.27.jpeg" alt="Undip" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
+    <img key="2" src="https://awsimages.detik.net.id/community/media/visual/2024/11/29/gelar-karya-inovasi-mahasiswa-dan-pelajar-di-semarang-1_169.jpeg?w=700&q=90" alt="Unnes" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
+    <img key="3" src="https://koranbernas.id/uploads/images/202512/image_870x_69384e238b8e0.jpg" alt="Udinus" style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#fff', borderRadius: '10px' }} />,
+  ];
+
   return (
     <div
-      className="w-full min-h-[70vh] flex items-center justify-start relative z-10 py-16 sinergi-section-container"
+      className="w-full min-h-[70vh] flex flex-col lg:flex-row items-center justify-between relative z-10 py-16 px-6 sm:px-10 lg:px-16 sinergi-section-container gap-12"
     >
       <div
         ref={containerRef}
-        className="w-full max-w-3xl text-left flex flex-col items-start gap-6"
+        className="w-full lg:w-3/5 max-w-3xl text-left flex flex-col items-start gap-6"
       >
         {/* Heading — word-split kept (short text, acceptable) */}
         <h2
@@ -66,6 +73,16 @@ export function SinergiUniversitas() {
         >
           {p2}
         </p>
+      </div>
+
+      <div 
+        className="w-full lg:w-2/5 flex justify-center items-center mt-12 lg:mt-0"
+        style={{
+          animation: isVisible ? 'sinergiReveal 0.75s 0.36s cubic-bezier(0.22,1,0.36,1) both' : 'none',
+          opacity: 0
+        }}
+      >
+        <Folder size={3} color="#b33939" items={folderItems} />
       </div>
     </div>
   );
