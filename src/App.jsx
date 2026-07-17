@@ -75,7 +75,7 @@ const sejarahData = [
 const kulinerTop = [
   {
     name: "Lumpia Semarang",
-    image: "/assets/lumpia-semarang.jpeg",
+    image: "https://asset.kompas.com/crops/UxROXDbwKoZ9Vr57w4sc0qHVfnM=/59x38:939x625/1200x800/data/photo/2022/05/05/62733af9841d8.jpg",
     desc: "Perpaduan budaya Tionghoa dan Jawa berisi rebung manis, telur, dan udang/ayam dibungkus kulit renyah."
   },
   {
