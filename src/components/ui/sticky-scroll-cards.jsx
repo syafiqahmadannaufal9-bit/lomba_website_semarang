@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
-// ReactLenis removed — was causing scroll-engine conflict with GSAP ScrollTrigger
+import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef, useState } from "react";
 
 
@@ -192,7 +192,7 @@ export function StickyScrollCards({
   }, []);
 
   return (
-    <>
+    <ReactLenis root>
       <main
         ref={container}
         className={cn(
@@ -251,6 +251,6 @@ export function StickyScrollCards({
         </div>
 
       </main>
-    </>
+    </ReactLenis>
   );
 }

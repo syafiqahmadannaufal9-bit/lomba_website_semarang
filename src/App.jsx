@@ -7,6 +7,7 @@ import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
 import { SinergiUniversitas } from '@/components/SinergiUniversitas'
 import { motion } from 'framer-motion'
 import InteractiveHoneycomb from './components/ui/InteractiveHoneycomb'
+import BorderGlow from './components/ui/BorderGlow'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -132,26 +133,32 @@ function App() {
     {
       id: 1,
       title: 'Dugderan & Warak Ngendog',
-      description: 'Tradisi unik perayaan Ramadan dengan arak-arakan boneka raksasa yang meriah',
+      description: 'Tradisi Dugderan dilaksanakan menjelang bulan ramadhan dan menandai akan segara dimulainya ibadah puasa. Acara ini sarat dengan simbol budaya lokal, dimulai dengan arak-arakan yang dipimpin oleh Warak Ngendog, sebuah figur mitologi unik yang mencerminkan keberagaman budaya di Semarang.',
       image: '/assets/dugderan_budaya.png'
     },
     {
       id: 2,
       title: 'Seni Gambang',
-      description: 'Musik tradisional Jawa dengan instrumen gamelan khas Semarang',
+      description: 'Tradisi Gambang Semarang ini bermula pada masa kolonial dan terus berkembang sebagai hiburan rakyat di acara-acara penting, seperti pernikahan dan festival budaya. Gambang Semarang adalah salah satu tradisi seni yang menjadi bagian tak terpisahkan dari budaya lokal Semarang.',
       image: '/assets/Gambang_budaya.png'
     },
     {
       id: 3,
-      title: 'Terbang Kolong',
-      description: 'Seni musik tradisional dengan alat musik perkusi yang dimainkan secara bersamaan',
-      image: '/assets/Terbang_budaya.png'
+      title: 'Tradisi Popokan',
+      description: 'Tradisi Popokan ini bermula dari kisah seekor macan yang pernah masuk ke Desa Sendang dan menimbulkan kerusakan. Berbagai cara telah dilakukan, termasuk menggunakan senjata, namun macan tersebut tetap bertahan. Kemudian atas saran seorang pemuka adat, warga mulai melemparkan tanah atau lumpur, dan akhirnya macan itu pergi. ',
+      image: 'https://img.merahputih.com/media/2015/09/20/70Ia2LETJR1442730555.jpg'
     },
     {
       id: 4,
-      title: 'Wayang Kulit',
-      description: 'Seni pertunjukan wayang tradisional yang menceritakan kisah-kisah dari Ramayana dan Mahabharata',
-      image: '/assets/Wayang_budaya.png'
+      title: 'Tradisi Padusan',
+      description: 'Padusan merupakan tradisi membersihkan diri sebelum bulan Ramadan. Di Semarang, tradisi ini biasa dilakukan di sumber mata air alami seperti Umbul Senjoyo. Warga akan beramai-ramai mandi dan mencuci peralatan ibadah sebagai simbol menyucikan diri sebelum menjalankan ibadah puasa.',
+      image: 'https://asset.kompas.com/crops/0n6TCCBPFJkxfoql5AQrPS05scE=/0x0:1800x1200/1200x800/data/photo/2023/03/23/641bc2a41d7bb.jpg'
+    },
+    {
+      id: 5,
+      title: 'Sesaji Rewanda',
+      description: 'Masyarakat di kawasan Semarang, khususnya di sekitar Gunung Merbabu, masih melestarikan tradisi sakral Sesaji Rewanda. Tradisi ini merupakan bentuk penghormatan kepada leluhur dan penjaga alam, dengan mempersembahkan sesaji berupa hasil bumi, bunga, serta makanan tradisional.',
+      image: 'https://asset.kompas.com/crops/0n6TCCBPFJkxfoql5AQrPS05scE=/0x0:1800x1200/1200x800/data/photo/2023/03/23/641bc2a41d7bb.jpg'
     }
   ];
 
@@ -587,8 +594,10 @@ function App() {
                       <div className="budaya-card-content">
                         <h3>{item.title}</h3>
                         <div className="budaya-card-details">
-                          <hr className="budaya-card-divider" />
-                          <p>{item.description}</p>
+                          <div className="budaya-card-details-inner">
+                            <hr className="budaya-card-divider" />
+                            <p>{item.description}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -603,7 +612,7 @@ function App() {
       {/* Wisata Section */}
       <section className="section wisata-inovasi-section" id="wisata">
         <div className="wisata-inovasi-header">
-          <h2 className="wisata-inovasi-title">WISATA <span className="text-red">IKONIK</span> SEMARANG</h2>
+          <h2 className="wisata-inovasi-title">WISATA <span className="text-red" style={{ fontFamily: "'Caveat', cursive", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
         </div>
         <div className="sticky-cards-wrapper z-10 relative">
           <StickyScrollCards />
@@ -717,7 +726,7 @@ function App() {
         
         {/* Top Part: Image and Content */}
         <div className="teknologi-hero-part">
-          <img src="/assets/teknologihero.png" alt="Semarang Kota Teknologi" className="teknologi-bg-image" loading="lazy" />
+          <img src="https://imgcdn.espos.id/@espos/images/2024/10/20241013184702-pemkot-semarang.jpeg?quality=60" alt="Semarang Kota Teknologi" className="teknologi-bg-image" loading="lazy" />
           <div className="teknologi-gradient-top"></div>
           <div className="teknologi-gradient-bottom"></div>
           
@@ -726,14 +735,14 @@ function App() {
               <div className="teknologi-line" ref={teknologiLineRef}></div>
               <div className="teknologi-content-bottom teknologi-content-left" ref={teknologiContentRef}>
                 <div className="teknologi-title-col">
-                  <h2>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
+                  <h2>Kota<br/>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
                 </div>
                 <div className="teknologi-desc-col">
                   <p>
-                    Sebagai kota yang dinamis, Semarang terus berinovasi dan mengintegrasikan teknologi terkini untuk menciptakan kota cerdas yang berkelanjutan. Menjadi percontohan transformasi digital, Semarang memfasilitasi berbagai ruang kolaborasi yang siap mencetak generasi inovator masa depan bagi nusantara.
+                    Semarang terus berinovasi dan mengintegrasikan teknologi terkini untuk menciptakan kota cerdas yang berkelanjutan. Menjadi percontohan transformasi digital,Kota Semarang berhasil meraih juara pertama pada ajang Gajah Mada Digital Transformation Governance Index (GM-DTGI) tahun 2024, serta penghargaan sebagai kota dengan inovasi digital terbaik dalam pelayanan publik.
                   </p>
                   <p>
-                    Melalui inisiatif Semarang Smart City, berbagai layanan publik kini dapat diakses secara terpadu. Infrastruktur cerdas dan pemanfaatan data besar memberikan kemudahan bagi masyarakat, mengukuhkan Semarang sebagai pelopor inovasi berkelas global.
+                    Kota Semarang dinilai unggul dibanding kota-kota lain di Indonesia karena keberhasilan dalam mengintegrasikan aplikasi-aplikasi digital yang mempermudah pelayanan publik, seperti Sapa Mbak Ita, Savira (Semarang Virtual Assistant), Call Center 112, serta aplikasi Pantau Sampah, Pantau Banjir dan Rob, Mengukuhkan Semarang sebagai pelopor inovasi berkelas global.
                   </p>
                 </div>
               </div>
@@ -749,39 +758,69 @@ function App() {
             <SinergiUniversitas />
           </div>
         </div>
-
-        {/* University Logos Marquee - Separate from scroll area */}
-        <div className="univ-marquee-section">
-          <div className="univ-marquee-container">
-            <div className="univ-marquee-track">
-              {/* Duplicate sets for infinite scroll effect */}
-              {[0, 1].map((setIdx) => (
-                <div key={setIdx} className="univ-marquee-set" aria-hidden={setIdx > 0 ? "true" : "false"}>
-                  {[
-                    '/assets/polines.png',
-                    '/assets/scu.png',
-                    '/assets/udinus.png',
-                    '/assets/uin.png',
-                    '/assets/unimus.png',
-                    '/assets/unisbank.png',
-                    '/assets/unisula.jpeg',
-                    '/assets/unnes.png',
-                    '/assets/unwahas.png'
-                  ].map((logo, idx) => (
-                    <div key={idx} className="univ-logo-card">
-                      <img src={logo} alt={`University Logo ${idx}`} />
+          
+        {/* Smart City Innovations */}
+        <div className="smart-city-innovations">
+          <h3 className="innovations-title">Inovasi Smart City</h3>
+            <div className="glow-cards-grid">
+              {[
+                { title: "Electric Small Soil Digger", desc: "Inovasi Mesin Panen Kentang dengan Sistem IoT, tim dari Politeknik Negeri Semarang keluar sebagai juara 1 kategori mahasiswa pada babak final Lomba Inovasi Nasional Teknologi Pertanian 2025. ", src: "https://koranbernas.id/uploads/images/202512/image_870x_69384e238b8e0.jpg", link: "https://koranbernas.id/politeknik-negeri-semarang-juara-1-lomba-inovasi-nasional-teknologi-pertanian" },
+                { title: "Aplikasi Stress Meter", desc: "Stress Meter, sebuah aplikasi berbasis website yang dirancang untuk membantu masyarakat mengidentifikasi tingkat stres secara mandiri. Melalui pengisian beberapa instrumen kuesioner yang valid, sistem akan langsung memetakan kondisi psikologis pengguna secara real-time.", src: "https://unkartur.ac.id/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-30-at-08.55.27.jpeg", link: "https://unkartur.ac.id/blog/2026/06/30/kolaborasi-dengan-brida-kota-semarang-universitas-karangturi-pamerkan-dua-inovasi-berbasis-web-di-jateng-fair-2026/" },
+                { title: "Inovasi MOLISA (Mobil Listrik Karya Mahasiswa)", desc: "merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan. di wilayah pesisir merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan.", src: "https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp", link: "https://www.antaranews.com/foto/5603932/mahasiswa-unissula-kembangkan-mobil-listrik-tenaga-surya-ramah-lingkungan" },
+                { title: "Smart Farming berbasis Artificial Internet of Things (AIoT) dan energi baru terbarukan (EBT)", desc: "Tim peneliti UNNES Electrical Engineering Students Research Group (UEESRG) Universitas Negeri Semarang mengembangkan Sistem untuk membantu petani mengelola lahan secara presisi.", src: "https://assets.kompasiana.com/items/album/2025/08/08/screen-shot-2025-08-08-at-14-48-04-6895b6a1c925c415cc5dddd4.png?t=o&v=770", link: "https://www.kompasiana.com/ueesrg/6895b6dfed64151b73294e02/ueesrg-unnes-kembangkan-sistem-smart-farming-berbasis-aiot-dan-energi-surya?page=1&page_images=5" },
+                { title: "AISSA (Artificial Intelligence Solusi Sampah) ", desc: "dikembangkan Pemerintah Kota Semarang berhasil masuk dalam daftar 30 Exemplary Initiatives pada ajang 7th Guangzhou International Award for Urban Innovation (Guangzhou Award) 2026.", src: "https://www.guangzhouaward.org/o/uploads/20260629/b909dc7f4e4d548d2ec011d539aa26ee.jpg", link: "https://www.guangzhouaward.org/a/3763.html?lang=en" },
+                { title: "PETASOL (pengolahan sampah plastik menjadi Bahan Bakar Minyak)", desc: "Petasol memanfaatkan limbah plastik yang mengotori sungai dan irigasi menjadi bahan bakar alternatif ramah lingkungan. Teknologi Pirolisis Muktikondensor ini dikembangkan untuk memberikan solusi energi murah bagi petani, meningkatkan efisiensi, sekaligus mengurangi limbah plastik.", src: "https://miniox.brin.go.id/website//uploads/images/posts//2024/10/1730116075-82504411.webp", link: "https://brin.go.id/news/121287/kelola-limbah-plastik-inovasi-brin-dan-pemkot-semarang-wujudkan-ketahanan-energi" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: -50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.6, delay: idx * 0.15, ease: "easeOut" }}
+                  className="flex flex-col"
+                >
+                  <BorderGlow
+                    edgeSensitivity={30}
+                    glowColor="40 80 80"
+                    backgroundColor="#120F17"
+                    borderRadius={28}
+                    glowRadius={40}
+                    glowIntensity={1.0}
+                    coneSpread={25}
+                    animated={false}
+                    colors={['#e74c3c', '#f1c40f', '#3498db']}
+                    className="h-full"
+                  >
+                    <div className="glow-card-content flex flex-col h-full">
+                      <div className="w-full overflow-hidden bg-neutral-100 rounded-sm shadow-inner mb-4">
+                        <img
+                          src={item.src}
+                          alt={item.title}
+                          className="block w-full aspect-video object-cover hover:scale-110 transition-transform duration-700"
+                          draggable={false} />
+                      </div>
+                      <h4 className="glow-card-title">{item.title}</h4>
+                      <p className="glow-card-desc flex-grow mb-6">{item.desc}</p>
+                      <a 
+                        href={item.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="mt-auto self-end px-2 py-1 text-[11px] font-bold tracking-widest uppercase text-neutral-400 bg-transparent border-none cursor-pointer hover:text-white transition-colors z-10 no-underline"
+                      >
+                        Sumber
+                      </a>
                     </div>
-                  ))}
-                </div>
+                  </BorderGlow>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
+
       </section>
 
       {/* Peta Section */}
       <section className="section" id="peta" style={{ background: '#f5fff0' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem' }}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem', margin: '0 auto' }}>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>PETA</h2>
           <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
             Temukan lokasi berbagai tempat menarik dan penting di Semarang melalui peta interaktif kami.
