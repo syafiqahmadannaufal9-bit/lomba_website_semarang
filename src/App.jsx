@@ -158,7 +158,7 @@ function App() {
       id: 5,
       title: 'Sesaji Rewanda',
       description: 'Masyarakat di kawasan Semarang, khususnya di sekitar Gunung Merbabu, masih melestarikan tradisi sakral Sesaji Rewanda. Tradisi ini merupakan bentuk penghormatan kepada leluhur dan penjaga alam, dengan mempersembahkan sesaji berupa hasil bumi, bunga, serta makanan tradisional.',
-      image: 'https://asset.kompas.com/crops/0n6TCCBPFJkxfoql5AQrPS05scE=/0x0:1800x1200/1200x800/data/photo/2023/03/23/641bc2a41d7bb.jpg'
+      image: 'https://awsimages.detik.net.id/community/media/visual/2026/03/28/sesaji-rewanda-gua-kreo-semarang-sabtu-2832026-1774686908938_169.jpeg?w=700&q=90'
     }
   ];
 
