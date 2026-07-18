@@ -102,7 +102,7 @@ const lokasiWisata = [
     lat: -6.9838,
     lng: 110.4106,
     desc: 'Monumen untuk mengenang Pertempuran Lima Hari, perjuangan rakyat Semarang melawan tentara Jepang.',
-    image: '/assets/Tugumuda.png'
+    image: '/assets/Tugu-muda.png'
   },
   {
     id: 'w4',
@@ -132,75 +132,62 @@ const lokasiWisata = [
     lat: -6.9853,
     lng: 110.3898,
     desc: 'Museum negeri yang menyimpan koleksi sejarah, budaya, dan seni khas Jawa Tengah.',
-    image: '/assets/dugderan_budaya.png'
-  }
+    image: '/assets/museum-ronggo.jpg'
+  },
+  {
+    id: 'w7',
+    type: 'wisata',
+    name: 'Klenteng Sam Poo Kong',
+    kategori: 'Wisata',
+    lat: -6.9961,
+    lng: 110.3986,
+    desc: 'Klenteng tertua di Semarang, petilasan pendaratan Laksamana Cheng Ho yang jadi simbol akulturasi budaya Tionghoa dan Jawa.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gedung%20Batu%20Temple%20Semarang.jpg'
+  },
+  {
+    id: 'w8',
+    type: 'wisata',
+    name: 'Masjid Agung Jawa Tengah',
+    kategori: 'Wisata',
+    lat: -6.9847,
+    lng: 110.4482,
+    desc: 'Masjid provinsi yang megah dengan perpaduan arsitektur Jawa, Timur Tengah, dan Yunani, serta menara pandang setinggi 99 meter.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Masjid%20Agung%20Jawa%20Tengah%20Indonesia.jpg'
+  },
+  {
+    id: 'w9',
+    type: 'wisata',
+    name: 'Vihara Buddhagaya Watugong',
+    kategori: 'Wisata',
+    lat: -7.0861,
+    lng: 110.4089,
+    desc: 'Kompleks Buddhis dengan Pagoda Avalokitesvara setinggi 45 meter, salah satu pagoda tertinggi di Indonesia.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pagoda%20Avalokitesvara%20-%20Buddhagaya%20Watugong.jpg'
+  },
+  {
+    id: 'w10',
+    type: 'wisata',
+    name: 'Klenteng Tay Kak Sie',
+    kategori: 'Wisata',
+    lat: -6.9742,
+    lng: 110.4279,
+    desc: 'Klenteng terbesar di kawasan Pecinan Semarang sejak 1746, tempat pemujaan Dewi Kwan Im yang kaya nilai sejarah.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tay%20Kak%20Sie%20Kelenteng%20Gang%20Lombok%20Semarang.jpg'
+  },
+  {
+    id: 'w11',
+    type: 'wisata',
+    name: 'Gereja Blenduk',
+    kategori: 'Wisata',
+    lat: -6.9681,
+    lng: 110.4275,
+    desc: 'Gereja tertua di Jawa Tengah, dibangun tahun 1753 dengan kubah tembaga ikonik, jantung kawasan Kota Lama Semarang.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gereja%20Blenduk%20Semarang.jpg'
+  },
 ];
 
-// Data lokasi Kuliner untuk Peta Interaktif Semarang
-const lokasiKuliner = [
-  {
-    id: 'k1',
-    type: 'kuliner',
-    name: 'Gang Lombok',
-    kategori: 'Kuliner',
-    lat: -6.9718,
-    lng: 110.4266,
-    desc: 'Sentra Lumpia Semarang legendaris di kawasan Pecinan, jajanan khas yang wajib dicoba.',
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lumpia%20Semarang.jpg'
-  },
-  {
-    id: 'k2',
-    type: 'kuliner',
-    name: 'Bandeng Juwana Elrina',
-    kategori: 'Kuliner',
-    lat: -6.9622,
-    lng: 110.4143,
-    desc: 'Sentra oleh-oleh Bandeng Presto paling terkenal di Semarang.',
-    image: '/assets/bandeng-juwana-semarang-google-image.jpg'
-  },
-  {
-    id: 'k3',
-    type: 'kuliner',
-    name: 'Pasar Semawis',
-    kategori: 'Kuliner',
-    lat: -6.9776,
-    lng: 110.4271,
-    desc: 'Pasar malam kuliner khas Pecinan, ramai dengan berbagai jajanan dan makanan legendaris.',
-    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Buto%20Kala%20di%20Pasar%20Malam%20Semawis%2C%20Semarang%2C%20Jawa%20Tengah.jpg'
-  },
-  {
-    id: 'k4',
-    type: 'kuliner',
-    name: 'Soto Bangkong',
-    kategori: 'Kuliner',
-    lat: -6.9927,
-    lng: 110.4247,
-    desc: 'Warung soto legendaris sejak era kolonial, salah satu ikon kuliner Soto Semarang.',
-    image: '/assets/Soto Semarang.jpg'
-  },
-  {
-    id: 'k5',
-    type: 'kuliner',
-    name: 'Toko Oen',
-    kategori: 'Kuliner',
-    lat: -6.9827,
-    lng: 110.4103,
-    desc: 'Kedai es krim dan restoran legendaris peninggalan era kolonial Belanda.',
-    image: '/assets/kue-mochi-semarang-google-image.jpg'
-  },
-  {
-    id: 'k6',
-    type: 'kuliner',
-    name: 'Jalan Pandanaran',
-    kategori: 'Kuliner',
-    lat: -6.989,
-    lng: 110.4174,
-    desc: 'Pusat oleh-oleh khas Semarang, mulai dari Wingko Babat hingga Bandeng Presto.',
-    image: '/assets/wingko_babat.jpg'
-  }
-];
 
-const lokasiPeta = [...lokasiWisata, ...lokasiKuliner];
+const lokasiPeta = [...lokasiWisata];
 
 const kulinerTop = [
   {
@@ -249,13 +236,40 @@ const kulinerBottom = [
 ];
 
 function App() {
-  // Carousel state - isi array dengan gambar Anda sendiri
-  const [images] = useState([
-    '/assets/Tugumuda.png',
-    '/assets/ChengHo_wisata.png',
-    // Tambahkan gambar lain di sini
-    // '/assets/gambar2.png',
-    // '/assets/gambar3.png',
+  // Hero Carousel state - tiap slide mewakili satu kategori dan mengarah ke section-nya
+  const [heroSlides] = useState([
+    {
+      id: 'budaya',
+      tag: 'Budaya',
+      title: 'Warisan Budaya Semarang',
+      desc: 'Keberagaman tradisi dan akulturasi budaya yang masih lestari hingga kini.',
+      image: '/assets/Gambang_budaya.png',
+      target: '#budaya',
+    },
+    {
+      id: 'wisata',
+      tag: 'Wisata',
+      title: 'Pesona Wisata Ikonik',
+      desc: 'Destinasi bersejarah dan alam yang menjadi kebanggaan Kota Semarang.',
+      image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lawang%20Sewu%20Semarang%20Indonesia%201.jpg',
+      target: '#wisata',
+    },
+    {
+      id: 'kuliner',
+      tag: 'Kuliner',
+      title: 'Cita Rasa Legendaris',
+      desc: 'Ragam kuliner khas yang menjadi identitas rasa Kota Semarang.',
+      image: '/assets/tahu-gimbal.jpg',
+      target: '#kuliner',
+    },
+    {
+      id: 'teknologi',
+      tag: 'Teknologi',
+      title: 'Inovasi Smart City',
+      desc: 'Transformasi digital dan teknologi yang mendorong pelayanan kota.',
+      image: 'https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp',
+      target: '#teknologi',
+    },
   ]);
 
   // Budaya Carousel state
@@ -300,6 +314,12 @@ function App() {
   const [isTopPaused, setIsTopPaused] = useState(false);
   const [isBottomPaused, setIsBottomPaused] = useState(false);
 
+  // Refs for GSAP Hero Section (Page 1 / Home)
+  const heroLeftRef = useRef(null);
+  const heroTitleRef = useRef(null);
+  const heroDividerRef = useRef(null);
+  const heroDescRef = useRef(null);
+
   // Refs for GSAP Welcome Section (Page 2)
   const welcomeSectionRef = useRef(null);
   const welcomeText1Ref = useRef(null);
@@ -326,6 +346,56 @@ function App() {
   const [petaMapStatus, setPetaMapStatus] = useState('idle'); // idle | loading | ready | error
   const [petaActiveId, setPetaActiveId] = useState(lokasiPeta[0]?.id ?? null);
   const petaActiveLokasi = lokasiPeta.find((l) => l.id === petaActiveId) || null;
+
+  useEffect(() => {
+  const ctx = gsap.context(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: welcomeSectionRef.current,
+        start: "top 85%",
+        end: "bottom center",
+        toggleActions: "play none none reverse",
+      },
+      delay: 0.2,
+    });
+
+    tl.from(welcomeText1Ref.current, {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    })
+    .from(welcomeText2Ref.current, {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      ease: "power3.out"
+    }, "-=0.6")
+    .from(shapesRef.current, {
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power3.out"
+    }, "-=0.6");
+
+    // Floating animation loop for shapes
+    shapesRef.current.forEach((shape) => {
+      gsap.to(shape, {
+        y: "random(-20, 20)",
+        x: "random(-20, 20)",
+        rotation: "random(-15, 15)",
+        duration: "random(2.5, 4)",
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+
+  }, welcomeSectionRef);
+
+  return () => ctx.revert();
+}, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -616,7 +686,7 @@ function App() {
 
   const handlePrevImage = () => {
     if (isAnimating) return;
-    const newIndex = currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1;
+    const newIndex = currentImageIndex === 0 ? heroSlides.length - 1 : currentImageIndex - 1;
     setNextImageIndex(newIndex);
     setIsAnimating(true);
     setTimeout(() => {
@@ -628,7 +698,7 @@ function App() {
 
   const handleNextImage = () => {
     if (isAnimating) return;
-    const newIndex = currentImageIndex === images.length - 1 ? 0 : currentImageIndex + 1;
+    const newIndex = currentImageIndex === heroSlides.length - 1 ? 0 : currentImageIndex + 1;
     setNextImageIndex(newIndex);
     setIsAnimating(true);
     setTimeout(() => {
@@ -637,6 +707,75 @@ function App() {
       setIsAnimating(false);
     }, 800);
   };
+
+  const goToHeroSlide = (index) => {
+    if (isAnimating || index === currentImageIndex) return;
+    setNextImageIndex(index);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentImageIndex(index);
+      setNextImageIndex(null);
+      setIsAnimating(false);
+    }, 800);
+  };
+
+  // Navigasi tombol "Selengkapnya": scroll halus ke section yang sesuai
+  // dengan slide yang sedang tampil (mis. slide Budaya -> #budaya).
+  const handleHeroCtaClick = (e, target) => {
+    e.preventDefault();
+    const el = document.querySelector(target);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Auto-advance carousel setiap beberapa detik. Pakai ref supaya interval
+  // selalu memanggil versi terbaru handleNextImage (menghindari stale closure
+  // atas currentImageIndex / isAnimating tanpa perlu me-reset interval tiap render).
+  const handleNextImageRef = useRef(handleNextImage);
+  useEffect(() => {
+    handleNextImageRef.current = handleNextImage;
+  });
+
+  useEffect(() => {
+    const autoplay = setInterval(() => {
+      handleNextImageRef.current();
+    }, 6000);
+    return () => clearInterval(autoplay);
+  }, []);
+
+  // Render satu slide hero (gambar tidak ter-crop + info kategori + tombol Selengkapnya)
+  const renderHeroSlide = (slide, extraClass = '') => (
+    <div className={`hero-slide ${extraClass}`}>
+      <div
+        className="hero-slide-backdrop"
+        style={{ backgroundImage: `url(${slide.image})` }}
+        aria-hidden="true"
+      />
+      <img
+        src={slide.image}
+        alt={slide.title}
+        className="hero-slide-img"
+        fetchpriority={extraClass ? undefined : 'high'}
+      />
+      <div className="hero-slide-overlay">
+        <div className="hero-slide-info">
+          <h3 className="hero-slide-heading">{slide.title}</h3>
+          <p className="hero-slide-desc">{slide.desc}</p>
+        </div>
+        <a
+          href={slide.target}
+          className="hero-slide-cta"
+          onClick={(e) => handleHeroCtaClick(e, slide.target)}
+        >
+          Selengkapnya
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  );
 
   const handlePrevBudaya = () => {
     setCurrentBudayaIndex(currentBudayaIndex === 0 ? budayaItems.length - 1 : currentBudayaIndex - 1);
@@ -663,74 +802,54 @@ function App() {
 
       {/* Hero Section */}
       <main className="hero" id="home">
+        {/* Fullscreen Carousel Background */}
+        <div className="hero-carousel-bg">
+          {nextImageIndex === null
+            ? renderHeroSlide(heroSlides[currentImageIndex])
+            : (
+              <>
+                {renderHeroSlide(heroSlides[currentImageIndex], 'fade-out')}
+                {renderHeroSlide(heroSlides[nextImageIndex], 'fade-in')}
+              </>
+            )}
+        </div>
+
         <div className={`hero-content ${isAnimating ? 'animating' : ''}`}>
           {/* Left Side Content */}
-          <div className="hero-left">
-            <h1 className="hero-title">
+          <div className="hero-left" ref={heroLeftRef}>
+            <h1 className="hero-title" ref={heroTitleRef}>
               WELCOME TO<br />
               <span className="text-red">SEMARANG<br />SMART</span> CITY
             </h1>
-            <div className="hero-divider"></div>
-            <p className="hero-description">
+            <div className="hero-divider" ref={heroDividerRef}></div>
+            <p className="hero-description" ref={heroDescRef}>
               kota bersejarah dengan <strong>keaneka</strong> - ragaman<br />
               <strong>budaya</strong> dan <strong>tradisi</strong> yang masih lestari
             </p>
           </div>
+        </div>
 
-          {/* Center Image */}
-          <div className="hero-center">
-            <div className="carousel-wrapper">
-              {nextImageIndex === null ? (
-                <img 
-                  src={images[currentImageIndex]} 
-                  alt="Carousel Image" 
-                  className="hero-image"
-                  fetchpriority="high"
-                />
-              ) : (
-                <>
-                  <img 
-                    src={images[currentImageIndex]} 
-                    alt="Current Image" 
-                    className="hero-image fade-out"
-                  />
-                  <img 
-                    src={images[nextImageIndex]} 
-                    alt="Next Image" 
-                    className="hero-image fade-in"
-                  />
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Right Side Content */}
-          <div className={`hero-right ${isAnimating ? 'animating' : ''}`}>
-            <div className="feature-item">
-              <h2 className="feature-title">HISTORICAL</h2>
-              <p className="feature-subtitle">Building & <strong>Culture</strong></p>
-            </div>
-
-            <div className="feature-item">
-              <h2 className="feature-title text-red">MEMORABLE</h2>
-              <p className="feature-subtitle text-red">National <strong className="text-red">hero</strong> figures</p>
-            </div>
-
-            <div className="feature-item">
-              <h2 className="feature-title">INOVATING</h2>
-              <p className="feature-subtitle">Technologies & <strong>Infrastructure</strong></p>
-            </div>
-          </div>
+        {/* Dot Indicators */}
+        <div className="hero-slide-dots">
+          {heroSlides.map((slide, idx) => (
+            <button
+              key={slide.id}
+              type="button"
+              className={`hero-slide-dot${(nextImageIndex ?? currentImageIndex) === idx ? ' active' : ''}`}
+              aria-label={`Lihat slide ${slide.tag}`}
+              onClick={() => goToHeroSlide(idx)}
+            />
+          ))}
         </div>
 
         {/* Navigation Arrows */}
         <button className="arrow-btn arrow-left" aria-label="Previous" onClick={handlePrevImage}>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <button className="arrow-btn arrow-right" aria-label="Next" onClick={handleNextImage}>
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
@@ -1139,24 +1258,6 @@ function App() {
             <div className="peta-map-legend">
               <span className="peta-legend-item">
                 <span className="peta-legend-swatch peta-legend-wisata" /> Wisata
-              </span>
-              <span className="peta-legend-item">
-                <svg className="peta-legend-icon-kuliner" viewBox="0 0 24 24" width="12" height="12" fill="none">
-                  <g stroke="#e74c3c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                    <g transform="rotate(-45 12 12)">
-                      <line x1="8" y1="2" x2="8" y2="9" />
-                      <line x1="10.5" y1="2" x2="10.5" y2="9" />
-                      <line x1="13" y1="2" x2="13" y2="9" />
-                      <path d="M8 9c0 1.5 1.1 2.5 2.5 2.5S13 10.5 13 9" />
-                      <line x1="10.5" y1="11.5" x2="10.5" y2="22" />
-                    </g>
-                    <g transform="rotate(45 12 12)">
-                      <ellipse cx="15.5" cy="5.2" rx="2.8" ry="3.8" fill="#e74c3c" stroke="none" />
-                      <line x1="15.5" y1="9" x2="15.5" y2="22" />
-                    </g>
-                  </g>
-                </svg>
-                Kuliner
               </span>
             </div>
 
