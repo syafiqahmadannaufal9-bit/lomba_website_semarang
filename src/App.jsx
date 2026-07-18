@@ -72,6 +72,136 @@ const sejarahData = [
   }
 ];
 
+// Data lokasi Wisata untuk Peta Interaktif Semarang
+const lokasiWisata = [
+  {
+    id: 'w1',
+    type: 'wisata',
+    name: 'Lawang Sewu',
+    kategori: 'Wisata',
+    lat: -6.9834,
+    lng: 110.4102,
+    desc: 'Gedung bersejarah peninggalan Belanda dengan seribu pintu dan jendela, dulunya kantor perusahaan kereta api NIS.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lawang%20Sewu%20Semarang%20Indonesia%201.jpg'
+  },
+  {
+    id: 'w2',
+    type: 'wisata',
+    name: 'Kota Lama Semarang',
+    kategori: 'Wisata',
+    lat: -6.9691,
+    lng: 110.4283,
+    desc: 'Kawasan "Little Netherland" berisi bangunan-bangunan bergaya Eropa klasik, ikonnya Gereja Blenduk.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gereja%20Blenduk%20Kota%20Lama%20Semarang.jpg'
+  },
+  {
+    id: 'w3',
+    type: 'wisata',
+    name: 'Tugu Muda',
+    kategori: 'Wisata',
+    lat: -6.9838,
+    lng: 110.4106,
+    desc: 'Monumen untuk mengenang Pertempuran Lima Hari, perjuangan rakyat Semarang melawan tentara Jepang.',
+    image: '/assets/Tugumuda.png'
+  },
+  {
+    id: 'w4',
+    type: 'wisata',
+    name: 'Simpang Lima',
+    kategori: 'Wisata',
+    lat: -6.9899,
+    lng: 110.4229,
+    desc: 'Alun-alun pusat kota dengan lima ruas jalan bertemu, pusat kuliner dan kegiatan warga Semarang.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Simpang%20Lima%2CSemarang.jpg'
+  },
+  {
+    id: 'w5',
+    type: 'wisata',
+    name: 'Pantai Marina',
+    kategori: 'Wisata',
+    lat: -6.9459,
+    lng: 110.3958,
+    desc: 'Kawasan pantai di utara kota, tempat favorit warga menikmati sunset dan kuliner laut.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sunset%20di%20Pantai%20Tirang%20Semarang.jpg'
+  },
+  {
+    id: 'w6',
+    type: 'wisata',
+    name: 'Museum Ronggowarsito',
+    kategori: 'Wisata',
+    lat: -6.9853,
+    lng: 110.3898,
+    desc: 'Museum negeri yang menyimpan koleksi sejarah, budaya, dan seni khas Jawa Tengah.',
+    image: '/assets/dugderan_budaya.png'
+  }
+];
+
+// Data lokasi Kuliner untuk Peta Interaktif Semarang
+const lokasiKuliner = [
+  {
+    id: 'k1',
+    type: 'kuliner',
+    name: 'Gang Lombok',
+    kategori: 'Kuliner',
+    lat: -6.9718,
+    lng: 110.4266,
+    desc: 'Sentra Lumpia Semarang legendaris di kawasan Pecinan, jajanan khas yang wajib dicoba.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lumpia%20Semarang.jpg'
+  },
+  {
+    id: 'k2',
+    type: 'kuliner',
+    name: 'Bandeng Juwana Elrina',
+    kategori: 'Kuliner',
+    lat: -6.9622,
+    lng: 110.4143,
+    desc: 'Sentra oleh-oleh Bandeng Presto paling terkenal di Semarang.',
+    image: '/assets/bandeng-juwana-semarang-google-image.jpg'
+  },
+  {
+    id: 'k3',
+    type: 'kuliner',
+    name: 'Pasar Semawis',
+    kategori: 'Kuliner',
+    lat: -6.9776,
+    lng: 110.4271,
+    desc: 'Pasar malam kuliner khas Pecinan, ramai dengan berbagai jajanan dan makanan legendaris.',
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Buto%20Kala%20di%20Pasar%20Malam%20Semawis%2C%20Semarang%2C%20Jawa%20Tengah.jpg'
+  },
+  {
+    id: 'k4',
+    type: 'kuliner',
+    name: 'Soto Bangkong',
+    kategori: 'Kuliner',
+    lat: -6.9927,
+    lng: 110.4247,
+    desc: 'Warung soto legendaris sejak era kolonial, salah satu ikon kuliner Soto Semarang.',
+    image: '/assets/Soto Semarang.jpg'
+  },
+  {
+    id: 'k5',
+    type: 'kuliner',
+    name: 'Toko Oen',
+    kategori: 'Kuliner',
+    lat: -6.9827,
+    lng: 110.4103,
+    desc: 'Kedai es krim dan restoran legendaris peninggalan era kolonial Belanda.',
+    image: '/assets/kue-mochi-semarang-google-image.jpg'
+  },
+  {
+    id: 'k6',
+    type: 'kuliner',
+    name: 'Jalan Pandanaran',
+    kategori: 'Kuliner',
+    lat: -6.989,
+    lng: 110.4174,
+    desc: 'Pusat oleh-oleh khas Semarang, mulai dari Wingko Babat hingga Bandeng Presto.',
+    image: '/assets/wingko_babat.jpg'
+  }
+];
+
+const lokasiPeta = [...lokasiWisata, ...lokasiKuliner];
+
 const kulinerTop = [
   {
     name: "Lumpia Semarang",
@@ -187,6 +317,15 @@ function App() {
   const teknologiSectionRef = useRef(null);
   const teknologiContentRef = useRef(null);
   const teknologiLineRef = useRef(null);
+
+  // Refs & state untuk Peta Interaktif (Leaflet dimuat lazy via CDN)
+  const petaSectionRef = useRef(null);
+  const petaMapContainerRef = useRef(null);
+  const petaMapInstanceRef = useRef(null);
+  const petaMarkersRef = useRef([]);
+  const [petaMapStatus, setPetaMapStatus] = useState('idle'); // idle | loading | ready | error
+  const [petaActiveId, setPetaActiveId] = useState(lokasiPeta[0]?.id ?? null);
+  const petaActiveLokasi = lokasiPeta.find((l) => l.id === petaActiveId) || null;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -325,6 +464,154 @@ function App() {
 
     return () => ctx.revert();
   }, []);
+
+  // Lazy-load Leaflet (CSS+JS via CDN) hanya saat section Peta mendekati viewport,
+  // supaya section lain tetap ringan dan tidak menambah bundle size project.
+  useEffect(() => {
+    const sectionEl = petaSectionRef.current;
+    if (!sectionEl) return;
+
+    let cancelled = false;
+
+    const initMap = () => {
+      if (cancelled || petaMapInstanceRef.current || !petaMapContainerRef.current) return;
+      const L = window.L;
+      if (!L) return;
+
+      const map = L.map(petaMapContainerRef.current, {
+        center: [-6.9865, 110.418],
+        zoom: 13,
+        scrollWheelZoom: false,
+        preferCanvas: true,
+        zoomControl: false,
+      });
+
+      L.control.zoom({ position: 'topright' }).addTo(map);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 18,
+      }).addTo(map);
+
+      const iconWisata = L.divIcon({
+        className: 'peta-marker-icon peta-marker-wisata',
+        html: '<span></span>',
+        iconSize: [16, 16],
+        iconAnchor: [8, 8],
+        popupAnchor: [0, -10],
+      });
+
+      const kulinerSvg = `
+        <svg viewBox="0 0 24 24" width="12" height="12" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <g stroke="#e74c3c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <g transform="rotate(-45 12 12)">
+              <line x1="8" y1="2" x2="8" y2="9"/>
+              <line x1="10.5" y1="2" x2="10.5" y2="9"/>
+              <line x1="13" y1="2" x2="13" y2="9"/>
+              <path d="M8 9c0 1.5 1.1 2.5 2.5 2.5S13 10.5 13 9"/>
+              <line x1="10.5" y1="11.5" x2="10.5" y2="22"/>
+            </g>
+            <g transform="rotate(45 12 12)">
+              <ellipse cx="15.5" cy="5.2" rx="2.8" ry="3.8" fill="#e74c3c" stroke="none"/>
+              <line x1="15.5" y1="9" x2="15.5" y2="22"/>
+            </g>
+          </g>
+        </svg>
+      `;
+
+      const iconKuliner = L.divIcon({
+        className: 'peta-marker-icon peta-marker-kuliner',
+        html: `<span>${kulinerSvg}</span>`,
+        iconSize: [20, 20],
+        iconAnchor: [10, 10],
+        popupAnchor: [0, -14],
+      });
+
+      petaMarkersRef.current = lokasiPeta.map((lokasi) => {
+        const marker = L.marker([lokasi.lat, lokasi.lng], {
+          icon: lokasi.type === 'kuliner' ? iconKuliner : iconWisata,
+        }).addTo(map);
+        marker.on('click', () => {
+          setPetaActiveId(lokasi.id);
+          map.flyTo([lokasi.lat, lokasi.lng], 16, { duration: 0.8 });
+        });
+        return { id: lokasi.id, marker };
+      });
+
+      // Enable scroll zoom hanya ketika peta difokus (klik), supaya scroll halaman tidak terganggu
+      map.on('focus', () => map.scrollWheelZoom.enable());
+      map.on('blur', () => map.scrollWheelZoom.disable());
+
+      petaMapInstanceRef.current = map;
+      setPetaMapStatus('ready');
+    };
+
+    const loadLeaflet = () => {
+      if (cancelled) return;
+      if (window.L) {
+        initMap();
+        return;
+      }
+      setPetaMapStatus('loading');
+
+      if (!document.getElementById('leaflet-css')) {
+        const link = document.createElement('link');
+        link.id = 'leaflet-css';
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+        document.head.appendChild(link);
+      }
+
+      let script = document.getElementById('leaflet-js');
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'leaflet-js';
+        script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+        script.async = true;
+        script.onload = initMap;
+        script.onerror = () => !cancelled && setPetaMapStatus('error');
+        document.body.appendChild(script);
+      } else {
+        script.addEventListener('load', initMap, { once: true });
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadLeaflet();
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(sectionEl);
+
+    return () => {
+      cancelled = true;
+      observer.disconnect();
+      if (petaMapInstanceRef.current) {
+        petaMapInstanceRef.current.remove();
+        petaMapInstanceRef.current = null;
+      }
+    };
+  }, []);
+
+  const handlePetaCardClick = (lokasi) => {
+    setPetaActiveId(lokasi.id);
+    const map = petaMapInstanceRef.current;
+    if (!map) return;
+    map.flyTo([lokasi.lat, lokasi.lng], 16, { duration: 0.8 });
+  };
+
+  // Memastikan list bisa langsung di-scroll dengan mouse wheel begitu kursor
+  // berada di atasnya, tanpa perlu klik scrollbar terlebih dahulu.
+  const handlePetaListWheel = (e) => {
+    e.currentTarget.scrollTop += e.deltaY;
+  };
+
 
 
   const handlePrevImage = () => {
@@ -819,12 +1106,96 @@ function App() {
       </section>
 
       {/* Peta Section */}
-      <section className="section" id="peta" style={{ background: '#f5fff0' }}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', padding: '2rem', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#e74c3c' }}>PETA</h2>
-          <p style={{ fontSize: '1.1rem', lineHeight: '1.6', color: '#333' }}>
+      <section className="section peta-section" id="peta" ref={petaSectionRef}>
+        <div className="peta-header">
+          <h2 className="peta-title">PETA</h2>
+          <p className="peta-subtitle">
             Temukan lokasi berbagai tempat menarik dan penting di Semarang melalui peta interaktif kami.
           </p>
+        </div>
+
+        <div className="peta-content">
+          <div className="peta-list-panel">
+            <div className="peta-list" role="list" onWheel={handlePetaListWheel}>
+              {lokasiPeta.map((lokasi) => (
+                <button
+                  key={lokasi.id}
+                  type="button"
+                  role="listitem"
+                  className={`peta-list-item peta-list-item-${lokasi.type}${petaActiveId === lokasi.id ? ' active' : ''}`}
+                  onClick={() => handlePetaCardClick(lokasi)}
+                >
+                  <span className={`peta-list-badge peta-list-badge-${lokasi.type}`}>{lokasi.kategori}</span>
+                  <span className="peta-list-name">{lokasi.name}</span>
+                  <span className="peta-list-desc">{lokasi.desc}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="peta-map-wrapper">
+            <div className="peta-map" ref={petaMapContainerRef} />
+
+            <div className="peta-map-legend">
+              <span className="peta-legend-item">
+                <span className="peta-legend-swatch peta-legend-wisata" /> Wisata
+              </span>
+              <span className="peta-legend-item">
+                <svg className="peta-legend-icon-kuliner" viewBox="0 0 24 24" width="12" height="12" fill="none">
+                  <g stroke="#e74c3c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <g transform="rotate(-45 12 12)">
+                      <line x1="8" y1="2" x2="8" y2="9" />
+                      <line x1="10.5" y1="2" x2="10.5" y2="9" />
+                      <line x1="13" y1="2" x2="13" y2="9" />
+                      <path d="M8 9c0 1.5 1.1 2.5 2.5 2.5S13 10.5 13 9" />
+                      <line x1="10.5" y1="11.5" x2="10.5" y2="22" />
+                    </g>
+                    <g transform="rotate(45 12 12)">
+                      <ellipse cx="15.5" cy="5.2" rx="2.8" ry="3.8" fill="#e74c3c" stroke="none" />
+                      <line x1="15.5" y1="9" x2="15.5" y2="22" />
+                    </g>
+                  </g>
+                </svg>
+                Kuliner
+              </span>
+            </div>
+
+            {petaActiveLokasi && (
+              <div className={`peta-info-card peta-info-card-${petaActiveLokasi.type}`}>
+                <button
+                  type="button"
+                  className="peta-info-card-close"
+                  aria-label="Tutup"
+                  onClick={() => setPetaActiveId(null)}
+                >
+                  ×
+                </button>
+                <div className="peta-info-card-img-wrapper">
+                  <img src={petaActiveLokasi.image} alt={petaActiveLokasi.name} className="peta-info-card-img" />
+                </div>
+                <div className="peta-info-card-body">
+                  <span className={`peta-list-badge peta-list-badge-${petaActiveLokasi.type}`}>
+                    {petaActiveLokasi.kategori}
+                  </span>
+                  <h4 className="peta-info-card-name">{petaActiveLokasi.name}</h4>
+                  <p className="peta-info-card-desc">{petaActiveLokasi.desc}</p>
+                </div>
+              </div>
+            )}
+
+            {petaMapStatus !== 'ready' && (
+              <div className="peta-map-overlay">
+                {petaMapStatus === 'error' ? (
+                  <p>Gagal memuat peta. Periksa koneksi internet Anda.</p>
+                ) : (
+                  <>
+                    <span className="peta-map-spinner" />
+                    <p>Memuat peta interaktif…</p>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
         </div>
       </section>
     </div>
