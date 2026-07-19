@@ -73,10 +73,10 @@ const Folder = ({ color = '#5227FF', size = 1, items = [], className = '' }) => 
   };
 
   const folderClassName = `folder ${open ? 'open' : ''}`.trim();
-  const scaleStyle = { transform: `scale(${size})` };
+  const scaleStyle = { '--folder-user-scale': size };
 
   return (
-    <div style={scaleStyle} className={className}>
+    <div style={scaleStyle} className={`folder-outer ${className}`.trim()}>
       <div
         className={folderClassName}
         style={folderStyle}

@@ -6,6 +6,19 @@
   --paper-3: #ffffff;
 }
 
+.folder-outer {
+  transform: scale(var(--folder-user-scale, 1));
+  transform-origin: center top;
+}
+
+/* Safety net tambahan — size prop sekarang sudah responsif dari SinergiUniversitas.jsx,
+   ini cuma jaga-jaga kalau ada Folder lain yang masih pakai size statis */
+@media (max-width: 480px) {
+  div.folder-outer {
+    transform: scale(calc(var(--folder-user-scale, 1) * 0.9));
+  }
+}
+
 .folder {
   transition: all 0.2s ease-in;
   cursor: pointer;
