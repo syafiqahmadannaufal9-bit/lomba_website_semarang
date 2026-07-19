@@ -1,7 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { ReactLenis } from 'lenis/react';
 import { useEffect, useRef, useState } from "react";
 
 
@@ -75,21 +74,21 @@ function StickyScrollCard({
   const rotation = CARD_ROTATIONS[i % CARD_ROTATIONS.length];
 
   return (
-    <div className="sticky top-0 flex h-screen items-center justify-center">
+    <div className="sticky top-0 flex h-screen items-start justify-center pt-16 md:items-center md:pt-0">
       <motion.div
         style={{
           scale,
           rotate: rotation,
           top: `calc(-5vh + ${i * 6 + 120}px)`,
           borderRadius: 8,
-          border: "10px solid #ffffff",
+          border: "clamp(3px, 1.6vw, 10px) solid #ffffff",
           boxShadow:
             "0 4px 20px rgba(0,0,0,0.1), 0 10px 40px rgba(0,0,0,0.1)",
         }}
-        className="relative -top-1/4 origin-top bg-white w-[380px] lg:w-[440px] p-6 lg:p-7">
+        className="relative -top-1/4 origin-top bg-white w-[165px] sm:w-[220px] md:w-[380px] lg:w-[440px] p-2 sm:p-4 md:p-6 lg:p-7">
         
         {/* ── Instagram Header ── */}
-        <div className="flex items-center pb-4">
+        <div className="flex items-center pb-1 sm:pb-3 md:pb-4">
         </div>
 
         {/* ── Image ── */}
@@ -100,9 +99,9 @@ function StickyScrollCard({
             className="block w-full aspect-square object-cover"
             draggable={false} />
         </div>
-                <br></br>
+                <br className="hidden sm:block"></br>
         {/* ── Action Row ── */}
-        <div className="flex items-center justify-between pt-4 pb-2">
+        <div className="hidden sm:flex items-center justify-between pt-4 pb-2">
           <div className="flex items-center gap-4">
             {/* Outline Heart */}
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-neutral-900 cursor-pointer hover:text-neutral-600 transition-colors">
@@ -134,12 +133,12 @@ function StickyScrollCard({
         </div>
 
         {/* ── Likes ── */}
-        <div className="pb-1.5">
+        <div className="hidden sm:block pb-1.5">
           <p className="text-[14px] font-semibold text-neutral-900">{likes || "0"} likes</p>
         </div>
 
         {/* ── Caption with hashtags ── */}
-        <div>
+        <div className="hidden sm:block">
           <p className="text-[14px] text-neutral-900 leading-[1.4]">
             <span className="font-semibold mr-2">{username || "your.name"}</span>
             {caption || title}
@@ -192,26 +191,25 @@ export function StickyScrollCards({
   }, []);
 
   return (
-    <ReactLenis root>
-      <main
-        ref={container}
-        className={cn(
-          "relative w-full pb-0 pt-0",
-          className
-        )}>
+    <main
+      ref={container}
+      className={cn(
+        "relative w-full pb-0 pt-0",
+        className
+      )}>
         
         {/* Split Layout Container */}
-        <div className="flex flex-col md:flex-row w-full h-full max-w-7xl mx-auto">
+        <div className="flex flex-row w-full h-full max-w-7xl mx-auto">
           
           {/* Left Side: Cards */}
-          <div className="w-full md:w-[45%] relative">
+          <div className="w-[65%] md:w-[45%] relative">
             {/* Hint label */}
             <div
               className="absolute left-1/2 top-[2%] flex -translate-x-1/2 flex-col items-center gap-3 z-20">
-              <p className="text-[10px] font-medium uppercase tracking-[0.2em] opacity-30 text-neutral-800">
+              <p className="text-[7px] sm:text-[9px] md:text-[10px] font-medium uppercase tracking-[0.15em] md:tracking-[0.2em] opacity-30 text-neutral-800 text-center whitespace-nowrap">
                 {hint}
               </p>
-              <span className="h-12 w-px bg-gradient-to-b from-neutral-400/30 to-transparent" />
+              <span className="h-8 md:h-12 w-px bg-gradient-to-b from-neutral-400/30 to-transparent" />
             </div>
 
             {cards.map((card, i) => {
@@ -229,7 +227,7 @@ export function StickyScrollCards({
           </div>
 
           {/* Right Side: Text */}
-          <div className="w-full md:w-[55%] sticky top-0 h-screen flex flex-col justify-center pl-8 md:pl-16 pr-4 md:pr-4">
+          <div className="w-[35%] md:w-[55%] sticky top-0 h-screen flex flex-col justify-start pt-16 md:justify-center md:pt-0 pl-3 sm:pl-6 md:pl-16 pr-3 sm:pr-4 md:pr-4">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -238,10 +236,10 @@ export function StickyScrollCards({
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
-                <h3 className="text-3xl md:text-4xl font-extrabold text-[#e74c3c] mb-8 tracking-tight">
+                <h3 className="text-sm sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#e74c3c] mb-1.5 sm:mb-5 md:mb-8 tracking-tight">
                   {cards[activeIndex]?.title}
                 </h3>
-                <p className="text-base md:text-lg text-neutral-600 leading-relaxed whitespace-pre-line">
+                <p className="text-[9px] sm:text-sm md:text-base lg:text-lg text-neutral-600 leading-snug sm:leading-relaxed whitespace-pre-line max-h-[70vh] sm:max-h-none overflow-y-auto sm:overflow-visible pr-1">
                   {cards[activeIndex]?.description}
                 </p>
               </motion.div>
@@ -250,7 +248,6 @@ export function StickyScrollCards({
 
         </div>
 
-      </main>
-    </ReactLenis>
+    </main>
   );
 }

@@ -786,7 +786,7 @@ function App() {
               >
                 <h1 className="hero-title" ref={heroTitleRef}>
                   {slide.headingLine1}<br />
-                  <span className="text-red">{slide.headingLine2}<br />{slide.headingLine3.split(' ')[0]}</span>{slide.headingLine3.includes(' ') ? ' ' + slide.headingLine3.split(' ').slice(1).join(' ') : ''}
+                  <span className="text-red">{slide.headingLine2}<br className="hero-title-linebreak" />{' '}{slide.headingLine3.split(' ')[0]}</span>{slide.headingLine3.includes(' ') ? ' ' + slide.headingLine3.split(' ').slice(1).join(' ') : ''}
                 </h1>
                 <div className="hero-divider" ref={heroDividerRef}></div>
                 <p className="hero-description" ref={heroDescRef}>
@@ -866,6 +866,26 @@ function App() {
             <span>#SemarangBergerak</span>
           </div>
         </div>
+
+        {/* Tombol Selengkapnya khusus layar handphone — dirender sebagai sibling langsung
+            dari hero-content (bukan di dalam hero-carousel-bg) supaya tetap berada di atas
+            saat card welcome turun menutupi bagian bawah layar. */}
+        {(nextImageIndex ?? currentImageIndex) !== 0 && (() => {
+          const activeIdx = nextImageIndex ?? currentImageIndex;
+          const slide = heroSlides[activeIdx];
+          return (
+            <a
+              href={slide.target}
+              className="hero-mobile-cta"
+              onClick={(e) => handleHeroCtaClick(e, slide.target)}
+            >
+              Selengkapnya
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          );
+        })()}
       </main>
 
       {/* Welcome / Page 2 Section */}
@@ -1040,48 +1060,50 @@ function App() {
 
       {/* Wisata Section */}
       <section className="section wisata-inovasi-section" id="wisata">
-        <div className="wisata-inovasi-header">
-          <h2 className="wisata-inovasi-title">WISATA <span style={{ fontFamily: "'Caveat', cursive",color: "#e74c3c", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
-        </div>
-        <div className="sticky-cards-wrapper z-10 relative">
-          <StickyScrollCards />
-        </div>
-        <div className="wisata-inovasi-footer">
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.015,
-                },
-              },
-            }}
-            className="wisata-inovasi-subtitle"
-          >
-            {"Perpaduan nilai warisan sejarah yang agung dan pesona kebudayaan lokal yang berakulturasi dengan harmonis menjadikan sektor pariwisata Kota Semarang terus berkembang pesat sebagai salah satu destinasi unggulan Nusantara.".split(" ").map((word, i) => (
-              <motion.span
-                key={i}
-                variants={{
-                  hidden: { opacity: 0, y: 25 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      type: "spring",
-                      damping: 15,
-                      stiffness: 120,
-                    },
+        <div className="wisata-inovasi-body">
+          <div className="wisata-inovasi-header">
+            <h2 className="wisata-inovasi-title">WISATA <span style={{ fontFamily: "'Caveat', cursive",color: "#e74c3c", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
+          </div>
+          <div className="sticky-cards-wrapper z-10 relative">
+            <StickyScrollCards />
+          </div>
+          <div className="wisata-inovasi-footer">
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.015,
                   },
-                }}
-                style={{ display: "inline-block", marginRight: "0.35em" }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </motion.p>
+                },
+              }}
+              className="wisata-inovasi-subtitle"
+            >
+              {"Perpaduan nilai warisan sejarah yang agung dan pesona kebudayaan lokal yang berakulturasi dengan harmonis menjadikan sektor pariwisata Kota Semarang terus berkembang pesat sebagai salah satu destinasi unggulan Nusantara.".split(" ").map((word, i) => (
+                <motion.span
+                  key={i}
+                  variants={{
+                    hidden: { opacity: 0, y: 25 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        type: "spring",
+                        damping: 15,
+                        stiffness: 120,
+                      },
+                    },
+                  }}
+                  style={{ display: "inline-block", marginRight: "0.35em" }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.p>
+          </div>
         </div>
       </section>
 
@@ -1221,20 +1243,20 @@ function App() {
                     className="h-full"
                   >
                     <div className="glow-card-content flex flex-col h-full">
-                      <div className="w-full overflow-hidden bg-neutral-100 rounded-sm shadow-inner mb-4">
+                      <div className="w-full overflow-hidden bg-neutral-100 rounded-sm shadow-inner mb-1.5 sm:mb-4">
                         <img
                           src={item.src}
                           alt={item.title}
-                          className="block w-full aspect-video object-cover hover:scale-110 transition-transform duration-700"
+                          className="block w-full aspect-[4/3] sm:aspect-video object-cover hover:scale-110 transition-transform duration-700"
                           draggable={false} />
                       </div>
                       <h4 className="glow-card-title">{item.title}</h4>
-                      <p className="glow-card-desc flex-grow mb-6">{item.desc}</p>
+                      <p className="glow-card-desc flex-grow mb-2 sm:mb-6">{item.desc}</p>
                       <a 
                         href={item.link} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="mt-auto self-end px-2 py-1 text-[11px] font-bold tracking-widest uppercase text-neutral-400 bg-transparent border-none cursor-pointer hover:text-white transition-colors z-10 no-underline"
+                        className="mt-auto self-end px-1 py-0.5 sm:px-2 sm:py-1 text-[8px] sm:text-[11px] font-bold tracking-widest uppercase text-neutral-400 bg-transparent border-none cursor-pointer hover:text-white transition-colors z-10 no-underline"
                       >
                         Sumber
                       </a>

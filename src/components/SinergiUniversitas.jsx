@@ -23,11 +23,34 @@ function useReveal(threshold = 0.2) {
   return [ref, visible];
 }
 
+// Menghitung size Folder berdasarkan lebar layar aktual, bukan angka statis
+function useResponsiveFolderSize() {
+  const getSize = () => {
+    if (typeof window === "undefined") return 3;
+    const w = window.innerWidth;
+    if (w <= 480) return 1.3;
+    if (w <= 768) return 1.9;
+    if (w <= 1024) return 2.5;
+    return 3;
+  };
+
+  const [size, setSize] = useState(getSize);
+
+  useEffect(() => {
+    const handleResize = () => setSize(getSize());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return size;
+}
+
 export function SinergiUniversitas() {
   const p1 = "Pemerintah Kota Semarang secara aktif menempatkan perguruan tinggi lokal bukan sekadar sebagai lembaga pencetak lulusan, melainkan sebagai mitra strategis utama dalam merumuskan kebijakan berbasis data dan menciptakan solusi yang tepat sasaran.";
   const p2 = "Kolaborasi ini melahirkan ekosistem yang saling menguntungkan (mutualistik). Dari ruang riset dan laboratorium kampus, lahir berbagai kajian ilmiah, teknologi tata kota, hingga inovasi kecerdasan buatan (artificial intelligence). Pemerintah kota kemudian hadir untuk menjembatani hasil riset tersebut agar dapat diuji coba dan diterapkan secara nyata pada sistem pelayanan masyarakat. Sinergi dinamis inilah yang mempercepat transformasi Semarang menjadi Smart City terdepan, sekaligus menjadi bukti nyata bagaimana dunia akademik dan birokrasi dapat berjalan beriringan demi meningkatkan kualitas hidup warganya.";
 
   const [containerRef, isVisible] = useReveal(0.15);
+  const folderSize = useResponsiveFolderSize();
 
   const folderItems = [
     <img key="1" src="/assets/gambar-tekonologi.jpeg" alt="Undip" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }} />,
@@ -45,7 +68,7 @@ export function SinergiUniversitas() {
       >
         {/* Heading — word-split kept (short text, acceptable) */}
         <h2
-          className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-left mb-4 sinergi-reveal"
+          className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight text-left mb-4 sinergi-reveal"
           style={{
             '--delay': '0ms',
             animation: isVisible ? 'sinergiReveal 0.7s cubic-bezier(0.22,1,0.36,1) both' : 'none',
@@ -56,7 +79,7 @@ export function SinergiUniversitas() {
 
         {/* Paragraph 1 — single block reveal, no per-word motion */}
         <p
-          className="text-lg md:text-xl text-neutral-300 leading-relaxed text-left"
+          className="text-sm sm:text-base md:text-xl text-neutral-300 leading-relaxed text-left"
           style={{
             animation: isVisible ? 'sinergiReveal 0.75s 0.12s cubic-bezier(0.22,1,0.36,1) both' : 'none',
           }}
@@ -66,7 +89,7 @@ export function SinergiUniversitas() {
 
         {/* Paragraph 2 */}
         <p
-          className="text-lg md:text-xl text-neutral-300 leading-relaxed text-left pt-2"
+          className="text-sm sm:text-base md:text-xl text-neutral-300 leading-relaxed text-left pt-2"
           style={{
             animation: isVisible ? 'sinergiReveal 0.75s 0.24s cubic-bezier(0.22,1,0.36,1) both' : 'none',
           }}
@@ -76,13 +99,13 @@ export function SinergiUniversitas() {
       </div>
 
       <div 
-        className="w-full lg:w-2/5 flex justify-center items-center mt-12 lg:mt-0"
+        className="w-full lg:w-2/5 flex justify-center items-center mt-12 lg:mt-0 sinergi-folder-wrapper"
         style={{
           animation: isVisible ? 'sinergiReveal 0.75s 0.36s cubic-bezier(0.22,1,0.36,1) both' : 'none',
           opacity: 0
         }}
       >
-        <Folder size={3} color="#b33939" items={folderItems} />
+        <Folder size={folderSize} color="#b33939" items={folderItems} />
       </div>
     </div>
   );
