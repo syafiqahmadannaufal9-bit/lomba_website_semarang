@@ -255,7 +255,7 @@ function App() {
       id: 'kuliner',
       tag: 'Kuliner',
       desc: 'Ragam kuliner khas yang menjadi identitas rasa Kota Semarang.',
-      image: '/assets/tahu-gimbal.jpg',
+      image: '/assets/wingko_babat.jpg',
       target: '#kuliner',
       headingLine1: 'NIKMATI',
       headingLine2: 'KULINER',
