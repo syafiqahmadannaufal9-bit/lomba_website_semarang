@@ -789,6 +789,20 @@ function App() {
     { label: 'WhatsApp', link: 'https://wa.me/082121825192' },
   ];
 
+  // Update URL hash saat scroll ke section tertentu (Ponytail way)
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.id) {
+          window.history.replaceState(null, null, `#${entry.target.id}`);
+        }
+      });
+    }, { rootMargin: '-40% 0px -60% 0px' });
+
+    document.querySelectorAll('section[id], main[id]').forEach(sec => observer.observe(sec));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="app">
       {/* PillNav — desktop only (hidden on mobile via CSS) */}
