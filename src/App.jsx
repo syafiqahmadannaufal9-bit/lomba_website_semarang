@@ -794,7 +794,7 @@ function App() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && entry.target.id) {
-          window.history.replaceState(null, null, `#${entry.target.id}`);
+          window.history.replaceState(null, null, `/${entry.target.id}`);
         }
       });
     }, { rootMargin: '-40% 0px -60% 0px' });
