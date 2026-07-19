@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PillNav from './components/PillNav'
+import StaggeredMenu from './components/StaggeredMenu'
 import GridMotion from './components/GridMotion'
 import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
 import { SinergiUniversitas } from '@/components/SinergiUniversitas'
@@ -743,19 +744,40 @@ function App() {
     setCurrentBudayaIndex(currentBudayaIndex === budayaItems.length - 1 ? 0 : currentBudayaIndex + 1);
   };
 
+  const staggeredNavItems = [
+    { label: 'Home', ariaLabel: 'Kembali ke halaman utama', link: '#home' },
+    { label: 'Sejarah', ariaLabel: 'Sejarah Kota Semarang', link: '#sejarah' },
+    { label: 'Budaya', ariaLabel: 'Budaya dan Toleransi', link: '#budaya' },
+    { label: 'Wisata', ariaLabel: 'Destinasi Wisata', link: '#wisata' },
+    { label: 'Kuliner', ariaLabel: 'Kuliner Khas Semarang', link: '#kuliner' },
+    { label: 'Teknologi', ariaLabel: 'Inovasi dan Teknologi', link: '#teknologi' },
+    { label: 'Peta', ariaLabel: 'Peta Interaktif', link: '#peta' },
+  ];
+
+  const staggeredSocialItems = [
+    { label: 'Instagram', link: 'https://www.instagram.com/crawl2heaven?igsh=MWh0aG1iMnZmazBwag==' },
+    { label: 'Facebook', link: 'https://www.facebook.com/profile.php?id=100019971024072' },
+    { label: 'WhatsApp', link: 'https://wa.me/082121825192' },
+  ];
+
   return (
     <div className="app">
-      {/* PillNav Header */}
-      <PillNav
-        logo={semarangLogo}
-        logoAlt="Semarang Smart City"
-        items={navItems}
-        activeHref="#home"
-        baseColor="#ffffff"
-        pillColor="#e74c3c"
-        hoveredPillTextColor="#e74c3c"
-        pillTextColor="#ffffff"
-        initialLoadAnimation={true}
+      {/* StaggeredMenu — fixed overlay */}
+      <StaggeredMenu
+        position="right"
+        items={staggeredNavItems}
+        socialItems={staggeredSocialItems}
+        displaySocials={true}
+        displayItemNumbering={true}
+        menuButtonColor="#e74c3c"
+        openMenuButtonColor="#111111"
+        changeMenuColorOnOpen={true}
+        colors={['#c0392b', '#e74c3c']}
+        logoUrl={semarangLogo}
+        accentColor="#e74c3c"
+        isFixed={true}
+        onMenuOpen={() => console.log('Menu terbuka')}
+        onMenuClose={() => console.log('Menu tertutup')}
       />
 
       {/* Hero Section */}
