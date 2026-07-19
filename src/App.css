@@ -31,6 +31,31 @@ body {
   position: relative;
 }
 
+/* ── Responsive nav switching ── */
+/* Desktop: PillNav shown, StaggeredMenu hidden */
+.nav-desktop-only {
+  display: block;
+}
+.nav-mobile-only {
+  display: none;
+}
+
+/* Mobile/Tablet: StaggeredMenu shown, PillNav hidden */
+@media (max-width: 1024px) {
+  .nav-desktop-only {
+    display: none;
+  }
+  .nav-mobile-only {
+    display: block;
+    /* needs full viewport for the fixed StaggeredMenu wrapper */
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 40;
+  }
+}
+
+
 .section {
   min-height: 80vh;
   display: flex;
@@ -39,6 +64,13 @@ body {
   padding: 2rem 1rem;
   scroll-margin-top: 2.6rem;
   /* Removed unconditional slideUp — was firing on all sections including off-screen */
+}
+
+@media (max-width: 768px) {
+  .section {
+    /* Hide subpixel rendering gaps on mobile scale */
+    margin-top: -1px;
+  }
 }
 
 /* Make welcome section a bit taller so its background covers more space */
@@ -685,15 +717,20 @@ body {
   z-index: 0;
 }
 
+.hero-slide-picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .hero-slide-img {
   position: relative;
   z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: right center;
-  display: block;
+  object-fit: cover;
+  object-position: center;
 }
+ 
 
 .hero-slide-overlay {
   position: absolute;
@@ -1091,8 +1128,8 @@ body {
 .budaya-section {
   position: relative;
   background: #ffffff;
-  min-height: 92vh;
-  padding: 3.5rem 2rem 4.5rem;
+  min-height: 35rem;
+  padding: 2.0rem 2rem 0rem;
   overflow: hidden;
   align-items: flex-start;
 }
@@ -1633,7 +1670,6 @@ body {
   gap: 1.25rem;
   text-align: left;
   padding: 3.5rem 2.5rem 2.5rem 3rem;
-  /* Sedikit diperkecil scale */
   justify-content: center;
 }
 
@@ -1662,11 +1698,11 @@ body {
   }
 
   .wisata-text-column {
-    padding: 4rem 2rem 2rem;
+    padding: 3rem 1.5rem 1.5rem;
   }
 
   .wisata-grid-panel {
-    min-height: 60vw;
+    min-height: 50vh;
   }
 }
 
@@ -2651,6 +2687,13 @@ body {
 /* Wisata Footer Spacing Configuration          */
 /* ============================================ */
 
+.mobile-stack-wrapper {
+  padding: 2rem 1rem;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
 .wisata-inovasi-footer {
   text-align: center;
   max-width: 1100px;
@@ -2660,8 +2703,8 @@ body {
   z-index: 20;
 
   /* Atur padding (jarak space) di sini sesuai keinginan */
-  padding-top: var(--wisata-footer-padding-top, 6rem);
-  padding-bottom: var(--wisata-footer-padding-bottom, 6rem);
+  padding-top: var(--wisata-footer-padding-top, 2.5rem);
+  padding-bottom: var(--wisata-footer-padding-bottom, 2.5rem);
   padding-left: var(--wisata-footer-padding-left, 1.5rem);
   padding-right: var(--wisata-footer-padding-right, 1.5rem);
 
@@ -3483,6 +3526,9 @@ body {
     --base-transform: translateX(-50%);
     transform: var(--base-transform);
   }
+  .slide-0-bg {
+    display: none;
+  }
 }
 
 /* Right Side */
@@ -3594,7 +3640,7 @@ body {
     max-width: none;
     min-width: 0;
     margin: 0;
-    padding: 1rem 3.4rem 5.5rem;
+    padding: 1rem 1.0rem 5.5rem;
     border-radius: 0;
     background: rgba(255, 255, 255, 0.96);
     --hero-scale: 1;
@@ -3630,13 +3676,13 @@ body {
 
   .hero-long-desc { display: none; }
 
-  /* Batasi tinggi area gambar sesuai rasio aslinya (bukan dipaksa setinggi
-     layar) supaya tidak ada spasi kosong di atas/bawah maupun ter-zoom. */
+  /* Biarkan gambar mengambil tinggi penuh layar seperti desktop 
+     sehingga menyatu dengan halaman dan tidak ada gap kosong di bawahnya. */
   .hero-carousel-bg {
     top: 0;
-    bottom: auto;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    bottom: 0;
+    height: 100%;
+    aspect-ratio: auto;
   }
 
   /* Backdrop blur abu-abu tidak lagi diperlukan sebagai pengisi ruang kosong
@@ -3722,38 +3768,12 @@ body {
   .hero-slide-dot.active { width: 17px; }
 
   .arrow-btn {
-    width: 28px;
-    height: 28px;
-    border-width: 1px;
-    top: 37.5vw;
+    display: none !important;
   }
-
-  .arrow-btn svg {
-    width: 19px;
-    height: 19px;
-  }
-
-  .arrow-left { left: 0.55rem; }
-  .arrow-right { right: 0.55rem; }
 
   .hashtags {
-    bottom: 0.55rem;
-    left: 0.8rem;
-    right: 0.8rem;
-    flex-direction: row;
-    align-items: flex-end;
-    font-size: 0.56rem;
-    line-height: 1.2;
-    z-index: 10;
+    display: none !important;
   }
-
-  .hashtags-left,
-  .hashtags-right {
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .hashtags-right { text-align: right; }
 }
 
 /* Keep the original desktop/tablet typography independent from phone rules. */

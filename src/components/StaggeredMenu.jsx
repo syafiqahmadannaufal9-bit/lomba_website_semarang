@@ -6,8 +6,6 @@ export const StaggeredMenu = ({
   position = 'right',
   colors = ['#B497CF', '#5227FF'],
   items = [],
-  socialItems = [],
-  displaySocials = true,
   displayItemNumbering = true,
   className,
   logoUrl = '/assets/semarang-semakin-hebat-seeklogo.png',
@@ -85,8 +83,6 @@ export const StaggeredMenu = ({
 
     const itemEls = Array.from(panel.querySelectorAll('.sm-panel-itemLabel'));
     const numberEls = Array.from(panel.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
-    const socialTitle = panel.querySelector('.sm-socials-title');
-    const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
 
     const offscreen = position === 'left' ? -100 : 100;
     const layerStates = layers.map(el => ({ el, start: offscreen }));
@@ -97,12 +93,6 @@ export const StaggeredMenu = ({
     }
     if (numberEls.length) {
       gsap.set(numberEls, { '--sm-num-opacity': 0 });
-    }
-    if (socialTitle) {
-      gsap.set(socialTitle, { opacity: 0 });
-    }
-    if (socialLinks.length) {
-      gsap.set(socialLinks, { y: 25, opacity: 0 });
     }
 
     const tl = gsap.timeline({ paused: true });
@@ -144,37 +134,6 @@ export const StaggeredMenu = ({
             stagger: { each: 0.08, from: 'start' }
           },
           itemsStart + 0.1
-        );
-      }
-    }
-
-    if (socialTitle || socialLinks.length) {
-      const socialsStart = panelInsertTime + panelDuration * 0.4;
-      if (socialTitle) {
-        tl.to(
-          socialTitle,
-          {
-            opacity: 1,
-            duration: 0.5,
-            ease: 'power2.out'
-          },
-          socialsStart
-        );
-      }
-      if (socialLinks.length) {
-        tl.to(
-          socialLinks,
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.55,
-            ease: 'power3.out',
-            stagger: { each: 0.08, from: 'start' },
-            onComplete: () => {
-              gsap.set(socialLinks, { clearProps: 'opacity' });
-            }
-          },
-          socialsStart + 0.04
         );
       }
     }
@@ -223,10 +182,6 @@ export const StaggeredMenu = ({
         if (numberEls.length) {
           gsap.set(numberEls, { '--sm-num-opacity': 0 });
         }
-        const socialTitle = panel.querySelector('.sm-socials-title');
-        const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link'));
-        if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
-        if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
         busyRef.current = false;
       }
     });
@@ -423,20 +378,7 @@ export const StaggeredMenu = ({
               </li>
             )}
           </ul>
-          {displaySocials && socialItems && socialItems.length > 0 && (
-            <div className="sm-socials" aria-label="Social links">
-              <h3 className="sm-socials-title">Sosial Media</h3>
-              <ul className="sm-socials-list" role="list">
-                {socialItems.map((s, i) => (
-                  <li key={s.label + i} className="sm-socials-item">
-                    <a href={s.link} target="_blank" rel="noopener noreferrer" className="sm-socials-link">
-                      {s.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <div className="sm-batik-pattern" aria-hidden="true" />
         </div>
       </aside>
     </div>

@@ -166,12 +166,16 @@ export function StickyScrollCards({
     offset: ["start start", "end end"],
   });
 
+  // Index aktif berdasarkan scroll position - TIDAK ADA AUTO-ADVANCE
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Deskripsi berubah otomatis sesuai gambar yang aktif saat scroll
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // Tingkatkan sensitivitas untuk perubahan yang lebih responsif
+    const normalizedProgress = Math.max(0, Math.min(1, latest));
     const index = Math.min(
       cards.length - 1,
-      Math.max(0, Math.floor(latest * cards.length))
+      Math.max(0, Math.floor(normalizedProgress * cards.length))
     );
     if (index !== activeIndex) {
       setActiveIndex(index);
@@ -194,7 +198,7 @@ export function StickyScrollCards({
     <main
       ref={container}
       className={cn(
-        "relative w-full pb-0 pt-0",
+        "relative w-full pb-0 pt-0 mb-[-8rem]",
         className
       )}>
         
@@ -231,10 +235,10 @@ export function StickyScrollCards({
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               >
                 <h3 className="text-sm sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#e74c3c] mb-1.5 sm:mb-5 md:mb-8 tracking-tight">
                   {cards[activeIndex]?.title}

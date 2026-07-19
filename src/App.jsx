@@ -5,6 +5,7 @@ import PillNav from './components/PillNav'
 import StaggeredMenu from './components/StaggeredMenu'
 import GridMotion from './components/GridMotion'
 import { StickyScrollCards } from '@/components/ui/sticky-scroll-cards'
+import { WisataMobileStack } from '@/components/ui/WisataMobileStack'
 import { SinergiUniversitas } from '@/components/SinergiUniversitas'
 import { motion } from 'framer-motion'
 import InteractiveHoneycomb from './components/ui/InteractiveHoneycomb'
@@ -228,9 +229,9 @@ function App() {
     {
       id: 'budaya',
       tag: 'Budaya',
-
-      desc: 'Keberagaman tradisi dan akulturasi budaya yang masih lestari hingga kini.',
+      desc: 'Keberagaman tradisi dan akulturasi budaya yang masih lestari hingga kini adalah bukti identitas Kota Semarang.',
       image: '/assets/Tugumuda.png',
+      mobileImage: 'https://asset.kompas.com/crops/Z1V9fEQb0jJbKl_pPoqqhhIUxm8=/319x0:1649x887/1200x800/data/photo/2021/11/09/618a892ad140e.jpeg',
       target: '#budaya',
       headingLine1: 'WELCOME TO',
       headingLine2: 'SEMARANG',
@@ -242,8 +243,9 @@ function App() {
     {
       id: 'wisata',
       tag: 'Wisata',
-      desc: 'Destinasi bersejarah dan alam yang menjadi kebanggaan Kota Semarang.',
+      desc: 'Destinasi bersejarah dan alam yang masih lestari selalu menjadi favorit keluarga dan menjadi kebanggaan Kota Semarang.',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lawang%20Sewu%20Semarang%20Indonesia%201.jpg',
+      mobileImage: 'https://kecsmgutara.semarangkota.go.id/medias/article/big/2689/73b2410c-970d-4550-90ab-5212f9fa6e96.jpg',
       target: '#wisata',
       headingLine1: 'JELAJAHI',
       headingLine2: 'WISATA',
@@ -255,8 +257,9 @@ function App() {
     {
       id: 'kuliner',
       tag: 'Kuliner',
-      desc: 'Ragam kuliner khas yang menjadi identitas rasa Kota Semarang.',
-      image: '/assets/wingko_babat.jpg',
+      desc: 'Ragam kuliner khas memiliki cita rasa yang khas, menjadi identitas rasa Kota Semarang turun temurun.',
+      image: 'https://asset.kompas.com/crops/UxROXDbwKoZ9Vr57w4sc0qHVfnM=/59x38:939x625/1200x800/data/photo/2022/05/05/62733af9841d8.jpg',
+      mobileImage: 'https://i.pinimg.com/1200x/cf/4d/81/cf4d8152ed7184adbd029d3f1dc6f13c.jpg',
       target: '#kuliner',
       headingLine1: 'NIKMATI',
       headingLine2: 'KULINER',
@@ -269,8 +272,9 @@ function App() {
       id: 'teknologi',
       tag: 'Teknologi',
 
-      desc: 'Transformasi digital dan teknologi yang mendorong pelayanan kota.',
-      image: 'https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp',
+      desc: 'Transformasi digital dan sinergi dengan universitas menjadi ujung tombak pelayanan yang lebih baik bagi masyarakat.',
+      image: 'https://miniox.brin.go.id/website//uploads/images/posts//2024/10/1730116075-82504411.webp',
+      mobileImage: 'https://koranbernas.id/uploads/images/202512/image_870x_69384e238b8e0.jpg',
       target: '#teknologi',
       headingLine1: 'MENUJU',
       headingLine2: 'KOTA',
@@ -286,7 +290,7 @@ function App() {
     {
       id: 1,
       title: 'Dugderan & Warak Ngendog',
-      description: 'Tradisi Dugderan dilaksanakan menjelang bulan ramadhan dan menandai akan segara dimulainya ibadah puasa. Acara ini sarat dengan simbol budaya lokal, dimulai dengan arak-arakan yang dipimpin oleh Warak Ngendog, sebuah figur mitologi unik yang mencerminkan keberagaman budaya di Semarang.',
+      description: 'Tradisi Dugderan dilaksanakan menjelang bulan ramadhan dan menandai akan dimulainya ibadah puasa. Acara ini erat dengan simbol budaya lokal, dimulai dengan arak-arakan, sebuah figur mitologi unik yang mencerminkan keberagaman budaya di Semarang.',
       image: '/assets/dugderan_budaya.png'
     },
     {
@@ -298,13 +302,13 @@ function App() {
     {
       id: 3,
       title: 'Tradisi Popokan',
-      description: 'Tradisi Popokan ini bermula dari kisah seekor macan yang pernah masuk ke Desa Sendang dan menimbulkan kerusakan. Berbagai cara telah dilakukan, termasuk menggunakan senjata, namun macan tersebut tetap bertahan. Kemudian atas saran seorang pemuka adat, warga mulai melemparkan tanah atau lumpur, dan akhirnya macan itu pergi. ',
+      description: 'Bermula dari kisah seekor macan yang masuk ke Desa Sendang dan menimbulkan kerusakan. Berbagai cara telah dilakukan, termasuk menggunakan senjata, namun macan tersebut tetap bertahan. Warga mulai melemparkan tanah atau lumpur, dan akhirnya macan itu pergi. ',
       image: 'https://img.merahputih.com/media/2015/09/20/70Ia2LETJR1442730555.jpg'
     },
     {
       id: 4,
       title: 'Tradisi Padusan',
-      description: 'Padusan merupakan tradisi membersihkan diri sebelum bulan Ramadan. Di Semarang, tradisi ini biasa dilakukan di sumber mata air alami seperti Umbul Senjoyo. Warga akan beramai-ramai mandi dan mencuci peralatan ibadah sebagai simbol menyucikan diri sebelum menjalankan ibadah puasa.',
+      description: 'Tradisi membersihkan diri sebelum bulan Ramadan, tradisi ini biasa dilakukan di sumber mata air alami seperti Umbul Senjoyo. Warga akan beramai-ramai mandi dan mencuci peralatan ibadah sebagai simbol menyucikan diri sebelum menjalankan ibadah puasa.',
       image: 'https://asset.kompas.com/crops/0n6TCCBPFJkxfoql5AQrPS05scE=/0x0:1800x1200/1200x800/data/photo/2023/03/23/641bc2a41d7bb.jpg'
     },
     {
@@ -702,7 +706,29 @@ function App() {
     }
   };
 
-  // Auto-advance dinonaktifkan — slide hanya berganti saat tombol panah diklik.
+  // Auto-advance
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAnimating) {
+        setSlideDirection('next');
+        setNextImageIndex((prevNext) => {
+          const currentIdx = prevNext ?? currentImageIndex;
+          const newIndex = currentIdx === heroSlides.length - 1 ? 0 : currentIdx + 1;
+          
+          setIsAnimating(true);
+          setTimeout(() => {
+            setCurrentImageIndex(newIndex);
+            setNextImageIndex(null);
+            setIsAnimating(false);
+          }, 700);
+          
+          return newIndex;
+        });
+      }
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [currentImageIndex, isAnimating, heroSlides.length]);
 
   // Render satu slide hero (gambar tidak ter-crop + info kategori + tombol Selengkapnya)
   const renderHeroSlide = (slide, extraClass = '') => (
@@ -712,12 +738,15 @@ function App() {
         style={{ backgroundImage: `url(${slide.image})` }}
         aria-hidden="true"
       />
-      <img
-        src={slide.image}
-        alt={slide.title}
-        className="hero-slide-img"
-        fetchpriority={extraClass ? undefined : 'high'}
-      />
+      <picture className="hero-slide-picture">
+        {slide.mobileImage && <source media="(max-width: 600px)" srcSet={slide.mobileImage} />}
+        <img
+          src={slide.image}
+          alt={slide.title}
+          className="hero-slide-img"
+          fetchpriority={extraClass ? undefined : 'high'}
+        />
+      </picture>
       <div className="hero-slide-overlay">
         <div className="hero-slide-info">
           <h3 className="hero-slide-heading">{slide.title}</h3>
@@ -762,39 +791,53 @@ function App() {
 
   return (
     <div className="app">
-      {/* StaggeredMenu — fixed overlay */}
-      <StaggeredMenu
-        position="right"
-        items={staggeredNavItems}
-        socialItems={staggeredSocialItems}
-        displaySocials={true}
-        displayItemNumbering={true}
-        menuButtonColor="#e74c3c"
-        openMenuButtonColor="#111111"
-        changeMenuColorOnOpen={true}
-        colors={['#c0392b', '#e74c3c']}
-        logoUrl={semarangLogo}
-        accentColor="#e74c3c"
-        isFixed={true}
-        onMenuOpen={() => console.log('Menu terbuka')}
-        onMenuClose={() => console.log('Menu tertutup')}
-      />
+      {/* PillNav — desktop only (hidden on mobile via CSS) */}
+      <div className="nav-desktop-only">
+        <PillNav
+          logo={semarangLogo}
+          logoAlt="Semarang Smart City"
+          items={navItems}
+          activeHref="#home"
+          baseColor="#ffffff"
+          pillColor="#e74c3c"
+          hoveredPillTextColor="#e74c3c"
+          pillTextColor="#ffffff"
+          initialLoadAnimation={true}
+        />
+      </div>
+
+      {/* StaggeredMenu — mobile only (hidden on desktop via CSS) */}
+      <div className="nav-mobile-only">
+        <StaggeredMenu
+          position="right"
+          items={staggeredNavItems}
+          displayItemNumbering={true}
+          menuButtonColor="#ffffff"
+          openMenuButtonColor="#111111"
+          changeMenuColorOnOpen={true}
+          colors={['#c0392b', '#e74c3c']}
+          logoUrl={semarangLogo}
+          accentColor="#e74c3c"
+          isFixed={true}
+          onMenuOpen={() => console.log('Menu terbuka')}
+          onMenuClose={() => console.log('Menu tertutup')}
+        />
+      </div>
+
 
       {/* Hero Section */}
       <main className="hero" id="home">
-        {/* Fullscreen Carousel Background for slides > 0 */}
-        {(nextImageIndex ?? currentImageIndex) !== 0 && (
-          <div className="hero-carousel-bg">
-            {nextImageIndex === null
-              ? renderHeroSlide(heroSlides[currentImageIndex])
-              : (
-                <>
-                  {renderHeroSlide(heroSlides[currentImageIndex], `slide-out-${slideDirection}`)}
-                  {renderHeroSlide(heroSlides[nextImageIndex], `slide-in-${slideDirection}`)}
-                </>
-              )}
-          </div>
-        )}
+        {/* Fullscreen Carousel Background */}
+        <div className={`hero-carousel-bg ${(nextImageIndex ?? currentImageIndex) === 0 ? 'slide-0-bg' : ''}`}>
+          {nextImageIndex === null
+            ? renderHeroSlide(heroSlides[currentImageIndex])
+            : (
+              <>
+                {renderHeroSlide(heroSlides[currentImageIndex], `slide-out-${slideDirection}`)}
+                {renderHeroSlide(heroSlides[nextImageIndex], `slide-in-${slideDirection}`)}
+              </>
+            )}
+        </div>
 
         <div className={`hero-content ${(nextImageIndex ?? currentImageIndex) === 0 ? 'hero-content-grid' : ''} ${isAnimating ? 'animating' : ''}`}>
           {/* Left Side Content — dinamis per slide */}
@@ -1086,9 +1129,17 @@ function App() {
           <div className="wisata-inovasi-header">
             <h2 className="wisata-inovasi-title">WISATA <span style={{ fontFamily: "'Caveat', cursive",color: "#e74c3c", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
           </div>
-          <div className="sticky-cards-wrapper z-10 relative">
+          
+          {/* Desktop Version - StickyScrollCards */}
+          <div className="sticky-cards-wrapper z-10 relative hidden md:block">
             <StickyScrollCards />
           </div>
+          
+          {/* Mobile Version - WisataMobileStack */}
+          <div className="mobile-stack-wrapper block md:hidden">
+            <WisataMobileStack />
+          </div>
+          
           <div className="wisata-inovasi-footer">
             <motion.p
               initial="hidden"
