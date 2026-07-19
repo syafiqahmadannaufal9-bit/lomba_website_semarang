@@ -69,7 +69,7 @@ body {
 @media (max-width: 768px) {
   .section {
     /* Hide subpixel rendering gaps on mobile scale */
-    margin-top: -1px;
+    margin-top: -5px;
   }
 }
 
@@ -3640,7 +3640,7 @@ body {
     max-width: none;
     min-width: 0;
     margin: 0;
-    padding: 1rem 1.0rem 5.5rem;
+    padding: 1.5rem 1.0rem 5.5rem;
     border-radius: 0;
     background: rgba(255, 255, 255, 0.96);
     --hero-scale: 1;
@@ -3693,7 +3693,7 @@ body {
 
   .hero-slide-img {
     object-fit: cover;
-    object-position: center center;
+    object-position: center top;
   }
 
   /* Gradient halus di bagian bawah gambar supaya perbatasan dengan background

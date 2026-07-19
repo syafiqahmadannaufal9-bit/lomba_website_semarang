@@ -231,7 +231,7 @@ function App() {
       tag: 'Budaya',
       desc: 'Keberagaman tradisi dan akulturasi budaya yang masih lestari hingga kini adalah bukti identitas Kota Semarang.',
       image: '/assets/Tugumuda.png',
-      mobileImage: 'https://asset.kompas.com/crops/Z1V9fEQb0jJbKl_pPoqqhhIUxm8=/319x0:1649x887/1200x800/data/photo/2021/11/09/618a892ad140e.jpeg',
+      mobileImage: 'https://kissparry.com/wp-content/uploads/2019/05/tugu_muda_label_lawang_sewu_20190520_1541_sam9052.jpg?w=942',
       target: '#budaya',
       headingLine1: 'WELCOME TO',
       headingLine2: 'SEMARANG',
