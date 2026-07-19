@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PillNav from './components/PillNav'
@@ -8,6 +8,7 @@ import { SinergiUniversitas } from '@/components/SinergiUniversitas'
 import { motion } from 'framer-motion'
 import InteractiveHoneycomb from './components/ui/InteractiveHoneycomb'
 import BorderGlow from './components/ui/BorderGlow'
+import SplitText from '@/components/ui/SplitText'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger);
@@ -25,22 +26,7 @@ const navItems = [
 // Use the Semarang Semakin Hebat logo
 const semarangLogo = '/assets/semarang-semakin-hebat-seeklogo.png';
 
-// Per-letter split text component for hover animation
-function SplitText({ text, className, wrapperRef, colored }) {
-  let letterCount = 0;
-  return (
-    <span className={className} ref={wrapperRef}>
-      {text.split('').map((char, i) => {
-        if (char === ' ') {
-          return <span key={i} className="letter-space">&nbsp;</span>;
-        }
-        const idx = ++letterCount;
-        const cls = colored ? `letter letter-colored letter-n${idx}` : 'letter';
-        return <span key={i} className={cls}>{char}</span>;
-      })}
-    </span>
-  );
-}
+// SplitText helper removed, using React Bits component imported above
 
 const sejarahData = [
   {
@@ -102,7 +88,7 @@ const lokasiWisata = [
     lat: -6.9838,
     lng: 110.4106,
     desc: 'Monumen untuk mengenang Pertempuran Lima Hari, perjuangan rakyat Semarang melawan tentara Jepang.',
-    image: '/assets/Tugu-muda.png'
+    image: 'https://asset.kompas.com/crops/d-vo69tFajbCplKB0Xn_hc9fwRE=/0x0:800x533/1200x800/data/photo/2018/10/11/1781745539.jpg'
   },
   {
     id: 'w4',
@@ -241,34 +227,56 @@ function App() {
     {
       id: 'budaya',
       tag: 'Budaya',
-      title: 'Warisan Budaya Semarang',
+
       desc: 'Keberagaman tradisi dan akulturasi budaya yang masih lestari hingga kini.',
-      image: '/assets/Gambang_budaya.png',
+      image: '/assets/Tugumuda.png',
       target: '#budaya',
+      headingLine1: 'WELCOME TO',
+      headingLine2: 'SEMARANG',
+      headingLine3: 'SMART CITY',
+      headingRedLine: 'SEMARANG',
+      subDesc: ['kota bersejarah dengan ', 'keaneka', ' - ragaman', 'budaya', ' dan ', 'tradisi', ' yang masih lestari'],
+     
     },
     {
       id: 'wisata',
       tag: 'Wisata',
-      title: 'Pesona Wisata Ikonik',
       desc: 'Destinasi bersejarah dan alam yang menjadi kebanggaan Kota Semarang.',
       image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lawang%20Sewu%20Semarang%20Indonesia%201.jpg',
       target: '#wisata',
+      headingLine1: 'JELAJAHI',
+      headingLine2: 'WISATA',
+      headingLine3: 'IKONIK',
+      headingRedLine: 'WISATA',
+      subDesc: ['temukan keajaiban ', 'lawang sewu', ' dan pesona klasik', 'kota lama', ' yang merekam ', 'jejak sejarah', ' abadi'],
+      longDesc: 'Jadikan setiap momen perjalanan Anda bermakna dengan mengunjungi berbagai destinasi memukau. Rasakan sensasi perpaduan antara pesona alam yang asri dan megahnya peninggalan sejarah yang terus dijaga kelestariannya.',
     },
     {
       id: 'kuliner',
       tag: 'Kuliner',
-      title: 'Cita Rasa Legendaris',
       desc: 'Ragam kuliner khas yang menjadi identitas rasa Kota Semarang.',
       image: '/assets/tahu-gimbal.jpg',
       target: '#kuliner',
+      headingLine1: 'NIKMATI',
+      headingLine2: 'KULINER',
+      headingLine3: 'LEGENDARIS',
+      headingRedLine: 'KULINER',
+      subDesc: ['manjakan lidah dengan ', 'lumpia', ' autentik hingga', 'tahu gimbal', ' yang kaya akan ', 'rempah', ' dan tradisi'],
+      longDesc: 'Nikmati setiap gigitan yang menggugah selera dari berbagai hidangan warisan turun-temurun. Semarang bukan hanya kota sejarah, tetapi juga surga bagi para pencinta kuliner yang mencari keaslian rasa Nusantara.',
     },
     {
       id: 'teknologi',
       tag: 'Teknologi',
-      title: 'Inovasi Smart City',
+
       desc: 'Transformasi digital dan teknologi yang mendorong pelayanan kota.',
       image: 'https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp',
       target: '#teknologi',
+      headingLine1: 'MENUJU',
+      headingLine2: 'KOTA',
+      headingLine3: 'MASA DEPAN',
+      headingRedLine: 'KOTA',
+      subDesc: ['mengintegrasikan ', 'teknologi cerdas', ' dan tata ruang', 'digital', ' untuk menciptakan ', 'kehidupan', ' yang lebih baik'],
+      longDesc: 'Menyongsong masa depan dengan infrastruktur digital yang inklusif dan berkelanjutan. Semarang terus berinovasi memberikan kemudahan dan kenyamanan melalui implementasi teknologi cerdas di berbagai sektor publik.',
     },
   ]);
 
@@ -310,6 +318,7 @@ function App() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [nextImageIndex, setNextImageIndex] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState('next'); // 'next' or 'prev'
   // State independen untuk pause marquee kuliner per baris
   const [isTopPaused, setIsTopPaused] = useState(false);
   const [isBottomPaused, setIsBottomPaused] = useState(false);
@@ -348,54 +357,25 @@ function App() {
   const petaActiveLokasi = lokasiPeta.find((l) => l.id === petaActiveId) || null;
 
   useEffect(() => {
-  const ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: welcomeSectionRef.current,
-        start: "top 85%",
-        end: "bottom center",
-        toggleActions: "play none none reverse",
-      },
-      delay: 0.2,
-    });
-
-    tl.from(welcomeText1Ref.current, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    })
-    .from(welcomeText2Ref.current, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out"
-    }, "-=0.6")
-    .from(shapesRef.current, {
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.1,
-      ease: "power3.out"
-    }, "-=0.6");
-
-    // Floating animation loop for shapes
-    shapesRef.current.forEach((shape) => {
-      gsap.to(shape, {
-        y: "random(-20, 20)",
-        x: "random(-20, 20)",
-        rotation: "random(-15, 15)",
-        duration: "random(2.5, 4)",
+    // Floating animation — runs permanently, outside scroll scope
+    const floatingAnims = shapesRef.current.map((shape) => {
+      if (!shape) return null;
+      return gsap.to(shape, {
+        y: "random(-25, 25)",
+        x: "random(-15, 15)",
+        rotation: "random(-12, 12)",
+        duration: "random(3, 5)",
         repeat: -1,
         yoyo: true,
-        ease: "sine.inOut"
+        ease: "sine.inOut",
+        delay: "random(0, 2)"
       });
     });
 
-  }, welcomeSectionRef);
-
-  return () => ctx.revert();
-}, []);
+    return () => {
+      floatingAnims.forEach(a => a && a.kill());
+    };
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -481,28 +461,7 @@ function App() {
         opacity: 0,
         duration: 1,
         ease: "power3.out"
-      }, "-=0.6")
-      .from(shapesRef.current, {
-        y: 80,
-        opacity: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: "power3.out"
-      }, "-=0.8");
-      
-      // Floating animation loop for shapes
-      shapesRef.current.forEach((shape) => {
-        gsap.to(shape, {
-          y: "random(-20, 20)",
-          x: "random(-20, 20)",
-          rotation: "random(-15, 15)",
-          duration: "random(2.5, 4)",
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut"
-        });
-      });
-
+      }, "-=0.6");
     }, welcomeSectionRef);
 
     return () => ctx.revert();
@@ -521,15 +480,15 @@ function App() {
       tl.from(teknologiLineRef.current, {
         scaleX: 0,
         transformOrigin: "left center",
-        duration: 0.8,
-        ease: "power3.inOut"
+        duration: 0.6,
+        ease: "power2.out"
       })
       .from(teknologiContentRef.current, {
-        y: 80,
+        y: 30,
         opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.4");
+        duration: 0.8,
+        ease: "power2.out"
+      }, "-=0.3");
     }, teknologiSectionRef);
 
     return () => ctx.revert();
@@ -676,16 +635,27 @@ function App() {
     map.flyTo([lokasi.lat, lokasi.lng], 16, { duration: 0.8 });
   };
 
-  // Memastikan list bisa langsung di-scroll dengan mouse wheel begitu kursor
-  // berada di atasnya, tanpa perlu klik scrollbar terlebih dahulu.
-  const handlePetaListWheel = (e) => {
-    e.currentTarget.scrollTop += e.deltaY;
-  };
+  const petaListRefVal = useRef(null);
+  const petaListRef = useCallback((node) => {
+    if (petaListRefVal.current) {
+      petaListRefVal.current.removeEventListener('wheel', petaListRefVal.current._handleWheel);
+    }
+    petaListRefVal.current = node;
+    if (node) {
+      const handleWheel = (e) => {
+        e.preventDefault();
+        node.scrollTop += e.deltaY;
+      };
+      node._handleWheel = handleWheel;
+      node.addEventListener('wheel', handleWheel, { passive: false });
+    }
+  }, []);
 
 
 
   const handlePrevImage = () => {
     if (isAnimating) return;
+    setSlideDirection('prev');
     const newIndex = currentImageIndex === 0 ? heroSlides.length - 1 : currentImageIndex - 1;
     setNextImageIndex(newIndex);
     setIsAnimating(true);
@@ -693,11 +663,12 @@ function App() {
       setCurrentImageIndex(newIndex);
       setNextImageIndex(null);
       setIsAnimating(false);
-    }, 800);
+    }, 700);
   };
 
   const handleNextImage = () => {
     if (isAnimating) return;
+    setSlideDirection('next');
     const newIndex = currentImageIndex === heroSlides.length - 1 ? 0 : currentImageIndex + 1;
     setNextImageIndex(newIndex);
     setIsAnimating(true);
@@ -705,18 +676,19 @@ function App() {
       setCurrentImageIndex(newIndex);
       setNextImageIndex(null);
       setIsAnimating(false);
-    }, 800);
+    }, 700);
   };
 
   const goToHeroSlide = (index) => {
     if (isAnimating || index === currentImageIndex) return;
+    setSlideDirection(index > currentImageIndex ? 'next' : 'prev');
     setNextImageIndex(index);
     setIsAnimating(true);
     setTimeout(() => {
       setCurrentImageIndex(index);
       setNextImageIndex(null);
       setIsAnimating(false);
-    }, 800);
+    }, 700);
   };
 
   // Navigasi tombol "Selengkapnya": scroll halus ke section yang sesuai
@@ -729,20 +701,7 @@ function App() {
     }
   };
 
-  // Auto-advance carousel setiap beberapa detik. Pakai ref supaya interval
-  // selalu memanggil versi terbaru handleNextImage (menghindari stale closure
-  // atas currentImageIndex / isAnimating tanpa perlu me-reset interval tiap render).
-  const handleNextImageRef = useRef(handleNextImage);
-  useEffect(() => {
-    handleNextImageRef.current = handleNextImage;
-  });
-
-  useEffect(() => {
-    const autoplay = setInterval(() => {
-      handleNextImageRef.current();
-    }, 6000);
-    return () => clearInterval(autoplay);
-  }, []);
+  // Auto-advance dinonaktifkan — slide hanya berganti saat tombol panah diklik.
 
   // Render satu slide hero (gambar tidak ter-crop + info kategori + tombol Selengkapnya)
   const renderHeroSlide = (slide, extraClass = '') => (
@@ -761,7 +720,6 @@ function App() {
       <div className="hero-slide-overlay">
         <div className="hero-slide-info">
           <h3 className="hero-slide-heading">{slide.title}</h3>
-          <p className="hero-slide-desc">{slide.desc}</p>
         </div>
         <a
           href={slide.target}
@@ -802,31 +760,74 @@ function App() {
 
       {/* Hero Section */}
       <main className="hero" id="home">
-        {/* Fullscreen Carousel Background */}
-        <div className="hero-carousel-bg">
-          {nextImageIndex === null
-            ? renderHeroSlide(heroSlides[currentImageIndex])
-            : (
-              <>
-                {renderHeroSlide(heroSlides[currentImageIndex], 'fade-out')}
-                {renderHeroSlide(heroSlides[nextImageIndex], 'fade-in')}
-              </>
-            )}
-        </div>
-
-        <div className={`hero-content ${isAnimating ? 'animating' : ''}`}>
-          {/* Left Side Content */}
-          <div className="hero-left" ref={heroLeftRef}>
-            <h1 className="hero-title" ref={heroTitleRef}>
-              WELCOME TO<br />
-              <span className="text-red">SEMARANG<br />SMART</span> CITY
-            </h1>
-            <div className="hero-divider" ref={heroDividerRef}></div>
-            <p className="hero-description" ref={heroDescRef}>
-              kota bersejarah dengan <strong>keaneka</strong> - ragaman<br />
-              <strong>budaya</strong> dan <strong>tradisi</strong> yang masih lestari
-            </p>
+        {/* Fullscreen Carousel Background for slides > 0 */}
+        {(nextImageIndex ?? currentImageIndex) !== 0 && (
+          <div className="hero-carousel-bg">
+            {nextImageIndex === null
+              ? renderHeroSlide(heroSlides[currentImageIndex])
+              : (
+                <>
+                  {renderHeroSlide(heroSlides[currentImageIndex], `slide-out-${slideDirection}`)}
+                  {renderHeroSlide(heroSlides[nextImageIndex], `slide-in-${slideDirection}`)}
+                </>
+              )}
           </div>
+        )}
+
+        <div className={`hero-content ${(nextImageIndex ?? currentImageIndex) === 0 ? 'hero-content-grid' : ''} ${isAnimating ? 'animating' : ''}`}>
+          {/* Left Side Content — dinamis per slide */}
+          {(() => {
+            const activeIdx = nextImageIndex ?? currentImageIndex;
+            const slide = heroSlides[activeIdx];
+            return (
+              <div
+                className={`hero-left ${isAnimating ? `slide-${slideDirection}-out` : 'slide-in'}`}
+                ref={heroLeftRef}
+              >
+                <h1 className="hero-title" ref={heroTitleRef}>
+                  {slide.headingLine1}<br />
+                  <span className="text-red">{slide.headingLine2}<br />{slide.headingLine3.split(' ')[0]}</span>{slide.headingLine3.includes(' ') ? ' ' + slide.headingLine3.split(' ').slice(1).join(' ') : ''}
+                </h1>
+                <div className="hero-divider" ref={heroDividerRef}></div>
+                <p className="hero-description" ref={heroDescRef}>
+                  {slide.subDesc[0]}<strong>{slide.subDesc[1]}</strong>{slide.subDesc[2]} <strong>{slide.subDesc[3]}</strong>{slide.subDesc[4]}<strong>{slide.subDesc[5]}</strong>{slide.subDesc[6]}. <span className="hero-long-desc">{slide.longDesc}</span>
+                </p>
+              </div>
+            );
+          })()}
+
+          {/* Render Center and Right columns ONLY for slide 0 */}
+          {(nextImageIndex ?? currentImageIndex) === 0 && (
+            <>
+              {/* Center Image Carousel */}
+              <div className="hero-center">
+                <div className="carousel-wrapper">
+                  <img
+                    src={heroSlides[0].image}
+                    alt={heroSlides[0].title}
+                    className={`hero-image ${nextImageIndex === 0 ? 'fade-in' : ''}`}
+                    fetchpriority="high"
+                  />
+                </div>
+              </div>
+
+              {/* Right Side — info kategori slide aktif */}
+              <div className={`hero-right ${isAnimating ? `animating slide-${slideDirection}` : ''}`}>
+                <div className="feature-item">
+                  <h2 className="feature-title">HISTORICAL</h2>
+                  <p className="feature-subtitle">Building &amp; <strong>Culture</strong></p>
+                </div>
+                <div className="feature-item">
+                  <h2 className="feature-title text-red">MEMORABLE</h2>
+                  <p className="feature-subtitle text-red">National <strong>hero</strong> figures</p>
+                </div>
+                <div className="feature-item">
+                  <h2 className="feature-title">INOVATING</h2>
+                  <p className="feature-subtitle">Technologies &amp; <strong>Infrastructure</strong></p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Dot Indicators */}
@@ -844,12 +845,12 @@ function App() {
 
         {/* Navigation Arrows */}
         <button className="arrow-btn arrow-left" aria-label="Previous" onClick={handlePrevImage}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
         <button className="arrow-btn arrow-right" aria-label="Next" onClick={handleNextImage}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
             <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
@@ -870,12 +871,34 @@ function App() {
       {/* Welcome / Page 2 Section */}
       <section className="section welcome-section" id="welcome" ref={welcomeSectionRef}>
         <div className="welcome-content">
-          <h2 className="welcome-text-1" ref={welcomeText1Ref}>
-            <SplitText text="Selamat Menjelajah" className="split-line" />
-          </h2>
-          <h1 className="welcome-text-2" ref={welcomeText2Ref}>
-            <SplitText text="Kota Semarang" className="split-line" colored />
-          </h1>
+          <SplitText
+            text="Selamat Menjelajah"
+            className="welcome-text-1"
+            delay={50}
+            duration={0.7}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            tag="h2"
+            textAlign="center"
+            once={false}
+            toggleActions="restart none none reverse"
+          />
+          <SplitText
+            text="Kota Semarang"
+            className="welcome-text-2"
+            delay={50}
+            duration={0.8}
+            ease="back.out(1.5)"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            tag="h1"
+            textAlign="center"
+            once={false}
+            toggleActions="restart none none reverse"
+          />
         </div>
         
         {/* Floating Shapes */}
@@ -1018,7 +1041,7 @@ function App() {
       {/* Wisata Section */}
       <section className="section wisata-inovasi-section" id="wisata">
         <div className="wisata-inovasi-header">
-          <h2 className="wisata-inovasi-title">WISATA <span className="text-red" style={{ fontFamily: "'Caveat', cursive", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
+          <h2 className="wisata-inovasi-title">WISATA <span style={{ fontFamily: "'Caveat', cursive",color: "#e74c3c", fontSize: "1.3em", fontWeight: "700", textTransform: "capitalize", letterSpacing: "1px", padding: "0 4px" }}>Ikonik</span> SEMARANG</h2>
         </div>
         <div className="sticky-cards-wrapper z-10 relative">
           <StickyScrollCards />
@@ -1141,7 +1164,7 @@ function App() {
               <div className="teknologi-line" ref={teknologiLineRef}></div>
               <div className="teknologi-content-bottom teknologi-content-left" ref={teknologiContentRef}>
                 <div className="teknologi-title-col">
-                  <h2>Kota<br/>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
+                  <h2>Semarang<br/>Dapur Inovasi<br/>Nusantara</h2>
                 </div>
                 <div className="teknologi-desc-col">
                   <p>
@@ -1172,7 +1195,7 @@ function App() {
               {[
                 { title: "Electric Small Soil Digger", desc: "Inovasi Mesin Panen Kentang dengan Sistem IoT, tim dari Politeknik Negeri Semarang keluar sebagai juara 1 kategori mahasiswa pada babak final Lomba Inovasi Nasional Teknologi Pertanian 2025. ", src: "https://koranbernas.id/uploads/images/202512/image_870x_69384e238b8e0.jpg", link: "https://koranbernas.id/politeknik-negeri-semarang-juara-1-lomba-inovasi-nasional-teknologi-pertanian" },
                 { title: "Aplikasi Stress Meter", desc: "Stress Meter, sebuah aplikasi berbasis website yang dirancang untuk membantu masyarakat mengidentifikasi tingkat stres secara mandiri. Melalui pengisian beberapa instrumen kuesioner yang valid, sistem akan langsung memetakan kondisi psikologis pengguna secara real-time.", src: "https://unkartur.ac.id/wp-content/uploads/2026/06/WhatsApp-Image-2026-06-30-at-08.55.27.jpeg", link: "https://unkartur.ac.id/blog/2026/06/30/kolaborasi-dengan-brida-kota-semarang-universitas-karangturi-pamerkan-dua-inovasi-berbasis-web-di-jateng-fair-2026/" },
-                { title: "Inovasi MOLISA (Mobil Listrik Karya Mahasiswa)", desc: "merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan. di wilayah pesisir merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan.", src: "https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp", link: "https://www.antaranews.com/foto/5603932/mahasiswa-unissula-kembangkan-mobil-listrik-tenaga-surya-ramah-lingkungan" },
+                { title: "MOLISA (Mobil Listrik Karya Mahasiswa)", desc: "merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan. di wilayah pesisir merupakan langkah nyata kolaborasi akademisi dalam mendorong pemanfaatan energi bersih serta ketahanan pangan perkotaan.", src: "https://cdn.antaranews.com/cache/1200x800/2026/06/11/pengembangan-mobil-listrik-tenaga-surya-110626-aaa-11.jpg.webp", link: "https://www.antaranews.com/foto/5603932/mahasiswa-unissula-kembangkan-mobil-listrik-tenaga-surya-ramah-lingkungan" },
                 { title: "Smart Farming berbasis Artificial Internet of Things (AIoT) dan energi baru terbarukan (EBT)", desc: "Tim peneliti UNNES Electrical Engineering Students Research Group (UEESRG) Universitas Negeri Semarang mengembangkan Sistem untuk membantu petani mengelola lahan secara presisi.", src: "https://assets.kompasiana.com/items/album/2025/08/08/screen-shot-2025-08-08-at-14-48-04-6895b6a1c925c415cc5dddd4.png?t=o&v=770", link: "https://www.kompasiana.com/ueesrg/6895b6dfed64151b73294e02/ueesrg-unnes-kembangkan-sistem-smart-farming-berbasis-aiot-dan-energi-surya?page=1&page_images=5" },
                 { title: "AISSA (Artificial Intelligence Solusi Sampah) ", desc: "dikembangkan Pemerintah Kota Semarang berhasil masuk dalam daftar 30 Exemplary Initiatives pada ajang 7th Guangzhou International Award for Urban Innovation (Guangzhou Award) 2026.", src: "https://www.guangzhouaward.org/o/uploads/20260629/b909dc7f4e4d548d2ec011d539aa26ee.jpg", link: "https://www.guangzhouaward.org/a/3763.html?lang=en" },
                 { title: "PETASOL (pengolahan sampah plastik menjadi Bahan Bakar Minyak)", desc: "Petasol memanfaatkan limbah plastik yang mengotori sungai dan irigasi menjadi bahan bakar alternatif ramah lingkungan. Teknologi Pirolisis Muktikondensor ini dikembangkan untuk memberikan solusi energi murah bagi petani, meningkatkan efisiensi, sekaligus mengurangi limbah plastik.", src: "https://miniox.brin.go.id/website//uploads/images/posts//2024/10/1730116075-82504411.webp", link: "https://brin.go.id/news/121287/kelola-limbah-plastik-inovasi-brin-dan-pemkot-semarang-wujudkan-ketahanan-energi" },
@@ -1235,7 +1258,7 @@ function App() {
 
         <div className="peta-content">
           <div className="peta-list-panel">
-            <div className="peta-list" role="list" onWheel={handlePetaListWheel}>
+            <div className="peta-list" role="list" ref={petaListRef}>
               {lokasiPeta.map((lokasi) => (
                 <button
                   key={lokasi.id}
@@ -1299,6 +1322,61 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="footer-section">
+        <div className="footer-container">
+          <div className="footer-top">
+            <div className="footer-brand">
+              <img src="/assets/semarang-semakin-hebat-seeklogo.png" className="footer-logo" alt="Logo Semarang" />
+              <p className="footer-desc">
+                Jelajahi keindahan sejarah, keragaman budaya, pesona wisata, dan inovasi teknologi dari jantung Jawa Tengah.
+              </p>
+            </div>
+            
+            <div className="footer-links">
+              <h4 className="footer-title">Main Content</h4>
+              <ul>
+                <li><a href="#home">Introduction</a></li>
+                <li><a href="#sejarah">History of Semarang</a></li>
+                <li><a href="#budaya">Culture and Tolerance</a></li>
+                <li><a href="#wisata">Travel Destination</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-links">
+              <h4 className="footer-title">Other</h4>
+              <ul>
+                <li><a href="#kuliner">signature culinary specialties</a></li>
+                <li><a href="#teknologi">Innovation & Technology</a></li>
+                <li><a href="#peta">Interactive Map</a></li>
+              </ul>
+            </div>
+
+            <div className="footer-contact">
+              <h4 className="footer-title">Contact</h4>
+              <p>Pemerintah Kota Semarang</p>
+              <p>Jl. Pemuda No. 148, Sekayu</p>
+              <p>Semarang Tengah, 50132</p>
+              <div className="footer-socials">
+                <a href="https://www.instagram.com/crawl2heaven?igsh=MWh0aG1iMnZmazBwag==" target="_blank" rel="noreferrer" className="social-icon" aria-label="Instagram">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
+                <a href="#" target="_blank" rel="noreferrer" className="social-icon" aria-label="Facebook">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://wa.me/082121825192" target="_blank" rel="noreferrer" className="social-icon" aria-label="WhatsApp">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="footer-bottom">
+            <p>&copy; {new Date().getFullYear()} Lomba Website Nusantara. Dibuat dengan antusiasme untuk Kota Semarang.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
